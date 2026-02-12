@@ -9,6 +9,33 @@ const registerUrl = "https://app.voxmeds.com/register";
 type BillingCycle = "monthly" | "yearly";
 type Segment = "individual" | "equipe";
 
+type BasePlan = {
+  name: string;
+  description: string;
+  icon: string;
+  monthlyPrice: number;
+  yearlyPrice: number;
+  savings: number;
+  highlight: boolean;
+  hasTrial: boolean;
+  features: string[];
+  cta: string;
+};
+
+type IndividualPlan = BasePlan & {
+  id: "individual";
+  ctaVariant: "primary";
+};
+
+type ClinicPlan = BasePlan & {
+  id: "consultorio" | "clinica" | "enterprise";
+  adminMonthly: number;
+  adminYearly: number;
+  ctaVariant: "secondary";
+};
+
+type Plan = IndividualPlan | ClinicPlan;
+
 const individualFeatures = [
   "Prontuário eletrônico completo",
   "Agenda integrada (em breve no app mobile)",
@@ -29,7 +56,7 @@ const clinicFeatures = [
   "Gestão de equipe e permissões",
 ];
 
-const individualPlan = {
+const individualPlan: IndividualPlan = {
   id: "individual",
   name: "Individual",
   description: "Plano individual",
@@ -44,7 +71,7 @@ const individualPlan = {
   ctaVariant: "primary" as const,
 };
 
-const clinicPlans = [
+const clinicPlans: ClinicPlan[] = [
   {
     id: "consultorio",
     name: "Consultório",
@@ -95,13 +122,17 @@ const clinicPlans = [
   },
 ];
 
+function isClinicPlan(plan: Plan): plan is ClinicPlan {
+  return plan.id !== "individual";
+}
+
 export function PricingSection() {
   const [segment, setSegment] = useState<Segment>("individual");
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
   const [doctorCount, setDoctorCount] = useState(5);
   const [showComparison, setShowComparison] = useState(false);
 
-  const plans = segment === "individual" ? [individualPlan] : clinicPlans;
+  const plans: Plan[] = segment === "individual" ? [individualPlan] : clinicPlans;
 
   const formatCurrency = (value: number) =>
     `R$ ${value.toLocaleString("pt-BR", {
@@ -109,27 +140,27 @@ export function PricingSection() {
       maximumFractionDigits: 0,
     })}`;
 
-  const calculateTotal = (plan: typeof plans[0]) => {
-    if (plan.id === "individual") {
+  const calculateTotal = (plan: Plan) => {
+    if (!isClinicPlan(plan)) {
       return billingCycle === "monthly" ? plan.monthlyPrice : plan.yearlyPrice;
     }
 
     const pricePerDoctor =
       billingCycle === "monthly" ? plan.monthlyPrice : plan.yearlyPrice;
     const adminPrice =
-      billingCycle === "monthly" ? plan.adminMonthly! : plan.adminYearly!;
+      billingCycle === "monthly" ? plan.adminMonthly : plan.adminYearly;
 
     return pricePerDoctor * doctorCount + adminPrice;
   };
 
-  const calculateYearlySavings = (plan: typeof plans[0]) => {
-    if (plan.id === "individual") {
+  const calculateYearlySavings = (plan: Plan) => {
+    if (!isClinicPlan(plan)) {
       return (plan.monthlyPrice - plan.yearlyPrice) * 12;
     }
     const monthlyTotal =
-      plan.monthlyPrice * doctorCount + (plan.adminMonthly || 0);
+      plan.monthlyPrice * doctorCount + plan.adminMonthly;
     const yearlyTotal =
-      plan.yearlyPrice * doctorCount + (plan.adminYearly || 0);
+      plan.yearlyPrice * doctorCount + plan.adminYearly;
     return (monthlyTotal - yearlyTotal) * 12;
   };
 
@@ -233,7 +264,7 @@ export function PricingSection() {
           {plans.map((plan, index) => {
             const totalPrice = calculateTotal(plan);
             const yearlySavings = calculateYearlySavings(plan);
-            const isClinicPlan = plan.id !== "individual";
+            const clinicPlan = isClinicPlan(plan);
 
             return (
               <div
@@ -294,13 +325,13 @@ export function PricingSection() {
                     <p className="mt-1 text-xs text-muted">cobrado anualmente</p>
                   )}
 
-                  {isClinicPlan && (
+                  {clinicPlan && (
                     <div className="mt-2 text-xs text-muted">
                       por médico +{" "}
                       {formatCurrency(
                         billingCycle === "monthly"
-                          ? plan.adminMonthly!
-                          : plan.adminYearly!
+                          ? plan.adminMonthly
+                          : plan.adminYearly
                       )}{" "}
                       Módulo de equipes
                     </div>
@@ -315,7 +346,7 @@ export function PricingSection() {
                 </div>
 
                 {/* Calculator for clinic plans */}
-                {isClinicPlan && (
+                {clinicPlan && (
                   <div className="mt-6 rounded-2xl border border-border/60 bg-surface p-4">
                     <div className="flex items-center justify-between">
                       <label
