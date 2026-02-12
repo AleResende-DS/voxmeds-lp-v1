@@ -62,29 +62,33 @@ const features = [
     title: "IA que documenta por você",
     description:
       "Transcrição automática que gera prontuários, anamnese e documentos em segundos.",
-    image: "/landing/screenshots/transcription.png",
+    image: "/landing/screenshots/consulta-vox.webp",
     tag: "Transcrição com IA",
+    imageWrapperClass: "aspect-[2037/1397]",
   },
   {
     title: "Histórico completo e organizado",
     description:
       "Prontuário eletrônico com evolução clínica, exames e documentos em um só lugar.",
-    image: "/landing/screenshots/patient-record.png",
+    image: "/landing/screenshots/historico-vox.webp",
     tag: "Prontuário",
+    imageWrapperClass: "aspect-[2037/1397]",
   },
   {
     title: "Agenda inteligente",
     description:
       "Acesso de secretário, agendamento automático pelo Agente de WhatsApp e 100% customizável.",
-    image: "/landing/screenshots/agenda.png",
+    image: "/landing/screenshots/agenda-vox.webp",
     tag: "Agenda",
+    imageWrapperClass: "aspect-[2037/1397]",
   },
   {
     title: "Relatórios automáticos",
     description:
       "Visão financeira e clínica sem planilhas ou retrabalho.",
-    image: "/landing/screenshots/reports.png",
+    image: "/landing/screenshots/analytics-vox.webp",
     tag: "Analytics",
+    imageWrapperClass: "aspect-[2037/1397]",
   },
   {
     title: "Agente de IA",
@@ -92,6 +96,7 @@ const features = [
       "Assistente virtual que agenda consultas, confirma horários e responde dúvidas 24h por dia.",
     image: "/landing/mockups/whatsapp-mock.svg",
     tag: "WhatsApp IA",
+    imageWrapperClass: "h-[280px] sm:h-[320px] lg:h-[340px]",
   },
   {
     title: "Seu consultório no bolso",
@@ -101,6 +106,7 @@ const features = [
     tag: "App mobile",
     badge: "Em breve",
     imageClass: "object-contain",
+    imageWrapperClass: "h-[280px] sm:h-[320px] lg:h-[340px]",
   },
 ];
 
@@ -263,19 +269,19 @@ export default function Home() {
           <div className="absolute inset-0 bg-noise" />
         </div>
 
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-24 pt-12 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-24 pt-12 sm:px-6 lg:grid-cols-[0.8fr_1.2fr]">
           <Reveal>
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-primary">
                 A transcrição com IA mais precisa em contexto médico.
               </span>
-              <h1 className="mt-6 text-4xl font-semibold text-balance sm:text-5xl">
+              <h1 className="mt-6 text-3xl font-semibold text-balance sm:text-5xl">
                 Seu consultório inteiro.
                 <br />
                 <span className="text-primary">
                   <Typewriter
                     phrases={heroPhrases}
-                    className="inline-block min-w-[22ch] font-semibold"
+                    className="inline-block min-w-0 sm:min-w-[22ch] font-semibold"
                     cursorClassName="text-primary"
                     typeSpeed={64}
                     deleteSpeed={34}
@@ -324,19 +330,22 @@ export default function Home() {
 
           <Reveal delay={0.1}>
             <div className="relative">
-              <div className="absolute -right-10 top-10 h-32 w-32 rounded-full bg-primary/20 blur-[80px]" />
-              <div className="glass relative overflow-hidden rounded-[32px] border border-white/70 p-3">
-                <Image
-                  src="/landing/mockups/hero-screenshot.png"
-                  alt="Dashboard VoxMeds"
-                  width={900}
-                  height={600}
-                  className="rounded-[26px] object-cover"
-                  priority
-                />
-              </div>
-              <div className="absolute -bottom-6 left-6 hidden rounded-2xl bg-white px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary shadow md:block">
-                Clínica VoxMeds
+              <div className="absolute -right-8 top-8 h-24 w-24 rounded-full bg-primary/20 blur-[65px] sm:-right-10 sm:top-10 sm:h-32 sm:w-32 sm:blur-[80px]" />
+              <div className="relative aspect-[2036/1394] overflow-hidden rounded-2xl border border-white/70 bg-white/45 p-1.5 shadow-[0_22px_54px_-30px_rgba(15,23,42,0.45)] backdrop-blur-[2px] sm:rounded-[28px] sm:p-2">
+                <video
+                  className="h-full w-full rounded-xl object-contain pointer-events-none sm:rounded-[22px]"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  disablePictureInPicture
+                  poster="/landing/mockups/hero-screenshot.png"
+                  aria-label="Demonstração do app VoxMeds"
+                >
+                  <source src="/landing/mockups/hero-loop-v2.mp4" type="video/mp4" />
+                  Seu navegador não suporta vídeo HTML5.
+                </video>
               </div>
             </div>
           </Reveal>
@@ -344,7 +353,7 @@ export default function Home() {
       </section>
 
       <section className="section py-24">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl">
@@ -417,7 +426,7 @@ export default function Home() {
       </section>
 
       <section className="section bg-surface py-24" id="crenca">
-        <div className="mx-auto max-w-5xl px-6 text-center">
+        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
           <Reveal>
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
               Quebra de crença
@@ -440,15 +449,14 @@ export default function Home() {
       </section>
 
       <section id="solucao" className="section py-24">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
                 Conheça a VoxMeds
               </p>
               <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
-                O primeiro sistema médico brasileiro 100% com IA, que realmente
-                entende sua rotina.
+                O sistema médico 100% com IA, que realmente entende sua rotina.
               </h2>
               <p className="mt-4 text-muted">
                 Um sistema pensado do zero para médicos brasileiros: você fala, a
@@ -540,7 +548,7 @@ export default function Home() {
       </section>
 
       <section id="funcionalidades" className="section bg-surface py-24">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="max-w-2xl">
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
@@ -559,7 +567,7 @@ export default function Home() {
           <div className="mt-12 grid gap-8 lg:grid-cols-2">
             {features.map((feature) => (
               <Reveal key={feature.title}>
-                <div className="flex h-full min-h-[520px] flex-col rounded-[32px] border border-border/60 bg-white p-6 shadow-card">
+                <div className="flex h-full min-h-[560px] flex-col rounded-[32px] border border-border/60 bg-white p-6 shadow-card">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
@@ -580,12 +588,15 @@ export default function Home() {
                     )}
                   </div>
                   <p className="mt-2 text-sm text-muted">{feature.description}</p>
-                  <div className="mt-auto overflow-hidden rounded-2xl border border-border/60 bg-surface h-[260px] sm:h-[280px] lg:h-[300px]">
+                  <div className={`mt-auto overflow-hidden rounded-2xl border border-border/60 bg-surface ${
+                    feature.imageWrapperClass ?? "h-[280px] sm:h-[320px] lg:h-[340px]"
+                  }`}>
                     <Image
                       src={feature.image}
                       alt={feature.title}
-                      width={800}
-                      height={520}
+                      width={2037}
+                      height={1397}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       className={`h-full w-full ${
                         feature.imageClass ?? "object-cover"
                       }`}
@@ -599,7 +610,7 @@ export default function Home() {
       </section>
 
       <section id="comparativo" className="section py-24">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-[0.45fr_0.55fr]">
               <div>
@@ -648,7 +659,7 @@ export default function Home() {
       </section>
 
       <section id="app" className="section bg-surface py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
@@ -696,7 +707,7 @@ export default function Home() {
       </section>
 
       <section id="whatsapp" className="section py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr]">
           <Reveal>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
@@ -738,7 +749,7 @@ export default function Home() {
       </section>
 
       <section id="seguranca" className="section bg-surface py-24">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="max-w-2xl">
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
@@ -773,7 +784,7 @@ export default function Home() {
       </section>
 
       <section id="depoimentos" className="section py-24 hidden">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
@@ -812,7 +823,7 @@ export default function Home() {
       <PricingSection />
 
       <section id="faq" className="section bg-surface py-24">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="max-w-2xl">
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
@@ -843,7 +854,7 @@ export default function Home() {
       </section>
 
       <footer className="bg-[#0b1514] text-white">
-        <div className="mx-auto max-w-6xl px-6 py-16">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <div className="rounded-[32px] bg-primary/10 p-10 text-center">
             <h2 className="text-3xl font-semibold text-balance">
               Pronto para transformar sua rotina?
@@ -863,10 +874,12 @@ export default function Home() {
           <div className="mt-14 grid gap-10 text-sm md:grid-cols-[1.2fr_1fr_1fr_1fr]">
             <div>
               <Image
-                src="/logo-light.svg"
+                src="/logo-footer.png"
                 alt="VoxMeds"
-                width={120}
-                height={32}
+                width={1080}
+                height={1080}
+                sizes="(max-width: 640px) 96px, 112px"
+                className="h-auto w-24 sm:w-28"
               />
               <p className="mt-4 text-white/60">
                 Inteligência clínica em cada palavra.

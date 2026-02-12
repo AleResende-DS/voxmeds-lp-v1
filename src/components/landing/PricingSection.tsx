@@ -142,7 +142,7 @@ export function PricingSection() {
         <div className="absolute right-1/4 bottom-0 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[120px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <div className="text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2">
@@ -152,7 +152,7 @@ export function PricingSection() {
             </span>
           </div>
 
-          <h2 className="mt-6 text-4xl font-semibold text-balance sm:text-5xl">
+          <h2 className="mt-6 text-3xl font-semibold text-balance sm:text-5xl">
             Escolha o plano ideal para
             <br />
             <span className="text-primary">sua rotina médica</span>
@@ -163,7 +163,7 @@ export function PricingSection() {
           </p>
 
           {/* Billing toggle */}
-          <div className="mt-8 inline-flex items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <span
               className={`text-sm font-medium transition ${
                 billingCycle === "monthly"
@@ -207,13 +207,13 @@ export function PricingSection() {
 
         {/* Segment toggle */}
         <div className="mt-12 text-center">
-          <div className="inline-flex items-center rounded-full border border-border/60 bg-surface px-2 py-2 text-sm">
+          <div className="inline-flex w-full max-w-xs items-center rounded-full border border-border/60 bg-surface px-2 py-2 text-sm sm:w-auto sm:max-w-none">
             {(["individual", "equipe"] as Segment[]).map((option) => (
               <button
                 key={option}
                 type="button"
                 onClick={() => setSegment(option)}
-                className={`rounded-full px-6 py-2 transition ${
+                className={`flex-1 rounded-full px-4 py-2 transition sm:px-6 ${
                   segment === option
                     ? "bg-primary text-white shadow"
                     : "text-muted hover:text-foreground"
@@ -239,7 +239,7 @@ export function PricingSection() {
             return (
               <div
                 key={plan.id}
-                className={`group relative flex flex-col rounded-[28px] border bg-white p-8 shadow-card transition-all duration-300 ${
+                className={`group relative flex flex-col rounded-[28px] border bg-white p-6 shadow-card transition-all duration-300 sm:p-8 ${
                   plan.highlight && segment === "individual"
                     ? "border-primary/40 ring-2 ring-primary/20"
                     : "border-border/60 hover:border-primary/30 hover:shadow-[0_32px_80px_-48px_rgba(13,148,136,0.25)]"
@@ -415,17 +415,17 @@ export function PricingSection() {
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-border/60 bg-surface">
-                      <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+                      <th className="px-4 py-4 text-left text-xs font-semibold uppercase tracking-[0.2em] text-muted sm:px-6">
                         Funcionalidade
                       </th>
-                      <th className="px-6 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+                      <th className="px-4 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted sm:px-6">
                         <div className="text-lg">{individualPlan.icon}</div>
                         <div className="mt-1">{individualPlan.name}</div>
                       </th>
                       {clinicPlans.map((plan) => (
                         <th
                           key={plan.id}
-                          className="px-6 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted"
+                          className="px-4 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted sm:px-6"
                         >
                           <div className="text-lg">{plan.icon}</div>
                           <div className="mt-1">{plan.name}</div>
@@ -445,11 +445,11 @@ export function PricingSection() {
                             index % 2 === 0 ? "bg-white" : "bg-surface/30"
                           }`}
                         >
-                          <td className="px-6 py-4 text-sm text-muted">
+                          <td className="px-4 py-4 text-sm text-muted sm:px-6">
                             {feature}
                           </td>
                           {allPlans.map((plan) => (
-                            <td key={plan.id} className="px-6 py-4 text-center">
+                            <td key={plan.id} className="px-4 py-4 text-center sm:px-6">
                               {plan.features.includes(feature) ||
                               (plan.id !== "individual" &&
                                 individualFeatures.includes(feature)) ? (
@@ -471,7 +471,7 @@ export function PricingSection() {
 
         {/* Enterprise CTA */}
         <div className="mt-16 text-center">
-          <div className="mx-auto max-w-2xl rounded-[28px] border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-8">
+          <div className="mx-auto max-w-2xl rounded-[28px] border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-6 sm:p-8">
             <h3 className="text-2xl font-semibold">Precisa de mais?</h3>
             <a
               href="https://wa.me/5544997362973"
@@ -485,7 +485,7 @@ export function PricingSection() {
         </div>
 
         {/* Trust indicators */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-xs text-muted">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-4 text-xs text-muted sm:gap-8">
           <div className="flex items-center gap-2">
             <Check className="h-4 w-4 text-success" />
             <span>30 dias grátis no Individual</span>

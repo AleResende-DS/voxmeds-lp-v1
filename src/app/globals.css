@@ -15,6 +15,7 @@
   --radius: 24px;
   --shadow-soft: 0 30px 80px -60px rgba(15, 23, 42, 0.45);
   --shadow-card: 0 24px 60px -42px rgba(15, 23, 42, 0.35);
+  --shadow-lg: 0 40px 100px -48px rgba(15, 23, 42, 0.5);
 }
 
 @theme inline {
@@ -89,6 +90,15 @@ h4 {
 
   .shadow-soft {
     box-shadow: var(--shadow-soft);
+  }
+
+  .hover-lift {
+    transition: transform 300ms ease, box-shadow 300ms ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
   }
 
   .float-slow {
