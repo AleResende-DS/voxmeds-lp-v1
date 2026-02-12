@@ -943,7 +943,7 @@ export default function Home() {
                   <Link
                     href="https://app.voxmeds.com/terms"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="tap-target inline-flex items-center"
                   >
                     Termos de uso
@@ -953,7 +953,7 @@ export default function Home() {
                   <Link
                     href="https://app.voxmeds.com/privacy"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="tap-target inline-flex items-center"
                   >
                     Privacidade
@@ -969,7 +969,7 @@ export default function Home() {
               <Link
                 href="https://www.zennex.com.br"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="tap-target inline-flex items-center px-1 transition hover:text-white"
               >
                 Zennex
@@ -978,7 +978,7 @@ export default function Home() {
             <Link
               href="https://instagram.com/voxmeds.ia"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="tap-target inline-flex items-center px-1 transition hover:text-white"
             >
               Instagram /voxmeds.ia
