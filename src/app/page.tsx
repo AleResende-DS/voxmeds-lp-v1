@@ -330,11 +330,11 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="relative">
+            <div className="relative lg:origin-center lg:scale-110">
               <div className="absolute -right-8 top-8 h-24 w-24 rounded-full bg-primary/20 blur-[65px] sm:-right-10 sm:top-10 sm:h-32 sm:w-32 sm:blur-[80px]" />
               <div className="relative aspect-[2036/1394] overflow-hidden rounded-2xl border border-white/70 bg-white/45 p-1 shadow-[0_22px_54px_-30px_rgba(15,23,42,0.45)] backdrop-blur-[2px] sm:rounded-[28px] sm:p-1.5">
                 <video
-                  className="h-full w-full rounded-xl object-cover pointer-events-none sm:rounded-[22px]"
+                  className="h-full w-full rounded-xl object-contain pointer-events-none sm:rounded-[22px]"
                   autoPlay
                   loop
                   muted
@@ -969,3 +969,7 @@ export default function Home() {
     </div>
   );
 }
+
+
+
+
