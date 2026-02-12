@@ -262,7 +262,7 @@ export default function Home() {
     <div className="bg-background text-foreground">
       <Header />
 
-      <section className="relative overflow-hidden bg-surface pt-20">
+      <section className="relative overflow-hidden bg-surface pt-14 sm:pt-20">
         <div className="absolute inset-0 -z-10">
           <div className="absolute -left-40 top-[-120px] h-[420px] w-[420px] rounded-full bg-primary/20 blur-[120px]" />
           <div className="absolute right-[-120px] top-[60px] h-[380px] w-[380px] rounded-full bg-primary/10 blur-[120px]" />
@@ -270,19 +270,20 @@ export default function Home() {
           <div className="absolute inset-0 bg-noise" />
         </div>
 
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-24 pt-12 sm:px-6 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 pb-16 pt-8 sm:gap-10 sm:px-6 sm:pb-24 sm:pt-12 lg:grid-cols-[0.8fr_1.2fr]">
           <Reveal>
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-primary">
                 A transcrição com IA mais precisa em contexto médico.
               </span>
-              <h1 className="mt-6 text-3xl font-semibold text-balance sm:text-5xl">
+              <h1 className="mt-6 text-[2rem] font-semibold leading-tight text-balance sm:text-5xl">
                 Seu consultório inteiro.
                 <br />
                 <span className="text-primary">
+                  <span className="sm:hidden">Na palma da sua mão</span>
                   <Typewriter
                     phrases={heroPhrases}
-                    className="inline-block min-w-0 sm:min-w-[22ch] font-semibold"
+                    className="hidden min-w-[22ch] font-semibold sm:inline-block"
                     cursorClassName="text-primary"
                     typeSpeed={64}
                     deleteSpeed={34}
@@ -297,17 +298,17 @@ export default function Home() {
                 para você focar no que importa: seu paciente.
               </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                 <Link
                   href={registerUrl}
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-[0_16px_40px_-24px_rgba(13,148,136,0.9)] transition hover:bg-primary-dark"
+                  className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-[0_16px_40px_-24px_rgba(13,148,136,0.9)] transition hover:bg-primary-dark sm:w-auto"
                 >
                   Começar teste grátis
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="#solucao"
-                  className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white px-6 py-3 text-sm font-medium text-foreground transition hover:border-primary/50"
+                  className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/60 bg-white px-6 py-3 text-sm font-medium text-foreground transition hover:border-primary/50 sm:w-auto"
                 >
                   Ver como funciona
                   <ArrowDown className="h-4 w-4" />
@@ -353,7 +354,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section py-24">
+      <section className="section py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
@@ -426,7 +427,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section bg-surface py-24" id="crenca">
+      <section className="section bg-surface py-14 sm:py-20 lg:py-24" id="crenca">
         <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
           <Reveal>
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
@@ -437,7 +438,7 @@ export default function Home() {
               crescer na carreira significa abrir mão da vida pessoal.
             </p>
             <div className="mx-auto mt-8 h-px w-24 bg-primary/40" />
-            <h2 className="mt-8 text-4xl font-semibold text-primary">
+            <h2 className="mt-8 text-3xl font-semibold text-primary sm:text-4xl">
               Mas isso não é verdade.
             </h2>
             <p className="mt-4 text-muted">
@@ -449,8 +450,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="solucao" className="section py-24">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
+      <section id="solucao" className="section py-14 sm:py-20 lg:py-24">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
@@ -498,7 +499,7 @@ export default function Home() {
           <Reveal delay={0.1}>
             <div className="relative">
               <div className="absolute right-8 top-6 h-24 w-24 rounded-full bg-primary/20 blur-[60px]" />
-              <div className="rounded-[32px] border border-border/60 bg-white p-8 shadow-card">
+              <div className="rounded-[32px] border border-border/60 bg-white p-6 shadow-card sm:p-8">
                 <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-muted">
                   <span>Demo VoxMeds</span>
                   <span className="inline-flex items-center gap-2 text-primary">
@@ -515,13 +516,13 @@ export default function Home() {
                       <span className="sr-only">
                         Transcrição automática em segundos.
                       </span>
-                      <span className="text-muted">"</span>
+                      <span className="text-muted">&ldquo;</span>
                       <Typewriter
                         phrases={transcriptionPhrases}
                         className="inline-block font-medium text-foreground"
                         cursorClassName="text-primary"
                       />
-                      <span className="text-muted">"</span>
+                      <span className="text-muted">&rdquo;</span>
                     </p>
                   </div>
                   <div className="rounded-2xl border border-border/60 bg-white p-4 shadow">
@@ -548,7 +549,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="funcionalidades" className="section bg-surface py-24">
+      <section id="funcionalidades" className="section bg-surface py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="max-w-2xl">
@@ -565,10 +566,10 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+          <div className="mt-12 grid gap-6 sm:gap-8 lg:grid-cols-2">
             {features.map((feature) => (
               <Reveal key={feature.title}>
-                <div className="flex h-full min-h-[560px] flex-col rounded-[32px] border border-border/60 bg-white p-6 shadow-card">
+                <div className="flex h-full flex-col rounded-[32px] border border-border/60 bg-white p-5 shadow-card sm:p-6 md:min-h-[560px]">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
@@ -610,10 +611,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="comparativo" className="section py-24">
+      <section id="comparativo" className="section py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
-            <div className="grid gap-10 lg:grid-cols-[0.45fr_0.55fr]">
+            <div className="grid gap-8 sm:gap-10 lg:grid-cols-[0.45fr_0.55fr]">
               <div>
                 <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
                   Comparativo
@@ -626,15 +627,15 @@ export default function Home() {
                 </p>
                 <Link
                   href={registerUrl}
-                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white"
+                  className="tap-target mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white"
                 >
                   Quero GANHAR tempo
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
 
-              <div className="grid gap-6 rounded-[32px] border border-border/60 bg-white p-6 shadow-card">
-                <div className="grid gap-4 sm:grid-cols-2 sm:gap-10">
+              <div className="grid gap-6 rounded-[32px] border border-border/60 bg-white p-5 shadow-card sm:p-6">
+                <div className="hidden gap-4 sm:grid sm:grid-cols-2 sm:gap-10">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-error">
                     Sem VoxMeds
                   </p>
@@ -646,10 +647,20 @@ export default function Home() {
                   {comparisonRows.map((row) => (
                     <div
                       key={row.id}
-                      className="grid items-start gap-4 text-sm text-muted sm:grid-cols-2 sm:gap-10"
+                      className="grid items-start gap-3 rounded-2xl border border-border/60 bg-surface/40 p-4 text-sm text-muted sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:grid-cols-2 sm:gap-10"
                     >
-                      <div>✕ {row.before}</div>
-                      <div>✓ {row.after}</div>
+                      <div className="space-y-1">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-error sm:hidden">
+                          Sem VoxMeds
+                        </p>
+                        <div>✕ {row.before}</div>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary sm:hidden">
+                          Com VoxMeds
+                        </p>
+                        <div>✓ {row.after}</div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -659,8 +670,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="app" className="section bg-surface py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
+      <section id="app" className="section bg-surface py-14 sm:py-20 lg:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
@@ -681,7 +692,7 @@ export default function Home() {
                 <li>✓ Segurança Biométrica</li>
                 <li>✓ Transcrição usando o microfone do celular.</li>
               </ul>
-              <div className="mt-6 flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-primary">
+              <div className="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-primary">
                 <span className="rounded-full border border-primary/30 px-4 py-2">
                   Em breve
                 </span>
@@ -691,7 +702,7 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="relative mx-auto w-[240px] sm:w-[280px] lg:w-[320px]">
+            <div className="relative mx-auto w-[220px] sm:w-[280px] lg:w-[320px]">
               <div className="absolute right-4 top-8 h-14 w-14 rounded-full bg-primary/20 blur-[45px]" />
               <div className="rounded-[22px] border border-border/60 bg-white p-1.5 shadow-card">
                 <Image
@@ -707,8 +718,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="whatsapp" className="section py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr]">
+      <section id="whatsapp" className="section py-14 sm:py-20 lg:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr]">
           <Reveal>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
@@ -749,7 +760,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="seguranca" className="section bg-surface py-24">
+      <section id="seguranca" className="section bg-surface py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="max-w-2xl">
@@ -784,7 +795,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="depoimentos" className="section py-24 hidden">
+      <section id="depoimentos" className="section hidden py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -809,8 +820,9 @@ export default function Home() {
                 className="min-w-[280px] flex-1 rounded-[28px] border border-border/60 bg-white p-6 shadow-card"
               >
                 <p className="text-sm text-muted">
-                  "Economizo pelo menos 2 horas por dia. Antes ficava até tarde
-                  digitando, agora saio no horário e com tudo documentado."
+                  &ldquo;Economizo pelo menos 2 horas por dia. Antes ficava até
+                  tarde digitando, agora saio no horário e com tudo
+                  documentado.&rdquo;
                 </p>
                 <div className="mt-5 text-sm font-semibold">Dr(a). [Nome]</div>
                 <div className="text-xs text-muted">Especialidade · Cidade</div>
@@ -823,7 +835,7 @@ export default function Home() {
 
       <PricingSection />
 
-      <section id="faq" className="section bg-surface py-24">
+      <section id="faq" className="section bg-surface py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="max-w-2xl">
@@ -840,10 +852,10 @@ export default function Home() {
             {faqs.map((faq, index) => (
               <Reveal key={faq.question}>
                 <details
-                  className="group rounded-[24px] border border-border/60 bg-white p-6 shadow-card"
+                  className="group rounded-[24px] border border-border/60 bg-white p-5 shadow-card sm:p-6"
                   open={index === 0}
                 >
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold">
+                  <summary className="tap-target flex cursor-pointer list-none items-center justify-between gap-4 py-2 text-sm font-semibold">
                     <span>{faq.question}</span>
                     <ChevronDown
                       className="h-4 w-4 shrink-0 text-muted transition-transform duration-200 group-open:rotate-180"
@@ -860,7 +872,7 @@ export default function Home() {
 
       <footer className="bg-[#0b1514] text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <div className="rounded-[32px] bg-primary/10 p-10 text-center">
+          <div className="rounded-[32px] bg-primary/10 p-8 text-center sm:p-10">
             <h2 className="text-3xl font-semibold text-balance">
               Pronto para transformar sua rotina?
             </h2>
@@ -869,15 +881,15 @@ export default function Home() {
             </p>
             <Link
               href={registerUrl}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white"
+              className="tap-target mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white"
             >
               Começar teste grátis de 30 dias
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          <div className="mt-14 grid gap-10 text-sm md:grid-cols-[1.2fr_1fr_1fr]">
-            <div>
+          <div className="mt-12 grid gap-8 text-sm sm:grid-cols-2 md:mt-14 md:grid-cols-[1.2fr_1fr_1fr] md:gap-10">
+            <div className="flex flex-col items-center text-center sm:col-span-2 md:col-span-1 md:items-start md:text-left">
               <Image
                 src="/logo-footer.png"
                 alt="VoxMeds"
@@ -890,19 +902,25 @@ export default function Home() {
                 Inteligência clínica em cada palavra.
               </p>
             </div>
-            <div>
+            <div className="flex flex-col items-center text-center md:items-start md:text-left">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
                 Produto
               </p>
-              <ul className="mt-4 space-y-2 text-white/70">
+              <ul className="mt-4 flex flex-col items-center gap-1 text-white/70 md:items-start">
                 <li>
-                  <Link href="#funcionalidades">Funcionalidades</Link>
+                  <Link href="#funcionalidades" className="tap-target inline-flex items-center">
+                    Funcionalidades
+                  </Link>
                 </li>
                 <li>
-                  <Link href="#planos">Planos</Link>
+                  <Link href="#planos" className="tap-target inline-flex items-center">
+                    Planos
+                  </Link>
                 </li>
                 <li>
-                  <Link href="#faq">FAQ</Link>
+                  <Link href="#faq" className="tap-target inline-flex items-center">
+                    FAQ
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -916,16 +934,17 @@ export default function Home() {
                 <li>Blog</li>
               </ul>
             </div>
-            <div>
+            <div className="flex flex-col items-center text-center md:items-start md:text-left">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
                 Legal
               </p>
-              <ul className="mt-4 space-y-2 text-white/70">
+              <ul className="mt-4 flex flex-col items-center gap-1 text-white/70 md:items-start">
                 <li>
                   <Link
                     href="https://app.voxmeds.com/terms"
                     target="_blank"
                     rel="noreferrer"
+                    className="tap-target inline-flex items-center"
                   >
                     Termos de uso
                   </Link>
@@ -935,6 +954,7 @@ export default function Home() {
                     href="https://app.voxmeds.com/privacy"
                     target="_blank"
                     rel="noreferrer"
+                    className="tap-target inline-flex items-center"
                   >
                     Privacidade
                   </Link>
@@ -943,14 +963,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row">
-            <span>
+          <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-center text-xs text-white/50 md:mt-12 md:flex-row md:items-start md:text-left">
+            <span className="flex flex-wrap items-center justify-center gap-1 md:justify-start">
               © 2026 VoxMeds — Desenvolvido por{" "}
               <Link
                 href="https://www.zennex.com.br"
                 target="_blank"
                 rel="noreferrer"
-                className="transition hover:text-white"
+                className="tap-target inline-flex items-center px-1 transition hover:text-white"
               >
                 Zennex
               </Link>
@@ -959,7 +979,7 @@ export default function Home() {
               href="https://instagram.com/voxmeds.ia"
               target="_blank"
               rel="noreferrer"
-              className="transition hover:text-white"
+              className="tap-target inline-flex items-center px-1 transition hover:text-white"
             >
               Instagram /voxmeds.ia
             </Link>

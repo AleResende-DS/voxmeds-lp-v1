@@ -64,7 +64,18 @@ h4 {
   }
 
   .section {
-    scroll-margin-top: 96px;
+    scroll-margin-top: 88px;
+  }
+
+  @media (min-width: 768px) {
+    .section {
+      scroll-margin-top: 96px;
+    }
+  }
+
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
   }
 
   .bg-grid {
@@ -152,7 +163,17 @@ h4 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .type-cursor {
+    animation: none;
+  }
+
+  .float-slow,
+  .float-delayed,
+  .pulse-soft {
     animation: none;
   }
 }

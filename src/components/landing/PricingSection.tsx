@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, Star, TrendingDown, Users, Calculator, ChevronDown } from "lucide-react";
+import { Check, TrendingDown, Users, Calculator, ChevronDown } from "lucide-react";
 
 const registerUrl = "https://app.voxmeds.com/register";
 
@@ -98,7 +98,6 @@ const clinicPlans = [
 export function PricingSection() {
   const [segment, setSegment] = useState<Segment>("individual");
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [doctorCount, setDoctorCount] = useState(5);
   const [showComparison, setShowComparison] = useState(false);
 
@@ -135,7 +134,7 @@ export function PricingSection() {
   };
 
   return (
-    <section id="planos" className="section relative overflow-hidden py-24">
+    <section id="planos" className="section relative overflow-hidden py-14 sm:py-20 lg:py-24">
       {/* Background decoration */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute left-1/4 top-0 h-[400px] w-[400px] rounded-full bg-primary/10 blur-[120px]" />
@@ -178,12 +177,12 @@ export function PricingSection() {
               onClick={() =>
                 setBillingCycle(billingCycle === "monthly" ? "yearly" : "monthly")
               }
-              className="relative h-8 w-16 rounded-full bg-surface-strong transition-colors hover:bg-border"
+              className="tap-target relative h-11 w-20 rounded-full bg-surface-strong transition-colors hover:bg-border"
               aria-label="Alternar entre mensal e anual"
             >
               <span
-                className={`absolute top-1 h-6 w-6 rounded-full bg-primary shadow-md transition-all duration-300 ${
-                  billingCycle === "yearly" ? "left-9" : "left-1"
+                className={`absolute top-1.5 h-8 w-8 rounded-full bg-primary shadow-md transition-all duration-300 ${
+                  billingCycle === "yearly" ? "left-[42px]" : "left-1.5"
                 }`}
               />
             </button>
@@ -207,13 +206,13 @@ export function PricingSection() {
 
         {/* Segment toggle */}
         <div className="mt-12 text-center">
-          <div className="inline-flex w-full max-w-xs items-center rounded-full border border-border/60 bg-surface px-2 py-2 text-sm sm:w-auto sm:max-w-none">
+          <div className="inline-flex w-full max-w-xs items-center rounded-full border border-border/60 bg-surface p-1.5 text-sm sm:w-auto sm:max-w-none">
             {(["individual", "equipe"] as Segment[]).map((option) => (
               <button
                 key={option}
                 type="button"
                 onClick={() => setSegment(option)}
-                className={`flex-1 rounded-full px-4 py-2 transition sm:px-6 ${
+                className={`tap-target inline-flex flex-1 items-center justify-center rounded-full px-4 py-2 transition sm:px-6 ${
                   segment === option
                     ? "bg-primary text-white shadow"
                     : "text-muted hover:text-foreground"
@@ -226,7 +225,7 @@ export function PricingSection() {
         </div>
 
         {/* Pricing cards */}
-        <div className={`mt-8 grid gap-6 ${
+        <div className={`mt-8 grid gap-5 sm:gap-6 ${
           segment === "individual"
             ? "lg:grid-cols-1 max-w-md mx-auto"
             : "lg:grid-cols-3"
@@ -239,7 +238,7 @@ export function PricingSection() {
             return (
               <div
                 key={plan.id}
-                className={`group relative flex flex-col rounded-[28px] border bg-white p-6 shadow-card transition-all duration-300 sm:p-8 ${
+                className={`group relative flex flex-col rounded-[28px] border bg-white p-5 shadow-card transition-all duration-300 sm:p-7 ${
                   plan.highlight && segment === "individual"
                     ? "border-primary/40 ring-2 ring-primary/20"
                     : "border-border/60 hover:border-primary/30 hover:shadow-[0_32px_80px_-48px_rgba(13,148,136,0.25)]"
@@ -282,17 +281,18 @@ export function PricingSection() {
                     Depois do trial
                   </div>
                   <div className="mt-2 flex items-baseline justify-center gap-2">
-                    <span className="text-4xl font-bold text-foreground">
+                    <span className="text-3xl font-bold text-foreground sm:text-4xl">
                       {formatCurrency(
                         billingCycle === "monthly"
                           ? plan.monthlyPrice
                           : plan.yearlyPrice
                       )}
                     </span>
-                    <span className="text-sm text-muted">
-                      /{billingCycle === "monthly" ? "mês" : "ano"}
-                    </span>
+                    <span className="text-sm text-muted">/mês</span>
                   </div>
+                  {billingCycle === "yearly" && (
+                    <p className="mt-1 text-xs text-muted">cobrado anualmente</p>
+                  )}
 
                   {isClinicPlan && (
                     <div className="mt-2 text-xs text-muted">
@@ -334,7 +334,7 @@ export function PricingSection() {
                         onChange={(e) =>
                           setDoctorCount(Math.max(2, parseInt(e.target.value) || 2))
                         }
-                        className="w-16 rounded-lg border border-border/60 bg-white px-2 py-1 text-center text-sm font-semibold focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        className="tap-target h-11 w-16 rounded-lg border border-border/60 bg-white px-2 py-1 text-center text-sm font-semibold focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                       />
                     </div>
                     <div className="mt-3 flex items-baseline justify-between">
@@ -343,9 +343,7 @@ export function PricingSection() {
                       </span>
                       <span className="text-lg font-bold text-primary">
                         {formatCurrency(totalPrice)}
-                        <span className="text-xs font-medium text-muted">
-                          /{billingCycle === "monthly" ? "mês" : "ano"}
-                        </span>
+                        <span className="text-xs font-medium text-muted">/mês</span>
                       </span>
                     </div>
                   </div>
@@ -369,7 +367,7 @@ export function PricingSection() {
                 {/* CTA */}
                 <Link
                   href={registerUrl}
-                  className={`mt-8 inline-flex w-full items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 ${
+                  className={`tap-target mt-8 inline-flex w-full items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 ${
                     plan.ctaVariant === "primary"
                       ? "bg-primary text-white shadow-[0_8px_24px_-8px_rgba(13,148,136,0.4)] hover:bg-primary-dark hover:shadow-[0_12px_32px_-8px_rgba(13,148,136,0.5)] hover:scale-[1.02]"
                       : "border border-border/60 text-foreground hover:border-primary/50 hover:bg-primary/5"
@@ -393,11 +391,11 @@ export function PricingSection() {
         </div>
 
         {/* Feature comparison table */}
-        <div className="mt-16">
+        <div className="mt-12 sm:mt-16">
           <button
             type="button"
             onClick={() => setShowComparison(!showComparison)}
-            className="mx-auto flex items-center gap-2 rounded-full border border-border/60 bg-white px-6 py-3 text-sm font-medium shadow-card transition-all hover:border-primary/30 hover:shadow-[0_8px_24px_-8px_rgba(13,148,136,0.2)]"
+            className="tap-target mx-auto flex items-center gap-2 rounded-full border border-border/60 bg-white px-6 py-3 text-sm font-medium shadow-card transition-all hover:border-primary/30 hover:shadow-[0_8px_24px_-8px_rgba(13,148,136,0.2)]"
           >
             <span>
               {showComparison ? "Ocultar" : "Ver"} comparação completa
@@ -411,59 +409,66 @@ export function PricingSection() {
 
           {showComparison && (
             <div className="mt-8 overflow-hidden rounded-[28px] border border-border/60 bg-white shadow-card animate-[fadeIn_0.3s_ease-in-out]">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-border/60 bg-surface">
-                      <th className="px-4 py-4 text-left text-xs font-semibold uppercase tracking-[0.2em] text-muted sm:px-6">
-                        Funcionalidade
-                      </th>
-                      <th className="px-4 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted sm:px-6">
-                        <div className="text-lg">{individualPlan.icon}</div>
-                        <div className="mt-1">{individualPlan.name}</div>
-                      </th>
-                      {clinicPlans.map((plan) => (
-                        <th
-                          key={plan.id}
-                          className="px-4 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted sm:px-6"
-                        >
-                          <div className="text-lg">{plan.icon}</div>
-                          <div className="mt-1">{plan.name}</div>
+              <p className="px-4 pt-4 text-xs font-medium text-muted sm:hidden">
+                Arraste para o lado para comparar todos os planos.
+              </p>
+              <div className="relative">
+                <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-5 bg-gradient-to-r from-white to-transparent sm:hidden" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-5 bg-gradient-to-l from-white to-transparent sm:hidden" />
+                <div className="overflow-x-auto">
+                  <table className="min-w-[664px] w-full">
+                    <thead>
+                      <tr className="border-b border-border/60 bg-surface">
+                        <th className="px-4 py-4 text-left text-xs font-semibold uppercase tracking-[0.2em] text-muted sm:px-6">
+                          Funcionalidade
                         </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Array.from(
-                      new Set([...individualFeatures, ...clinicFeatures])
-                    ).map((feature, index) => {
-                      const allPlans = [individualPlan, ...clinicPlans];
-                      return (
-                        <tr
-                          key={feature}
-                          className={`border-b border-border/30 last:border-0 ${
-                            index % 2 === 0 ? "bg-white" : "bg-surface/30"
-                          }`}
-                        >
-                          <td className="px-4 py-4 text-sm text-muted sm:px-6">
-                            {feature}
-                          </td>
-                          {allPlans.map((plan) => (
-                            <td key={plan.id} className="px-4 py-4 text-center sm:px-6">
-                              {plan.features.includes(feature) ||
-                              (plan.id !== "individual" &&
-                                individualFeatures.includes(feature)) ? (
-                                <Check className="mx-auto h-5 w-5 text-primary" />
-                              ) : (
-                                <span className="text-muted/30">—</span>
-                              )}
+                        <th className="px-4 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted sm:px-6">
+                          <div className="text-lg">{individualPlan.icon}</div>
+                          <div className="mt-1">{individualPlan.name}</div>
+                        </th>
+                        {clinicPlans.map((plan) => (
+                          <th
+                            key={plan.id}
+                            className="px-4 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted sm:px-6"
+                          >
+                            <div className="text-lg">{plan.icon}</div>
+                            <div className="mt-1">{plan.name}</div>
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Array.from(
+                        new Set([...individualFeatures, ...clinicFeatures])
+                      ).map((feature, index) => {
+                        const allPlans = [individualPlan, ...clinicPlans];
+                        return (
+                          <tr
+                            key={feature}
+                            className={`border-b border-border/30 last:border-0 ${
+                              index % 2 === 0 ? "bg-white" : "bg-surface/30"
+                            }`}
+                          >
+                            <td className="px-4 py-4 text-sm text-muted sm:px-6">
+                              {feature}
                             </td>
-                          ))}
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+                            {allPlans.map((plan) => (
+                              <td key={plan.id} className="px-4 py-4 text-center sm:px-6">
+                                {plan.features.includes(feature) ||
+                                (plan.id !== "individual" &&
+                                  individualFeatures.includes(feature)) ? (
+                                  <Check className="mx-auto h-5 w-5 text-primary" />
+                                ) : (
+                                  <span className="text-muted/30">—</span>
+                                )}
+                              </td>
+                            ))}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           )}
@@ -477,7 +482,7 @@ export function PricingSection() {
               href="https://wa.me/5544997362973"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary bg-white px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-white"
+              className="tap-target mt-6 inline-flex items-center gap-2 rounded-full border border-primary bg-white px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-white"
             >
               Falar com especialista
             </a>

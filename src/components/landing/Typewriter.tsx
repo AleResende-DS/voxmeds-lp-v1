@@ -29,14 +29,11 @@ export function Typewriter({
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    if (reduceMotion) {
-      setText(phrases[0] ?? "");
-      return;
-    }
+    if (reduceMotion) return;
 
     const timer = setTimeout(() => setStarted(true), startDelay);
     return () => clearTimeout(timer);
-  }, [reduceMotion, phrases, startDelay]);
+  }, [reduceMotion, startDelay]);
 
   useEffect(() => {
     if (reduceMotion || !started || phrases.length === 0) return;
@@ -48,9 +45,11 @@ export function Typewriter({
     }
 
     if (isDeleting && text === "") {
-      setIsDeleting(false);
-      setIndex((prev) => (prev + 1) % phrases.length);
-      return;
+      const resetTimer = setTimeout(() => {
+        setIsDeleting(false);
+        setIndex((prev) => (prev + 1) % phrases.length);
+      }, 0);
+      return () => clearTimeout(resetTimer);
     }
 
     const nextText = isDeleting
@@ -75,10 +74,11 @@ export function Typewriter({
   ]);
 
   if (phrases.length === 0) return null;
+  const displayedText = reduceMotion ? (phrases[0] ?? "") : text;
 
   return (
     <span className={className} aria-hidden={reduceMotion ? undefined : true}>
-      {text}
+      {displayedText}
       {!reduceMotion && (
         <span
           className={`type-cursor${cursorClassName ? ` ${cursorClassName}` : ""}`}
