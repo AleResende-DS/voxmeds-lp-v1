@@ -6,6 +6,7 @@ import {
   BarChart3,
   Calendar,
   Check,
+  ChevronDown,
   Clock,
   Hourglass,
   FileText,
@@ -215,39 +216,39 @@ const faqs = [
       "Sim. O VoxMeds é um prontuário completo, com histórico, documentos e evolução clínica em um só lugar.",
   },
   {
-    question: "A transcrição funciona com qualquer sotaque?",
-    answer:
-      "Nossa IA foi treinada com médicos de todas as regiões do Brasil e entende termos técnicos e variações de fala.",
-  },
-  {
     question: "Posso personalizar os documentos gerados?",
     answer:
-      "Você pode criar templates de anamnese, SOAP, laudos e atestados. A IA aprende seu estilo com o tempo.",
-  },
-  {
-    question: "O VoxMeds é seguro?",
-    answer:
-      "Sim. Todos os dados são criptografados e seguimos rigorosamente a LGPD.",
+      "Sim, todos os documentos são editáveis, a IA é apenas um suporte para você. Além disso, você pode criar templates personalizados dos documentos.",
   },
   {
     question: "Como funciona o agente no WhatsApp?",
     answer:
-      "Você conecta o WhatsApp da clínica e um assistente responde mensagens, agenda consultas e confirma horários.",
+      "Você conecta o WhatsApp da clínica e um assistente de IA responde mensagens, tira dúvidas, realiza agendamentos e confirma horários. Tudo com as informações diretamente do app.",
   },
   {
     question: "Posso testar antes de assinar?",
     answer:
-      "Sim. Oferecemos 30 dias grátis com acesso completo, sem cartão de crédito.",
+      "Sim, oferecemos 20 consultas gratuitas sem cartão de crédito. Além de 30 dias com acesso grátis completo.",
   },
   {
-    question: "O app funciona offline?",
+    question: "A IA vai prescrever por mim?",
     answer:
-      "Algumas funções básicas funcionam offline. Para transcrição e sincronização, é necessário internet.",
+      "Não, a IA atua apenas como apoio e cria no máximo sugestões e alertas, mas você, médico, é quem decide tudo.",
   },
   {
-    question: "Vocês oferecem suporte?",
+    question: "Gera prescrição digital válida?",
     answer:
-      "Sim. Suporte por chat dentro do app com tempo médio de resposta em até 2 horas úteis.",
+      "Ainda não, estamos trabalhando para entregar um documento válido. Em breve você poderá gerar prescrições digitais válidas.",
+  },
+  {
+    question: "Posso começar com o plano individual e aumentar para Equipe?",
+    answer:
+      "Sim, você pode aumentar ou diminuir o seu plano a qualquer momento.",
+  },
+  {
+    question: "A cobrança é por médico?",
+    answer:
+      "Sim, o valor é por médico, mas é gerada uma única fatura com o valor total.",
   },
   {
     question: "Posso cancelar a qualquer momento?",
@@ -331,9 +332,9 @@ export default function Home() {
           <Reveal delay={0.1}>
             <div className="relative">
               <div className="absolute -right-8 top-8 h-24 w-24 rounded-full bg-primary/20 blur-[65px] sm:-right-10 sm:top-10 sm:h-32 sm:w-32 sm:blur-[80px]" />
-              <div className="relative aspect-[2036/1394] overflow-hidden rounded-2xl border border-white/70 bg-white/45 p-1.5 shadow-[0_22px_54px_-30px_rgba(15,23,42,0.45)] backdrop-blur-[2px] sm:rounded-[28px] sm:p-2">
+              <div className="relative aspect-[2036/1394] overflow-hidden rounded-2xl border border-white/70 bg-white/45 p-1 shadow-[0_22px_54px_-30px_rgba(15,23,42,0.45)] backdrop-blur-[2px] sm:rounded-[28px] sm:p-1.5">
                 <video
-                  className="h-full w-full rounded-xl object-contain pointer-events-none sm:rounded-[22px]"
+                  className="h-full w-full rounded-xl object-cover pointer-events-none sm:rounded-[22px]"
                   autoPlay
                   loop
                   muted
@@ -842,8 +843,12 @@ export default function Home() {
                   className="group rounded-[24px] border border-border/60 bg-white p-6 shadow-card"
                   open={index === 0}
                 >
-                  <summary className="cursor-pointer list-none text-sm font-semibold">
-                    {faq.question}
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold">
+                    <span>{faq.question}</span>
+                    <ChevronDown
+                      className="h-4 w-4 shrink-0 text-muted transition-transform duration-200 group-open:rotate-180"
+                      aria-hidden="true"
+                    />
                   </summary>
                   <p className="mt-3 text-sm text-muted">{faq.answer}</p>
                 </details>
@@ -871,7 +876,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="mt-14 grid gap-10 text-sm md:grid-cols-[1.2fr_1fr_1fr_1fr]">
+          <div className="mt-14 grid gap-10 text-sm md:grid-cols-[1.2fr_1fr_1fr]">
             <div>
               <Image
                 src="/logo-footer.png"
@@ -901,7 +906,7 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-            <div>
+            <div className="hidden">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
                 Empresa
               </p>
@@ -916,16 +921,48 @@ export default function Home() {
                 Legal
               </p>
               <ul className="mt-4 space-y-2 text-white/70">
-                <li>Termos de uso</li>
-                <li>Privacidade</li>
-                <li>LGPD</li>
+                <li>
+                  <Link
+                    href="https://app.voxmeds.com/terms"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Termos de uso
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="https://app.voxmeds.com/privacy"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Privacidade
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
 
           <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row">
-            <span>© 2026 VoxMeds — Desenvolvido por Zennex</span>
-            <span>Instagram · LinkedIn · YouTube</span>
+            <span>
+              © 2026 VoxMeds — Desenvolvido por{" "}
+              <Link
+                href="https://www.zennex.com.br"
+                target="_blank"
+                rel="noreferrer"
+                className="transition hover:text-white"
+              >
+                Zennex
+              </Link>
+            </span>
+            <Link
+              href="https://instagram.com/voxmeds.ia"
+              target="_blank"
+              rel="noreferrer"
+              className="transition hover:text-white"
+            >
+              Instagram /voxmeds.ia
+            </Link>
           </div>
         </div>
       </footer>
