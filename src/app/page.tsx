@@ -95,8 +95,9 @@ const features = [
     title: "Agente de IA",
     description:
       "Assistente virtual que agenda consultas, confirma horários e responde dúvidas 24h por dia.",
-    image: "/landing/mockups/whatsapp-mock.svg",
+    image: "/landing/screenshots/whatsapp-agent-iphone.webp",
     tag: "WhatsApp IA",
+    imageClass: "object-contain",
     imageWrapperClass: "h-[280px] sm:h-[320px] lg:h-[340px]",
   },
   {
@@ -719,7 +720,7 @@ export default function Home() {
       </section>
 
       <section id="whatsapp" className="section py-14 sm:py-20 lg:py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[0.93fr_1fr]">
           <Reveal>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
@@ -747,14 +748,16 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="rounded-[32px] border border-border/60 bg-white p-6 shadow-card">
-              <Image
-                src="/landing/mockups/whatsapp-mock.svg"
-                alt="Mockup WhatsApp VoxMeds"
-                width={800}
-                height={520}
-                className="h-full w-full object-cover"
-              />
+            <div className="relative overflow-hidden rounded-2xl border border-white/70 bg-white/45 p-1 shadow-[0_22px_54px_-30px_rgba(15,23,42,0.45)] backdrop-blur-[2px] sm:rounded-[28px] sm:p-1.5">
+              <div className="overflow-hidden rounded-xl bg-white sm:rounded-[22px]">
+                <Image
+                  src="/landing/screenshots/whatsapp-agent-pc-v3.webp"
+                  alt="Conversa no WhatsApp com agente IA da VoxMeds"
+                  width={2055}
+                  height={1408}
+                  className="h-auto w-full object-contain"
+                />
+              </div>
             </div>
           </Reveal>
         </div>
