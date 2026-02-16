@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   other: {
-    "facebook-domain-verification": "fq8k2uxybgh70wubjb13jywk1ywgy3",
+    "facebook-domain-verification": "mavip3dguzlkh70zkucq8bv2motyz9",
   },
   openGraph: {
     title: "VoxMeds — Seu consultório inteiro em uma única plataforma",
