@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Check, TrendingDown, Users, Calculator, ChevronDown } from "lucide-react";
+import { trackLeadEvent } from "@/lib/tracking";
 
 const registerUrl = "https://app.voxmeds.com/register";
 
@@ -131,6 +132,10 @@ export function PricingSection() {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
   const [doctorCount, setDoctorCount] = useState(5);
   const [showComparison, setShowComparison] = useState(false);
+
+  const handleSpecialistLeadClick = () => {
+    trackLeadEvent();
+  };
 
   const plans: Plan[] = segment === "individual" ? [individualPlan] : clinicPlans;
 
@@ -513,6 +518,7 @@ export function PricingSection() {
               href="https://wa.me/5544997362973"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleSpecialistLeadClick}
               className="tap-target mt-6 inline-flex items-center gap-2 rounded-full border border-primary bg-white px-6 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-white"
             >
               Falar com especialista
