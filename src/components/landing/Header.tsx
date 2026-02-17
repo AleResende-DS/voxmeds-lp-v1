@@ -64,7 +64,7 @@ export function Header() {
             <span className="relative h-[56px] w-[56px] overflow-hidden sm:h-[60px] sm:w-[60px]">
               <Image
                 src="/logo-light.svg"
-                alt="VoxMeds"
+                alt="MedWiser"
                 fill
                 sizes="(max-width: 640px) 56px, 60px"
                 priority

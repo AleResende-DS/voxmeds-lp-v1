@@ -161,7 +161,7 @@ const comparisonRows = [
           Finaliza o dia no último paciente.
         </span>
         <span className="mt-2 block text-muted">
-          Mais descanso, mais lazer, mais família com a VoxMeds.
+          Mais descanso, mais lazer, mais família com a MedWiser.
         </span>
       </>
     ),
@@ -208,14 +208,14 @@ const transcriptionPhrases = [
 
 const faqs = [
   {
-    question: "O que preciso para usar o VoxMeds?",
+    question: "O que preciso para usar o MedWiser?",
     answer:
       "Basta um computador ou celular com internet e microfone. Você pode usar pelo navegador ou pelo app iOS/Android.",
   },
   {
-    question: "O VoxMeds substitui meu prontuário atual?",
+    question: "O MedWiser substitui meu prontuário atual?",
     answer:
-      "Sim. O VoxMeds é um prontuário completo, com histórico, documentos e evolução clínica em um só lugar.",
+      "Sim. O MedWiser é um prontuário completo, com histórico, documentos e evolução clínica em um só lugar.",
   },
   {
     question: "Posso personalizar os documentos gerados?",
@@ -345,7 +345,7 @@ export default function Home() {
                   preload="metadata"
                   disablePictureInPicture
                   poster="/landing/mockups/hero-screenshot.png"
-                  aria-label="Demonstração do app VoxMeds"
+                  aria-label="Demonstração do app MedWiser"
                 >
                   <source src="/landing/mockups/hero-loop-v2.mp4" type="video/mp4" />
                   Seu navegador não suporta vídeo HTML5.
@@ -457,7 +457,7 @@ export default function Home() {
           <Reveal>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-                Conheça a VoxMeds
+                Conheça a MedWiser
               </p>
               <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
                 O sistema médico 100% com IA, que realmente entende sua rotina.
@@ -503,7 +503,7 @@ export default function Home() {
               <div className="absolute right-8 top-6 h-24 w-24 rounded-full bg-primary/20 blur-[60px]" />
               <div className="rounded-[32px] border border-border/60 bg-white p-6 shadow-card sm:p-8">
                 <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-muted">
-                  <span>Demo VoxMeds</span>
+                  <span>Demo MedWiser</span>
                   <span className="inline-flex items-center gap-2 text-primary">
                     <span className="h-2 w-2 rounded-full bg-primary pulse-soft" />
                     Ao vivo
@@ -583,7 +583,7 @@ export default function Home() {
                         </span>
                       )}
                     </div>
-                    <span className="text-xs text-muted">VoxMeds</span>
+                    <span className="text-xs text-muted">MedWiser</span>
                   </div>
                   <div className="mt-4">
                     <h3 className="text-2xl font-semibold">{feature.title}</h3>
@@ -639,10 +639,10 @@ export default function Home() {
               <div className="grid gap-6 rounded-[32px] border border-border/60 bg-white p-5 shadow-card sm:p-6">
                 <div className="hidden gap-4 sm:grid sm:grid-cols-2 sm:gap-10">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-error">
-                    Sem VoxMeds
+                    Sem MedWiser
                   </p>
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                    Com VoxMeds
+                    Com MedWiser
                   </p>
                 </div>
                 <div className="grid gap-4">
@@ -653,13 +653,13 @@ export default function Home() {
                     >
                       <div className="space-y-1">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-error sm:hidden">
-                          Sem VoxMeds
+                          Sem MedWiser
                         </p>
                         <div>✕ {row.before}</div>
                       </div>
                       <div className="space-y-1">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary sm:hidden">
-                          Com VoxMeds
+                          Com MedWiser
                         </p>
                         <div>✓ {row.after}</div>
                       </div>
@@ -709,7 +709,7 @@ export default function Home() {
               <div className="rounded-[22px] border border-border/60 bg-white p-1.5 shadow-card">
                 <Image
                   src="/landing/mockups/mobile-app.svg"
-                  alt="Mockup app VoxMeds"
+                  alt="Mockup app MedWiser"
                   width={460}
                   height={720}
                   className="h-auto w-full object-contain"
@@ -753,7 +753,7 @@ export default function Home() {
               <div className="overflow-hidden rounded-xl bg-white sm:rounded-[22px]">
                 <Image
                   src="/landing/screenshots/whatsapp-agent-pc-v3.webp"
-                  alt="Conversa no WhatsApp com agente IA da VoxMeds"
+                  alt="Conversa no WhatsApp com agente IA da MedWiser"
                   width={2055}
                   height={1408}
                   className="h-auto w-full object-contain"
@@ -895,8 +895,8 @@ export default function Home() {
           <div className="mt-12 grid gap-8 text-sm sm:grid-cols-2 md:mt-14 md:grid-cols-[1.2fr_1fr_1fr] md:gap-10">
             <div className="flex flex-col items-center text-center sm:col-span-2 md:col-span-1 md:items-start md:text-left">
               <Image
-                src="/logo-footer.png"
-                alt="VoxMeds"
+                src="/logo-footer.svg"
+                alt="MedWiser"
                 width={1080}
                 height={1080}
                 sizes="(max-width: 640px) 96px, 112px"
@@ -969,7 +969,7 @@ export default function Home() {
 
           <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-center text-xs text-white/50 md:mt-12 md:flex-row md:items-start md:text-left">
             <span className="flex flex-wrap items-center justify-center gap-1 md:justify-start">
-              © 2026 VoxMeds — Desenvolvido por{" "}
+              © 2026 MedWiser — Desenvolvido por{" "}
               <Link
                 href="https://www.zennex.com.br"
                 target="_blank"
@@ -980,12 +980,12 @@ export default function Home() {
               </Link>
             </span>
             <Link
-              href="https://instagram.com/voxmeds.ia"
+              href="https://medwiser.app"
               target="_blank"
               rel="noopener noreferrer"
               className="tap-target inline-flex items-center px-1 transition hover:text-white"
             >
-              Instagram /voxmeds.ia
+              Instagram /medwiser.app
             </Link>
           </div>
         </div>

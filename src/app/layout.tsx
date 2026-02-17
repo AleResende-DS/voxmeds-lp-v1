@@ -17,11 +17,11 @@ const body = IBM_Plex_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://medwiser.app"),
-  title: "VoxMeds — Assistente Médico com IA",
+  title: "MedWiser — Assistente Médico com IA",
   description:
     "Transcrição clínica, prontuário, agenda e relatórios com IA para médicos e clínicas. Mais tempo com pacientes, menos tempo digitando.",
   keywords: [
-    "VoxMeds",
+    "MedWiser",
     "prontuário eletrônico",
     "transcrição médica",
     "IA para médicos",
@@ -43,11 +43,11 @@ export const metadata: Metadata = {
     "facebook-domain-verification": "mavip3dguzlkh70zkucq8bv2motyz9",
   },
   openGraph: {
-    title: "VoxMeds — Seu consultório inteiro em uma única plataforma",
+    title: "MedWiser — Seu consultório inteiro em uma única plataforma",
     description:
       "Prontuário, agenda, transcrição com IA e relatórios integrados para você focar no paciente.",
     url: "https://medwiser.app",
-    siteName: "VoxMeds",
+    siteName: "MedWiser",
     locale: "pt_BR",
     type: "website",
     images: [
@@ -55,13 +55,13 @@ export const metadata: Metadata = {
         url: "/landing/mockups/hero-screenshot.png",
         width: 1200,
         height: 630,
-        alt: "Dashboard VoxMeds",
+        alt: "Dashboard MedWiser",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "VoxMeds — Assistente Médico com IA",
+    title: "MedWiser — Assistente Médico com IA",
     description:
       "Prontuário, agenda, transcrição com IA e relatórios integrados para médicos e clínicas.",
     images: ["/landing/mockups/hero-screenshot.png"],

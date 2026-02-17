@@ -11,9 +11,9 @@ const contentSecurityPolicy = [
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
   "media-src 'self' data: blob:",
-  "connect-src 'self' https://app.voxmeds.com https://www.voxmeds.com https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://www.facebook.com",
+  "connect-src 'self' https://medwiser.app https://portal.medwiser.app https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://www.facebook.com",
   "frame-src 'self' https://www.googletagmanager.com",
-  "form-action 'self' https://app.voxmeds.com",
+  "form-action 'self' https://medwiser.app https://portal.medwiser.app",
   "upgrade-insecure-requests",
 ].join("; ");
 
