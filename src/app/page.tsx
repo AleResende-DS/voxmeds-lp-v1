@@ -17,11 +17,12 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Header } from "@/components/landing/Header";
+import { LeadLink } from "@/components/landing/LeadLink";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { Reveal } from "@/components/landing/Reveal";
 import { Typewriter } from "@/components/landing/Typewriter";
 
-const registerUrl = "https://app.voxmeds.com/register";
+const registerUrl = "https://portal.medwiser.app/register";
 
 const painPoints = [
   {
@@ -300,13 +301,13 @@ export default function Home() {
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-                <Link
+                <LeadLink
                   href={registerUrl}
                   className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-[0_16px_40px_-24px_rgba(13,148,136,0.9)] transition hover:bg-primary-dark sm:w-auto"
                 >
                   Começar teste grátis
                   <ArrowRight className="h-4 w-4" />
-                </Link>
+                </LeadLink>
                 <Link
                   href="#solucao"
                   className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/60 bg-white px-6 py-3 text-sm font-medium text-foreground transition hover:border-primary/50 sm:w-auto"
@@ -626,13 +627,13 @@ export default function Home() {
                 <p className="mt-4 text-muted">
                   Veja a diferença real de usar a melhor plataforma médica com IA.
                 </p>
-                <Link
+                <LeadLink
                   href={registerUrl}
                   className="tap-target mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white"
                 >
                   Quero GANHAR tempo
                   <ArrowRight className="h-4 w-4" />
-                </Link>
+                </LeadLink>
               </div>
 
               <div className="grid gap-6 rounded-[32px] border border-border/60 bg-white p-5 shadow-card sm:p-6">
@@ -882,13 +883,13 @@ export default function Home() {
             <p className="mt-3 text-sm text-white/70">
               Experimente o consultório mais leve da sua vida.
             </p>
-            <Link
+            <LeadLink
               href={registerUrl}
               className="tap-target mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white"
             >
               Começar teste grátis de 30 dias
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </LeadLink>
           </div>
 
           <div className="mt-12 grid gap-8 text-sm sm:grid-cols-2 md:mt-14 md:grid-cols-[1.2fr_1fr_1fr] md:gap-10">
@@ -944,7 +945,7 @@ export default function Home() {
               <ul className="mt-4 flex flex-col items-center gap-1 text-white/70 md:items-start">
                 <li>
                   <Link
-                    href="https://app.voxmeds.com/terms"
+                    href="https://portal.medwiser.app/terms"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="tap-target inline-flex items-center"
@@ -954,7 +955,7 @@ export default function Home() {
                 </li>
                 <li>
                   <Link
-                    href="https://app.voxmeds.com/privacy"
+                    href="https://portal.medwiser.app/privacy"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="tap-target inline-flex items-center"

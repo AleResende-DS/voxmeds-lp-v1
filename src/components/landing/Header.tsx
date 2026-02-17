@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Menu, X } from "lucide-react";
+import { trackLeadEvent } from "@/lib/tracking";
 
 const navLinks = [
   { label: "Funcionalidades", href: "#funcionalidades" },
@@ -11,8 +12,8 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
-const loginUrl = "https://app.voxmeds.com/login";
-const registerUrl = "https://app.voxmeds.com/register";
+const loginUrl = "https://portal.medwiser.app/login";
+const registerUrl = "https://portal.medwiser.app/register";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -93,6 +94,7 @@ export function Header() {
             </Link>
             <Link
               href={registerUrl}
+              onClick={trackLeadEvent}
               className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-1.5 text-[13px] font-medium text-white shadow-[0_10px_30px_-20px_rgba(13,148,136,0.8)] transition hover:bg-primary-dark"
             >
               Começar grátis
@@ -146,7 +148,10 @@ export function Header() {
                 </Link>
                 <Link
                   href={registerUrl}
-                  onClick={closeMenu}
+                  onClick={() => {
+                    trackLeadEvent();
+                    closeMenu();
+                  }}
                   className="tap-target inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-medium text-white"
                 >
                   Começar grátis

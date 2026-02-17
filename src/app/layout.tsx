@@ -16,7 +16,7 @@ const body = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.voxmeds.com"),
+  metadataBase: new URL("https://medwiser.app"),
   title: "VoxMeds — Assistente Médico com IA",
   description:
     "Transcrição clínica, prontuário, agenda e relatórios com IA para médicos e clínicas. Mais tempo com pacientes, menos tempo digitando.",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "VoxMeds — Seu consultório inteiro em uma única plataforma",
     description:
       "Prontuário, agenda, transcrição com IA e relatórios integrados para você focar no paciente.",
-    url: "https://www.voxmeds.com",
+    url: "https://medwiser.app",
     siteName: "VoxMeds",
     locale: "pt_BR",
     type: "website",

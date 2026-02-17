@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Check, TrendingDown, Users, Calculator, ChevronDown } from "lucide-react";
 import { trackLeadEvent } from "@/lib/tracking";
 
-const registerUrl = "https://app.voxmeds.com/register";
+const registerUrl = "https://portal.medwiser.app/register";
 
 type BillingCycle = "monthly" | "yearly";
 type Segment = "individual" | "equipe";
@@ -403,6 +403,7 @@ export function PricingSection() {
                 {/* CTA */}
                 <Link
                   href={registerUrl}
+                  onClick={trackLeadEvent}
                   className={`tap-target mt-8 inline-flex w-full items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 ${
                     plan.ctaVariant === "primary"
                       ? "bg-primary text-white shadow-[0_8px_24px_-8px_rgba(13,148,136,0.4)] hover:bg-primary-dark hover:shadow-[0_12px_32px_-8px_rgba(13,148,136,0.5)] hover:scale-[1.02]"
