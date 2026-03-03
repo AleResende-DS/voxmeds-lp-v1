@@ -516,7 +516,7 @@ export function PricingSection() {
           <div className="mx-auto max-w-2xl rounded-[28px] border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-6 sm:p-8">
             <h3 className="text-2xl font-semibold">Precisa de mais?</h3>
             <a
-              href="https://wa.me/5544997362973"
+              href="https://wa.me/554499751916"
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleSpecialistLeadClick}
