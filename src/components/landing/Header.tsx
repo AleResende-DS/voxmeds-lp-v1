@@ -6,6 +6,7 @@ import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { trackLeadEvent } from "@/lib/tracking";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
   { label: "Funcionalidades", href: "#funcionalidades" },
@@ -60,8 +61,8 @@ export function Header() {
       <div
         className={`backdrop-blur-sm transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
           scrolled
-            ? "border-b border-border/60 bg-white/[0.01] shadow-[0_10px_30px_-24px_rgba(15,23,42,0.35)]"
-            : "border-b border-transparent bg-white/10"
+            ? "border-b border-border/60 bg-background/70 shadow-[0_10px_30px_-24px_rgba(15,23,42,0.35)]"
+            : "border-b border-transparent bg-background/30"
         }`}
       >
         <div className="mx-auto flex h-[64px] max-w-6xl items-center justify-between px-4 sm:px-6">
@@ -81,7 +82,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-7 text-[13px] text-muted md:flex">
+          <nav className="hidden items-center gap-7 text-[13px] text-muted-foreground md:flex">
             {navLinks.map((item) => (
               <Link
                 key={item.href}
@@ -96,10 +97,11 @@ export function Header() {
           <div className="hidden items-center gap-3 md:flex">
             <Link
               href={loginUrl}
-              className="text-[13px] text-muted transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-foreground"
+              className="text-[13px] text-muted-foreground transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-foreground"
             >
               Entrar
             </Link>
+            <ThemeToggle />
             <Link
               href={registerUrl}
               onClick={trackLeadEvent}
@@ -110,16 +112,19 @@ export function Header() {
             </Link>
           </div>
 
-          <button
-            type="button"
-            className="tap-target press inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/60 text-foreground transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-surface md:hidden"
-            aria-label="Abrir menu"
-            aria-expanded={open}
-            aria-controls="mobile-nav"
-            onClick={() => setOpen((prev) => !prev)}
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              className="tap-target press inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/60 text-foreground transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-muted"
+              aria-label="Abrir menu"
+              aria-expanded={open}
+              aria-controls="mobile-nav"
+              onClick={() => setOpen((prev) => !prev)}
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -140,7 +145,7 @@ export function Header() {
             <motion.div
               key="mobile-nav"
               id="mobile-nav"
-              className="relative z-50 overflow-hidden border-b border-border/60 bg-white/95 px-4 shadow-lg md:hidden sm:px-6"
+              className="relative z-50 overflow-hidden border-b border-border/60 bg-background/95 px-4 shadow-lg md:hidden sm:px-6"
               initial={
                 reduceMotion
                   ? { opacity: 0 }
@@ -167,7 +172,7 @@ export function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={closeMenu}
-                    className="tap-target press flex items-center rounded-xl px-2 text-muted transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-surface hover:text-foreground"
+                    className="tap-target press flex items-center rounded-xl px-2 text-muted-foreground transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-muted hover:text-foreground"
                   >
                     {item.label}
                   </Link>
@@ -176,7 +181,7 @@ export function Header() {
                   <Link
                     href={loginUrl}
                     onClick={closeMenu}
-                    className="tap-target press inline-flex items-center rounded-xl px-2 text-muted transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-surface hover:text-foreground"
+                    className="tap-target press inline-flex items-center rounded-xl px-2 text-muted-foreground transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-muted hover:text-foreground"
                   >
                     Entrar
                   </Link>

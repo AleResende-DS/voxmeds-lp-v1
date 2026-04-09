@@ -31,7 +31,7 @@ export function HeroText({ align = "left", className }: HeroTextProps) {
       }`}
     >
       <span
-        className="relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-white/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-widest text-primary backdrop-blur-sm"
+        className="relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-background/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-widest text-primary backdrop-blur-sm"
         title="Plataforma agêntica significa que a IA não só responde perguntas — ela executa tarefas de verdade por você."
       >
         <Sparkles className="h-3.5 w-3.5" />
@@ -59,7 +59,7 @@ export function HeroText({ align = "left", className }: HeroTextProps) {
       </h1>
 
       <p
-        className={`mt-5 text-lg text-muted ${
+        className={`mt-5 text-lg text-muted-foreground ${
           centered ? "mx-auto max-w-xl" : "max-w-xl"
         }`}
       >
@@ -82,7 +82,7 @@ export function HeroText({ align = "left", className }: HeroTextProps) {
         </LeadLink>
         <Link
           href="#copiloto"
-          className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/60 bg-white px-6 py-3.5 text-sm font-medium text-foreground transition-[border-color,transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-primary/50 active:scale-[0.97] sm:w-auto"
+          className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-6 py-3.5 text-sm font-medium text-foreground transition-[border-color,transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-primary/50 active:scale-[0.97] sm:w-auto"
         >
           Ver como funciona
           <ArrowDown className="h-4 w-4" />
@@ -90,7 +90,7 @@ export function HeroText({ align = "left", className }: HeroTextProps) {
       </div>
 
       <div
-        className={`mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted ${
+        className={`mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground ${
           centered ? "justify-center" : ""
         }`}
       >

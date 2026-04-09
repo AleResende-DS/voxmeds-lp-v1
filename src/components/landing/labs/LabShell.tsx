@@ -17,10 +17,10 @@ interface LabShellProps {
 export function LabShell({ title, description, children }: LabShellProps) {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="fixed left-4 top-4 z-[100] flex items-center gap-3 rounded-full border border-border/60 bg-white/90 px-3 py-2 text-xs font-medium shadow-card backdrop-blur-sm">
+      <div className="fixed left-4 top-4 z-[100] flex items-center gap-3 rounded-full border border-border/60 bg-background/90 px-3 py-2 text-xs font-medium shadow-card backdrop-blur-sm">
         <Link
           href="/labs"
-          className="press inline-flex items-center gap-1 text-muted transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-foreground"
+          className="press inline-flex items-center gap-1 text-muted-foreground transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-foreground"
         >
           <ChevronLeft className="h-3 w-3" />
           Labs
@@ -30,7 +30,7 @@ export function LabShell({ title, description, children }: LabShellProps) {
         {description && (
           <>
             <span className="hidden h-3 w-px bg-border sm:block" />
-            <span className="hidden text-muted sm:block">{description}</span>
+            <span className="hidden text-muted-foreground sm:block">{description}</span>
           </>
         )}
       </div>

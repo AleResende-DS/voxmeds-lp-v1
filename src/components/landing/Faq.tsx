@@ -51,7 +51,7 @@ function FaqRow({
 }) {
   return (
     <div
-      className={`rounded-card border bg-white p-5 shadow-card transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] sm:p-6 ${
+      className={`rounded-card border bg-card p-5 shadow-card transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] sm:p-6 ${
         isOpen ? "border-primary/30" : "border-border/60"
       }`}
     >
@@ -65,7 +65,7 @@ function FaqRow({
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.22, ease: EASE_DRAWER }}
-          className="shrink-0 text-muted"
+          className="shrink-0 text-muted-foreground"
         >
           <ChevronDown className="h-4 w-4" />
         </motion.span>
@@ -83,7 +83,7 @@ function FaqRow({
             }}
             className="overflow-hidden"
           >
-            <p className="mt-3 text-sm text-muted">{answer}</p>
+            <p className="mt-3 text-sm text-muted-foreground">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>

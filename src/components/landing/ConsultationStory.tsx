@@ -138,7 +138,7 @@ export function ConsultationStory() {
       ref={ref}
       id="solucao"
       aria-label="Como a MedWiser transforma uma consulta"
-      className="section relative bg-[#050a0c] text-white"
+      className="dark section relative bg-background text-foreground"
       style={{ height: "420vh" }}
     >
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
@@ -167,7 +167,7 @@ export function ConsultationStory() {
               Plataforma agêntica
             </div>
             <HeadlineSwitcher index={headlineIndex} />
-            <p className="mt-8 hidden text-xs uppercase tracking-[0.2em] text-white/40 sm:block">
+            <p className="mt-8 hidden text-xs uppercase tracking-[0.2em] text-foreground/40 sm:block">
               Role a página para ver →
             </p>
           </div>
@@ -177,14 +177,14 @@ export function ConsultationStory() {
             className="order-1 lg:order-2"
             style={{ scale: mockupScale }}
           >
-            <div className="relative mx-auto aspect-[4/3] w-full max-w-xl overflow-hidden rounded-card border border-white/10 bg-[#0b1416]/90 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] backdrop-blur-sm">
+            <div className="relative mx-auto aspect-[4/3] w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-card shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)] backdrop-blur-sm">
               {/* Mockup chrome */}
-              <div className="flex items-center justify-between border-b border-white/10 bg-[#0b1416] px-4 py-3">
+              <div className="flex items-center justify-between border-b border-border bg-card px-4 py-3">
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-red-400/80" />
                   <div className="h-2 w-2 rounded-full bg-yellow-400/80" />
                   <div className="h-2 w-2 rounded-full bg-green-400/80" />
-                  <span className="ml-3 text-[10px] font-mono text-white/40">
+                  <span className="ml-3 text-[10px] font-mono text-foreground/40">
                     MedWiser · Consulta em andamento
                   </span>
                 </div>
@@ -207,7 +207,7 @@ export function ConsultationStory() {
                       <Mic className="h-10 w-10 text-primary-light" />
                     </div>
                   </div>
-                  <p className="text-sm font-mono text-white/50">
+                  <p className="text-sm font-mono text-foreground/50">
                     aguardando áudio...
                   </p>
                 </motion.div>
@@ -243,7 +243,7 @@ export function ConsultationStory() {
                       style={{ pathLength: waveProgress, opacity: 0.6 }}
                     />
                   </svg>
-                  <p className="text-[11px] font-mono text-white/40">
+                  <p className="text-[11px] font-mono text-foreground/40">
                     00:00:42 · 16kHz · canal único
                   </p>
                 </motion.div>
@@ -268,35 +268,35 @@ export function ConsultationStory() {
                     Prontuário estruturado
                   </p>
                   <div className="grid gap-2 text-[11px]">
-                    <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+                    <div className="rounded-lg border border-border/60 bg-muted/40 p-3">
                       <p className="text-[9px] font-bold uppercase tracking-widest text-primary-light">
                         S · Subjetivo
                       </p>
-                      <p className="mt-1 text-white/75">
+                      <p className="mt-1 text-foreground/75">
                         Paciente refere tosse seca há 2 semanas, sem febre.
                       </p>
                     </div>
-                    <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+                    <div className="rounded-lg border border-border/60 bg-muted/40 p-3">
                       <p className="text-[9px] font-bold uppercase tracking-widest text-primary-light">
                         O · Objetivo
                       </p>
-                      <p className="mt-1 text-white/75">
+                      <p className="mt-1 text-foreground/75">
                         PA 140/90, FC 78, ausculta pulmonar sem alterações.
                       </p>
                     </div>
-                    <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+                    <div className="rounded-lg border border-border/60 bg-muted/40 p-3">
                       <p className="text-[9px] font-bold uppercase tracking-widest text-primary-light">
                         A · Avaliação
                       </p>
-                      <p className="mt-1 text-white/75">
+                      <p className="mt-1 text-foreground/75">
                         Suspeita de tosse medicamentosa por IECA. HAS descompensada.
                       </p>
                     </div>
-                    <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+                    <div className="rounded-lg border border-border/60 bg-muted/40 p-3">
                       <p className="text-[9px] font-bold uppercase tracking-widest text-primary-light">
                         P · Plano
                       </p>
-                      <p className="mt-1 text-white/75">
+                      <p className="mt-1 text-foreground/75">
                         Trocar losartana por valsartana. Retorno em 15 dias.
                       </p>
                     </div>
@@ -312,41 +312,41 @@ export function ConsultationStory() {
                     Análise automática de exame
                   </p>
                   <div className="flex gap-3">
-                    <div className="flex h-28 w-20 shrink-0 flex-col gap-1 rounded-lg border border-white/10 bg-white/5 p-2">
+                    <div className="flex h-28 w-20 shrink-0 flex-col gap-1 rounded-lg border border-border/60 bg-muted/40 p-2">
                       <FileText className="h-4 w-4 text-primary-light" />
-                      <p className="text-[8px] font-mono text-white/60">
+                      <p className="text-[8px] font-mono text-foreground/60">
                         hemograma.pdf
                       </p>
                       <div className="mt-1 flex flex-col gap-0.5">
-                        <div className="h-0.5 w-full rounded-full bg-white/20" />
-                        <div className="h-0.5 w-3/4 rounded-full bg-white/20" />
+                        <div className="h-0.5 w-full rounded-full bg-foreground/20" />
+                        <div className="h-0.5 w-3/4 rounded-full bg-foreground/20" />
                         <div className="h-0.5 w-full rounded-full bg-yellow-400/80" />
-                        <div className="h-0.5 w-5/6 rounded-full bg-white/20" />
+                        <div className="h-0.5 w-5/6 rounded-full bg-foreground/20" />
                         <div className="h-0.5 w-full rounded-full bg-yellow-400/80" />
                       </div>
                     </div>
-                    <div className="flex-1 rounded-lg border border-white/10 bg-white/5 p-3">
-                      <p className="text-[10px] font-mono text-white/60">
+                    <div className="flex-1 rounded-lg border border-border/60 bg-muted/40 p-3">
+                      <p className="text-[10px] font-mono text-foreground/60">
                         Achados processados
                       </p>
                       <div className="mt-2 space-y-1 text-[11px]">
                         <div className="flex justify-between">
-                          <span className="text-white/60">Hemoglobina</span>
+                          <span className="text-foreground/60">Hemoglobina</span>
                           <span className="text-yellow-400">
                             10.2 g/dL ↓
                           </span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-white/60">Ferritina</span>
+                          <span className="text-foreground/60">Ferritina</span>
                           <span className="text-yellow-400">12 ng/mL ↓</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-white/60">VCM</span>
+                          <span className="text-foreground/60">VCM</span>
                           <span className="text-yellow-400">76 fL ↓</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-white/60">Leucócitos</span>
-                          <span className="text-white/75">6.800</span>
+                          <span className="text-foreground/60">Leucócitos</span>
+                          <span className="text-foreground/75">6.800</span>
                         </div>
                       </div>
                     </div>
@@ -371,10 +371,10 @@ export function ConsultationStory() {
                         <p className="text-[10px] font-semibold uppercase tracking-widest text-yellow-300">
                           Alerta da IA
                         </p>
-                        <p className="mt-2 text-sm font-medium text-white">
+                        <p className="mt-2 text-sm font-medium text-foreground">
                           Hemograma sugere anemia ferropriva.
                         </p>
-                        <p className="mt-1 text-xs text-white/60">
+                        <p className="mt-1 text-xs text-foreground/60">
                           VCM baixo, ferritina baixa. Considerar investigação
                           de perda sanguínea oculta.
                         </p>
@@ -391,17 +391,17 @@ export function ConsultationStory() {
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/20 text-primary-light">
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
-                  <p className="text-lg font-semibold text-white">
+                  <p className="text-lg font-semibold text-foreground">
                     Consulta documentada
                   </p>
-                  <div className="flex items-center gap-4 font-mono text-[11px] text-white/50">
+                  <div className="flex items-center gap-4 font-mono text-[11px] text-foreground/50">
                     <span>03m 47s</span>
-                    <span className="h-3 w-px bg-white/20" />
+                    <span className="h-3 w-px bg-foreground/20" />
                     <span>SOAP + alerta</span>
-                    <span className="h-3 w-px bg-white/20" />
+                    <span className="h-3 w-px bg-foreground/20" />
                     <span>0 digitação</span>
                   </div>
-                  <p className="mt-4 max-w-xs text-center text-xs text-white/60">
+                  <p className="mt-4 max-w-xs text-center text-xs text-foreground/60">
                     Você jantar em casa hoje. Sua família agradece.
                   </p>
                 </motion.div>
@@ -454,7 +454,7 @@ function HeadlineSwitcher({ index }: { index: MotionValue<number> }) {
           <h2 className="mt-4 font-display text-3xl font-semibold text-balance sm:text-4xl lg:text-5xl">
             {item.title}
           </h2>
-          <p className="mt-5 max-w-md text-base text-white/65">{item.body}</p>
+          <p className="mt-5 max-w-md text-base text-foreground/65">{item.body}</p>
         </motion.div>
       </AnimatePresence>
     </div>
@@ -501,7 +501,7 @@ function TranscriptionLine({
 function TranscriptionStream({ progress }: { progress: MotionValue<number> }) {
   const total = TRANSCRIPTION_LINES.length;
   return (
-    <div className="flex flex-col gap-1.5 text-[11px] leading-relaxed text-white/75">
+    <div className="flex flex-col gap-1.5 text-[11px] leading-relaxed text-foreground/75">
       {TRANSCRIPTION_LINES.map((line, i) => (
         <TranscriptionLine
           key={i}
@@ -523,7 +523,7 @@ function StaticConsultationStory() {
     <section
       id="solucao"
       aria-label="Como a MedWiser transforma uma consulta"
-      className="section relative bg-[#050a0c] py-16 text-white sm:py-24"
+      className="dark section relative bg-background py-16 text-foreground sm:py-24"
     >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/4 top-0 h-[400px] w-[400px] rounded-full bg-primary/20 blur-[160px]" />
@@ -536,15 +536,15 @@ function StaticConsultationStory() {
         <h2 className="mt-4 font-display text-3xl font-semibold text-balance sm:text-4xl lg:text-5xl">
           Você fala. A IA documenta. Você vai para casa.
         </h2>
-        <p className="mt-5 max-w-2xl text-base text-white/65 mx-auto">
+        <p className="mt-5 max-w-2xl text-base text-foreground/65 mx-auto">
           Áudio vira transcrição, transcrição vira prontuário, prontuário vira
           alerta. Tudo em segundos. Você só cuida do paciente.
         </p>
-        <div className="mt-10 flex items-center justify-center gap-4 font-mono text-xs text-white/50">
+        <div className="mt-10 flex items-center justify-center gap-4 font-mono text-xs text-foreground/50">
           <span>03m 47s por consulta</span>
-          <span className="h-3 w-px bg-white/20" />
+          <span className="h-3 w-px bg-foreground/20" />
           <span>SOAP + alerta</span>
-          <span className="h-3 w-px bg-white/20" />
+          <span className="h-3 w-px bg-foreground/20" />
           <span>0 digitação</span>
         </div>
       </div>

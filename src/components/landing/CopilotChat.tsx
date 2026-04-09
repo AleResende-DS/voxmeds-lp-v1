@@ -107,8 +107,8 @@ export function CopilotChat() {
   return (
     <div ref={rootRef} className="relative">
       <div className="absolute -right-6 top-6 h-32 w-32 rounded-full bg-primary/20 blur-[80px] drift-slow" />
-      <div className="relative rounded-card border border-border/60 bg-white p-6 shadow-card sm:p-8">
-        <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-muted">
+      <div className="relative rounded-card border border-border/60 bg-card p-6 shadow-card sm:p-8">
+        <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-muted-foreground">
           <span>Chat clínico · Paciente J.M.S.</span>
           <span className="inline-flex items-center gap-2 text-primary">
             <Brain className="h-3.5 w-3.5" />
@@ -176,7 +176,7 @@ export function CopilotChat() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.28, ease: EASE_OUT }}
-                      className="mt-3 text-xs text-muted"
+                      className="mt-3 text-xs text-muted-foreground"
                     >
                       {AI_CONTEXT}
                     </motion.p>

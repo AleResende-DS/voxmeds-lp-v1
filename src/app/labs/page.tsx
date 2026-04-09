@@ -34,7 +34,14 @@ const variants = [
     slug: "b-plus",
     title: "B+ — Mockup + waveform bg",
     description:
-      "Path B com waveform A1 discreta atrás do texto. Mostra o produto E tem background animado ambient. Minha recomendação.",
+      "Path B com waveform A1 discreta atrás do texto. Mostra o produto E tem background animado ambient.",
+    tag: "Variante",
+  },
+  {
+    slug: "b-v2",
+    title: "B-V2 — Mockup fiel ao app real ★",
+    description:
+      "HeroLoop reescrito reproduzindo o layout, tipografia (Geist), tabs e paleta exatos do app.medwiser.app. Usa tokens shadcn OKLCH e segue o tema claro/escuro. Meu redesign final.",
     tag: "Recomendação",
     highlight: true,
   },
@@ -45,14 +52,14 @@ export default function LabsIndex() {
     <div className="min-h-screen bg-surface">
       <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
         <div className="mb-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-card px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">
             <Sparkles className="h-3 w-3" />
             Labs
           </div>
           <h1 className="mt-4 font-display text-3xl font-semibold sm:text-4xl">
             Hero Variants
           </h1>
-          <p className="mt-3 max-w-xl text-muted">
+          <p className="mt-3 max-w-xl text-muted-foreground">
             Protótipos isolados para comparar direções de hero. Cada variant
             renderiza só o hero + SocialProofBar pra foco visual — sem o resto
             da LP. Abra várias abas para comparar lado a lado.
@@ -64,7 +71,7 @@ export default function LabsIndex() {
             <Link
               key={v.slug}
               href={`/labs/hero/${v.slug}`}
-              className={`group flex items-start justify-between gap-4 rounded-card border bg-white p-5 shadow-card transition-[border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-primary/40 active:scale-[0.99] ${
+              className={`group flex items-start justify-between gap-4 rounded-card border bg-card p-5 shadow-card transition-[border-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-primary/40 active:scale-[0.99] ${
                 v.highlight
                   ? "border-primary/40 ring-1 ring-primary/15"
                   : "border-border/60"
@@ -79,20 +86,20 @@ export default function LabsIndex() {
                     className={`rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-widest ${
                       v.highlight
                         ? "bg-primary text-white"
-                        : "bg-surface text-muted"
+                        : "bg-surface text-muted-foreground"
                     }`}
                   >
                     {v.tag}
                   </span>
                 </div>
-                <p className="mt-1.5 text-sm text-muted">{v.description}</p>
+                <p className="mt-1.5 text-sm text-muted-foreground">{v.description}</p>
               </div>
-              <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-muted transition-transform duration-200 group-hover:translate-x-1 group-hover:text-primary" />
+              <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-200 group-hover:translate-x-1 group-hover:text-primary" />
             </Link>
           ))}
         </div>
 
-        <div className="mt-10 rounded-card border border-border/60 bg-white/60 p-4 text-xs text-muted">
+        <div className="mt-10 rounded-card border border-border/60 bg-card/60 p-4 text-xs text-muted-foreground">
           <p className="font-semibold text-foreground">Como comparar:</p>
           <ul className="mt-2 space-y-1">
             <li>• Abra cada variant em uma aba separada</li>

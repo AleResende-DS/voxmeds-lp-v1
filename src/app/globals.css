@@ -1,20 +1,43 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════
+   Design tokens — aligned with app.medwiser.app (shadcn/ui + OKLCH)
+   Same variable names as the real app, so the LP and the product
+   share a single design language.
+═══════════════════════════════════════════════════════════════════ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #111111;
-  /* Primary escurecido de #0d9488 para #0f766e (teal-700) para passar no WCAG AA */
-  --primary: #0f766e;
-  --primary-light: #14b8a6;
-  --primary-dark: #0b5952;
-  /* Muted escurecido de #6b7280 (gray-500) para #4b5563 (gray-600) — contraste ~7:1 */
-  --muted: #4b5563;
-  --border: #eaeaec;
-  --surface: #f7f9f8;
-  --surface-strong: #eef5f3;
-  --success: #22c55e;
-  --error: #ef4444;
-  --radius: 24px;
+  /* Base — light mode */
+  --background: 1 0 0;
+  --foreground: 0.1776 0 0;
+  --card: 1 0 0;
+  --card-foreground: 0.1776 0 0;
+  --popover: 1 0 0;
+  --popover-foreground: 0.1776 0 0;
+  --primary: 0.6002 0.1038 184.704;
+  --primary-foreground: 1 0 0;
+  --secondary: 0.9764 0.0013 286.3755;
+  --secondary-foreground: 0.1776 0 0;
+  --muted: 0.9764 0.0013 286.3755;
+  --muted-foreground: 0.551 0.0234 264.3637;
+  --meta-foreground: 0.7137 0.0192 261.3246;
+  --accent: 0.9764 0.0013 286.3755;
+  --accent-foreground: 0.1776 0 0;
+  --destructive: 0.6368 0.2078 25.3313;
+  --destructive-foreground: 1 0 0;
+  --success: 0.72 0.14 149;
+  --success-foreground: 1 0 0;
+  --warning: 0.78 0.15 75;
+  --warning-foreground: 0.18 0.02 90;
+  --border: 0.9376 0.0027 286.3482;
+  --input: 0.9376 0.0027 286.3482;
+  --ring: 0.6002 0.1038 184.704;
+  --radius: 0.5rem;
+
+  /* Darker primary variant for shadows / CTAs in light mode */
+  --primary-dark: 0.5 0.09 184;
+
+  /* Shadows — stay as rgba so they don't need color-mode flipping */
   --shadow-soft: 0 30px 80px -60px rgba(15, 23, 42, 0.45);
   --shadow-card: 0 24px 60px -42px rgba(15, 23, 42, 0.35);
   --shadow-lg: 0 40px 100px -48px rgba(15, 23, 42, 0.5);
@@ -32,21 +55,87 @@
   --duration-hero: 500ms;
 }
 
+.dark {
+  --background: 0.1541 0.0046 264.4321;
+  --foreground: 0.967 0.0029 264.5419;
+  --card: 0.1773 0.0089 264.3183;
+  --card-foreground: 0.967 0.0029 264.5419;
+  --popover: 0.1773 0.0089 264.3183;
+  --popover-foreground: 0.967 0.0029 264.5419;
+  --primary: 0.6002 0.1038 184.704;
+  --primary-foreground: 1 0 0;
+  --secondary: 0.1998 0.0086 264.36;
+  --secondary-foreground: 0.967 0.0029 264.5419;
+  --muted: 0.1998 0.0086 264.36;
+  --muted-foreground: 0.7118 0.0129 286.0665;
+  --meta-foreground: 0.5517 0.0138 285.9385;
+  --accent: 0.1998 0.0086 264.36;
+  --accent-foreground: 0.967 0.0029 264.5419;
+  --destructive: 0.6368 0.2078 25.3313;
+  --destructive-foreground: 0.2077 0.035 265.7549;
+  --success: 0.7 0.14 149;
+  --success-foreground: 0.16 0.02 92;
+  --warning: 0.72 0.14 75;
+  --warning-foreground: 0.18 0.02 90;
+  --border: 0.2686 0.0097 268.3127;
+  --input: 0.2686 0.0097 268.3127;
+  --ring: 0.6002 0.1038 184.704;
+
+  --primary-dark: 0.55 0.09 184;
+
+  --shadow-soft: 0 30px 80px -60px rgba(0, 0, 0, 0.8);
+  --shadow-card: 0 24px 60px -42px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 40px 100px -48px rgba(0, 0, 0, 0.8);
+}
+
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-light: var(--primary-light);
-  --color-primary-dark: var(--primary-dark);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
-  --color-surface: var(--surface);
-  --color-surface-strong: var(--surface-strong);
-  --color-success: var(--success);
-  --color-error: var(--error);
-  --radius-card: var(--radius);
+  --color-background: oklch(var(--background));
+  --color-foreground: oklch(var(--foreground));
+  --color-card: oklch(var(--card));
+  --color-card-foreground: oklch(var(--card-foreground));
+  --color-popover: oklch(var(--popover));
+  --color-popover-foreground: oklch(var(--popover-foreground));
+  --color-primary: oklch(var(--primary));
+  --color-primary-foreground: oklch(var(--primary-foreground));
+  --color-primary-dark: oklch(var(--primary-dark));
+  --color-secondary: oklch(var(--secondary));
+  --color-secondary-foreground: oklch(var(--secondary-foreground));
+  --color-muted: oklch(var(--muted));
+  --color-muted-foreground: oklch(var(--muted-foreground));
+  --color-meta-foreground: oklch(var(--meta-foreground));
+  --color-accent: oklch(var(--accent));
+  --color-accent-foreground: oklch(var(--accent-foreground));
+  --color-destructive: oklch(var(--destructive));
+  --color-destructive-foreground: oklch(var(--destructive-foreground));
+  --color-success: oklch(var(--success));
+  --color-success-foreground: oklch(var(--success-foreground));
+  --color-warning: oklch(var(--warning));
+  --color-warning-foreground: oklch(var(--warning-foreground));
+  --color-border: oklch(var(--border));
+  --color-input: oklch(var(--input));
+  --color-ring: oklch(var(--ring));
+
+  /* Radius scale — matches app.medwiser.app */
+  --radius-sm: calc(var(--radius) - 4px); /* 4px */
+  --radius-md: calc(var(--radius) - 2px); /* 6px */
+  --radius-lg: var(--radius); /* 8px */
+  --radius-xl: calc(var(--radius) + 4px); /* 12px */
+  --radius-2xl: calc(var(--radius) + 8px); /* 16px */
+  --radius-3xl: calc(var(--radius) + 16px); /* 24px */
+
+  /* Fonts */
   --font-display: var(--font-display);
   --font-body: var(--font-body);
+  --font-geist: var(--font-geist);
+  --font-geist-mono: var(--font-geist-mono);
+
+  /* Aliases so legacy LP classes still work after the shadcn migration.
+     These mirror old token names → new shadcn equivalents. */
+  --color-error: oklch(var(--destructive));
+  --color-surface: oklch(var(--muted));
+  --color-surface-strong: oklch(var(--muted));
+  --color-primary-light: oklch(var(--primary));
+  --radius-card: var(--radius-2xl); /* was 24px, now 16px to match app */
 }
 
 html {
@@ -54,10 +143,13 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: oklch(var(--background));
+  color: oklch(var(--foreground));
   font-family: var(--font-body), sans-serif;
   letter-spacing: -0.01em;
+  transition:
+    background-color 200ms var(--ease-out),
+    color 200ms var(--ease-out);
 }
 
 h1,
@@ -69,7 +161,7 @@ h4 {
 }
 
 ::selection {
-  background: rgba(13, 148, 136, 0.2);
+  background: oklch(var(--primary) / 0.22);
 }
 
 @layer utilities {
@@ -78,7 +170,6 @@ h4 {
   }
 
   .section {
-    /* Header real é 64px — 12px de folga visual = 76px */
     scroll-margin-top: 76px;
   }
 
@@ -87,9 +178,15 @@ h4 {
     min-width: 44px;
   }
 
+  /* Grid + noise — these adapt to the current mode via CSS vars */
   .bg-grid {
-    background-image: linear-gradient(rgba(17, 24, 39, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(17, 24, 39, 0.06) 1px, transparent 1px);
+    background-image:
+      linear-gradient(oklch(var(--foreground) / 0.06) 1px, transparent 1px),
+      linear-gradient(
+        90deg,
+        oklch(var(--foreground) / 0.06) 1px,
+        transparent 1px
+      );
     background-size: 28px 28px;
   }
 
@@ -98,8 +195,8 @@ h4 {
   }
 
   .glass {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: oklch(var(--card) / 0.7);
+    border: 1px solid oklch(var(--border) / 0.6);
     box-shadow: var(--shadow-soft);
     backdrop-filter: blur(12px);
   }
@@ -125,7 +222,6 @@ h4 {
     }
   }
 
-  /* Tactile feedback — every pressable surface uses this */
   .press {
     transition: transform 160ms var(--ease-out);
   }
@@ -134,19 +230,17 @@ h4 {
     transform: scale(0.97);
   }
 
-  /* Subtle pulse for ambient indicators (replaces animate-ping) */
   .pulse-ring {
     animation: pulse-ring 2.4s var(--ease-out) infinite;
   }
 
-  /* Badge shimmer — ~8s loop */
   .shimmer {
     background-image: linear-gradient(
       110deg,
       transparent 35%,
-      rgba(255, 255, 255, 0.35) 45%,
-      rgba(255, 255, 255, 0.55) 50%,
-      rgba(255, 255, 255, 0.35) 55%,
+      oklch(var(--foreground) / 0.18) 45%,
+      oklch(var(--foreground) / 0.32) 50%,
+      oklch(var(--foreground) / 0.18) 55%,
       transparent 65%
     );
     background-size: 250% 100%;

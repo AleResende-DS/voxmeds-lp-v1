@@ -36,11 +36,11 @@ export function BeliefBreak() {
       ref={sectionRef}
       id="crenca"
       onMouseMove={handleMouseMove}
-      className="section relative overflow-hidden bg-[#0b1514] py-16 text-white sm:py-24 lg:py-32"
+      className="dark section relative overflow-hidden bg-background py-16 text-foreground sm:py-24 lg:py-32"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <motion.div
-          className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-[140px]"
+          className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[140px]"
           style={
             reduceMotion
               ? undefined
@@ -54,19 +54,19 @@ export function BeliefBreak() {
       </div>
       <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6">
         <Reveal>
-          <p className="text-sm font-medium uppercase tracking-[0.25em] text-primary-light">
+          <p className="text-sm font-medium uppercase tracking-[0.25em] text-primary">
             O que ninguém te contou
           </p>
         </Reveal>
         <Reveal delay={0.08}>
-          <p className="mt-6 text-lg text-white/70 sm:text-xl">
+          <p className="mt-6 text-lg text-foreground/70 sm:text-xl">
             A maioria dos médicos acredita que burocracia é parte inevitável
             da profissão. Que crescer na carreira significa abrir mão da vida
             pessoal. Que decisões difíceis precisam ser tomadas sozinho.
           </p>
         </Reveal>
         <Reveal delay={0.16}>
-          <div className="mx-auto mt-10 h-px w-24 bg-primary-light/60" />
+          <div className="mx-auto mt-10 h-px w-24 bg-primary/60" />
         </Reveal>
         <Reveal delay={0.22} variant="fade-up-scale">
           <h2 className="mt-10 font-display text-4xl font-semibold text-balance sm:text-5xl lg:text-6xl">
@@ -74,7 +74,7 @@ export function BeliefBreak() {
           </h2>
         </Reveal>
         <Reveal delay={0.32}>
-          <p className="mx-auto mt-6 max-w-2xl text-base text-white/70 sm:text-lg">
+          <p className="mx-auto mt-6 max-w-2xl text-base text-foreground/70 sm:text-lg">
             A tecnologia agêntica já permite que você documente sem digitar,
             analise exames com uma IA copiloto, e cresça sem se esgotar. Só
             precisa das ferramentas certas ao seu lado.

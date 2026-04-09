@@ -99,7 +99,7 @@ export function SocialProofBar() {
   return (
     <section
       aria-label="Números da MedWiser"
-      className="border-y border-border/60 bg-white py-10 sm:py-14"
+      className="border-y border-border/60 bg-card py-10 sm:py-14"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
@@ -115,7 +115,7 @@ export function SocialProofBar() {
                     <div className="font-display text-2xl font-semibold text-foreground sm:text-3xl">
                       <AnimatedStatValue stat={stat} />
                     </div>
-                    <div className="text-xs text-muted sm:text-sm">
+                    <div className="text-xs text-muted-foreground sm:text-sm">
                       {stat.label}
                     </div>
                   </div>

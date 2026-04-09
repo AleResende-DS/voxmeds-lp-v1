@@ -75,7 +75,7 @@ export function TestimonialsSection() {
             <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
               Médicos que recuperaram suas noites
             </h2>
-            <p className="mt-4 text-muted">
+            <p className="mt-4 text-muted-foreground">
               Do recém-formado ao especialista com décadas de consultório —
               veja como a MedWiser está mudando a rotina clínica no Brasil.
             </p>
@@ -90,7 +90,7 @@ export function TestimonialsSection() {
           {testimonials.map((testimonial) => (
             <RevealItem key={testimonial.id}>
               <article
-                className={`hover-lift flex h-full flex-col rounded-card border bg-white p-6 shadow-card sm:p-8 ${
+                className={`hover-lift flex h-full flex-col rounded-card border bg-card p-6 shadow-card sm:p-8 ${
                   testimonial.highlight
                     ? "border-primary/40 ring-1 ring-primary/15"
                     : "border-border/60"
@@ -116,10 +116,10 @@ export function TestimonialsSection() {
                     <div className="truncate text-sm font-semibold text-foreground">
                       {testimonial.name}
                     </div>
-                    <div className="truncate text-xs text-muted">
+                    <div className="truncate text-xs text-muted-foreground">
                       {testimonial.role} · {testimonial.city}
                     </div>
-                    <div className="truncate text-[11px] uppercase tracking-[0.12em] text-muted/80">
+                    <div className="truncate text-[11px] uppercase tracking-[0.12em] text-muted-foreground/80">
                       {testimonial.crm}
                     </div>
                   </div>

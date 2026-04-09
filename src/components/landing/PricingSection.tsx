@@ -75,7 +75,7 @@ export function PricingSection() {
             <span className="text-primary">Tudo incluso.</span>
           </h2>
 
-          <p className="mx-auto mt-4 max-w-xl text-lg text-muted">
+          <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
             Comece grátis em segundos — sem cartão de crédito. Cadastre um
             cartão depois e ganhe 7 dias de acesso completo.
           </p>
@@ -87,7 +87,7 @@ export function PricingSection() {
               className={`tap-target press rounded-full px-5 text-sm font-medium transition-[background-color,color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
                 billingCycle === "monthly"
                   ? "bg-foreground text-white shadow-md"
-                  : "text-muted hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               Mensal
@@ -98,7 +98,7 @@ export function PricingSection() {
               className={`tap-target press inline-flex items-center gap-2 rounded-full px-5 text-sm font-medium transition-[background-color,color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
                 billingCycle === "yearly"
                   ? "bg-foreground text-white shadow-md"
-                  : "text-muted hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               Anual
@@ -116,9 +116,9 @@ export function PricingSection() {
         </div>
 
         <div className="mx-auto mt-10 max-w-lg">
-          <div className="relative flex flex-col rounded-[24px] border border-primary/40 bg-white p-6 shadow-card ring-2 ring-primary/15 sm:p-8">
+          <div className="relative flex flex-col rounded-2xl border border-primary/40 bg-card p-6 shadow-card ring-2 ring-primary/15 sm:p-8">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-              <div className="rounded-full border border-primary/40 bg-white px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary shadow-sm">
+              <div className="rounded-full border border-primary/40 bg-card px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary shadow-sm">
                 Plano completo
               </div>
             </div>
@@ -130,13 +130,13 @@ export function PricingSection() {
               <div className="mt-1 text-2xl font-bold text-primary">
                 R$ 0,00
               </div>
-              <div className="mt-1 text-xs text-muted">
+              <div className="mt-1 text-xs text-muted-foreground">
                 5 consultas grátis sem cartão
               </div>
             </div>
 
             <div className="mt-6 text-center">
-              <div className="text-xs font-medium uppercase tracking-wider text-muted">
+              <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Depois
               </div>
               <div className="mt-2 flex items-baseline justify-center gap-2">
@@ -152,12 +152,12 @@ export function PricingSection() {
                     R$ {price}
                   </motion.span>
                 </AnimatePresence>
-                <span className="text-sm text-muted">/mês</span>
+                <span className="text-sm text-muted-foreground">/mês</span>
               </div>
               <AnimatePresence mode="wait" initial={false}>
                 <motion.p
                   key={billingCycle}
-                  className="mt-2 text-xs text-muted"
+                  className="mt-2 text-xs text-muted-foreground"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -217,13 +217,13 @@ export function PricingSection() {
               Começar agora grátis
             </Link>
 
-            <p className="mt-3 text-center text-xs text-muted">
+            <p className="mt-3 text-center text-xs text-muted-foreground">
               Cadastro em menos de 30 segundos. Sem cartão.
             </p>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-muted sm:text-sm">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-muted-foreground sm:text-sm">
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-primary" />
             <span>5 consultas grátis sem cartão</span>

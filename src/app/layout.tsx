@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, IBM_Plex_Sans } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Geist,
+  Geist_Mono,
+  IBM_Plex_Sans,
+} from "next/font/google";
 import Script from "next/script";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
@@ -13,6 +19,20 @@ const body = IBM_Plex_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   weight: ["300", "400", "500", "600", "700"],
+});
+
+// Geist — used ONLY inside the product mockup (HeroLoop, ConsultationStory)
+// to match the real MedWiser app font exactly.
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+  weight: ["400", "500", "600", "700"],
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -183,8 +203,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`${display.variable} ${body.variable} antialiased`}>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body
+        className={`${display.variable} ${body.variable} ${geist.variable} ${geistMono.variable} antialiased`}
+      >
         <Script
           id="ld-organization"
           type="application/ld+json"
@@ -217,7 +239,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -50,19 +50,19 @@ export function HeroLoop() {
   }, [reduceMotion]);
 
   return (
-    <div className="relative mx-auto w-full">
+    <div className="dark relative mx-auto w-full">
       {/* Ambient glow */}
       <div className="pointer-events-none absolute -right-10 top-10 h-32 w-32 rounded-full bg-primary/25 blur-[80px] drift-slow" />
 
       {/* Mockup window */}
-      <div className="relative aspect-[2036/1394] overflow-hidden rounded-card border border-white/10 bg-[#0b1416] shadow-[0_30px_80px_-40px_rgba(15,23,42,0.55)]">
+      <div className="relative aspect-[2036/1394] overflow-hidden rounded-2xl border border-border bg-card shadow-[0_30px_80px_-40px_rgba(15,23,42,0.55)]">
         {/* Chrome */}
-        <div className="flex items-center justify-between border-b border-white/10 bg-[#0b1416] px-4 py-3">
+        <div className="flex items-center justify-between border-b border-border bg-card px-4 py-3">
           <div className="flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-red-400/80" />
             <div className="h-2 w-2 rounded-full bg-yellow-400/80" />
             <div className="h-2 w-2 rounded-full bg-green-400/80" />
-            <span className="ml-3 font-mono text-[10px] text-white/50">
+            <span className="ml-3 font-mono text-[10px] text-foreground/50">
               MedWiser · Consulta em andamento
             </span>
           </div>
@@ -87,7 +87,7 @@ export function HeroLoop() {
         </div>
 
         {/* Footer bar */}
-        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between border-t border-white/10 bg-[#0b1416] px-4 py-3 text-[10px] text-white/50">
+        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between border-t border-border bg-card px-4 py-3 text-[10px] text-foreground/50">
           <span className="font-mono tabular-nums">{timer}</span>
           <span className="font-mono">MedWiser.app</span>
         </div>
@@ -135,7 +135,7 @@ function WaveformBeat() {
           );
         })}
       </div>
-      <p className="font-mono text-[10px] text-white/40">
+      <p className="font-mono text-[10px] text-foreground/40">
         16kHz · canal único · ao vivo
       </p>
     </motion.div>
@@ -174,7 +174,7 @@ function TranscriptionBeat() {
               ease: EASE_OUT,
               delay: 0.15 + i * 0.35,
             }}
-            className="font-mono text-xs text-white/80"
+            className="font-mono text-xs text-foreground/80"
           >
             <span className="mr-2 text-primary-light/70">▸</span>
             {line}
@@ -213,10 +213,10 @@ function AlertBeat() {
             <p className="text-[9px] font-semibold uppercase tracking-widest text-yellow-300">
               Alerta da IA
             </p>
-            <p className="mt-1.5 text-xs font-medium text-white">
+            <p className="mt-1.5 text-xs font-medium text-foreground">
               Hemograma sugere anemia ferropriva.
             </p>
-            <p className="mt-1 text-[11px] text-white/60">
+            <p className="mt-1 text-[11px] text-foreground/60">
               VCM 76 fL ↓ · Ferritina 12 ng/mL ↓
             </p>
           </div>
@@ -226,7 +226,7 @@ function AlertBeat() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, delay: 0.8 }}
-        className="font-mono text-[10px] text-white/40"
+        className="font-mono text-[10px] text-foreground/40"
       >
         Considerar investigação de perda sanguínea.
       </motion.p>
