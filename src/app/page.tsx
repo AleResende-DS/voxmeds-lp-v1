@@ -4,8 +4,6 @@ import {
   ArrowDown,
   ArrowRight,
   BellRing,
-  Brain,
-  ChevronDown,
   Clock,
   FileText,
   FileUp,
@@ -19,11 +17,16 @@ import {
   Stethoscope,
   Wand2,
 } from "lucide-react";
+import { BeliefBreak } from "@/components/landing/BeliefBreak";
+import { ConsultationStory } from "@/components/landing/ConsultationStory";
+import { CopilotChat } from "@/components/landing/CopilotChat";
+import { Faq } from "@/components/landing/Faq";
 import { FloatingWhatsApp } from "@/components/landing/FloatingWhatsApp";
 import { Header } from "@/components/landing/Header";
 import { LeadLink } from "@/components/landing/LeadLink";
 import { PricingSection } from "@/components/landing/PricingSection";
-import { Reveal } from "@/components/landing/Reveal";
+import { Reveal, RevealGroup, RevealItem } from "@/components/landing/Reveal";
+import { ScrollProgress } from "@/components/landing/ScrollProgress";
 import { SocialProofBar } from "@/components/landing/SocialProofBar";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { Typewriter } from "@/components/landing/Typewriter";
@@ -199,12 +202,6 @@ const heroPhrases = [
   "Não trabalho em casa.",
 ];
 
-const transcriptionPhrases = [
-  "Gerando anamnese do paciente...",
-  "Analisando exames enviados...",
-  "Verificando interações medicamentosas...",
-];
-
 const faqs = [
   {
     question: "Como funciona o teste grátis?",
@@ -261,13 +258,14 @@ const faqs = [
 export default function Home() {
   return (
     <div className="bg-background text-foreground">
+      <ScrollProgress />
       <Header />
 
       {/* HERO */}
       <section className="relative overflow-hidden bg-surface pt-14 sm:pt-20">
         <div className="absolute inset-0 -z-10">
-          <div className="absolute -left-40 top-[-120px] h-[420px] w-[420px] rounded-full bg-primary/15 blur-[120px]" />
-          <div className="absolute right-[-120px] top-[60px] h-[380px] w-[380px] rounded-full bg-primary/10 blur-[120px]" />
+          <div className="absolute -left-40 top-[-120px] h-[420px] w-[420px] rounded-full bg-primary/15 blur-[120px] drift-slow" />
+          <div className="absolute right-[-120px] top-[60px] h-[380px] w-[380px] rounded-full bg-primary/10 blur-[120px] drift-slow-reverse" />
           <div className="absolute inset-0 bg-grid opacity-50" />
           <div className="absolute inset-0 bg-noise" />
         </div>
@@ -276,12 +274,16 @@ export default function Home() {
           <Reveal>
             <div>
               <span
-                className="group inline-flex items-center gap-2 rounded-full border border-primary/30 bg-white/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-widest text-primary backdrop-blur-sm"
+                className="relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-white/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-widest text-primary backdrop-blur-sm"
                 title="Plataforma agêntica significa que a IA não só responde perguntas — ela executa tarefas de verdade por você: documenta consultas, analisa exames e te avisa sobre achados críticos."
               >
                 <Sparkles className="h-3.5 w-3.5" />
                 <span>Primeira plataforma médica Agêntica do Brasil</span>
                 <HelpCircle className="h-3.5 w-3.5 opacity-70" />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 shimmer"
+                />
               </span>
               <h1 className="mt-6 font-display text-[2.25rem] font-semibold leading-[1.05] text-balance sm:text-[3.25rem] lg:text-[3.75rem]">
                 Você estudou medicina.
@@ -291,9 +293,9 @@ export default function Home() {
                     phrases={heroPhrases}
                     className="inline-block font-semibold"
                     cursorClassName="text-primary"
-                    typeSpeed={60}
-                    deleteSpeed={32}
-                    pause={1600}
+                    typeSpeed={38}
+                    deleteSpeed={22}
+                    pause={1400}
                   />
                 </span>
               </h1>
@@ -306,14 +308,14 @@ export default function Home() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                 <LeadLink
                   href={registerUrl}
-                  className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition hover:bg-primary-dark sm:w-auto"
+                  className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97] sm:w-auto"
                 >
                   Quero meu tempo de volta
                   <ArrowRight className="h-4 w-4" />
                 </LeadLink>
                 <Link
                   href="#copiloto"
-                  className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/60 bg-white px-6 py-3.5 text-sm font-medium text-foreground transition hover:border-primary/50 sm:w-auto"
+                  className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/60 bg-white px-6 py-3.5 text-sm font-medium text-foreground transition-[border-color,transform,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-primary/50 active:scale-[0.97] sm:w-auto"
                 >
                   Ver como funciona
                   <ArrowDown className="h-4 w-4" />
@@ -333,10 +335,10 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} variant="fade-up-scale">
             <div className="relative">
-              <div className="absolute -right-10 top-10 h-32 w-32 rounded-full bg-primary/20 blur-[80px]" />
-              <div className="relative aspect-[2036/1394] overflow-hidden rounded-[24px] border border-white/70 bg-white/45 p-1.5 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.55)] backdrop-blur-[2px]">
+              <div className="absolute -right-10 top-10 h-32 w-32 rounded-full bg-primary/20 blur-[80px] drift-slow" />
+              <div className="relative aspect-[2036/1394] overflow-hidden rounded-card border border-white/70 bg-white/45 p-1.5 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.55)] backdrop-blur-[2px]">
                 <video
                   className="pointer-events-none h-full w-full rounded-[20px] object-contain"
                   autoPlay
@@ -387,12 +389,16 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {painPoints.map((item, index) => {
+          <RevealGroup
+            className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            stagger={0.06}
+            delay={0.1}
+          >
+            {painPoints.map((item) => {
               const Icon = item.icon;
               return (
-                <Reveal key={item.title} className="h-full" delay={index * 0.03}>
-                  <div className="flex h-full flex-col rounded-[24px] border border-border/60 bg-white p-6 shadow-card">
+                <RevealItem key={item.title} className="h-full" variant="fade-up">
+                  <div className="hover-lift flex h-full flex-col rounded-card border border-border/60 bg-white p-6 shadow-card">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                       <Icon className="h-6 w-6" />
                     </div>
@@ -401,156 +407,18 @@ export default function Home() {
                     </h3>
                     <p className="mt-2 text-sm text-muted">{item.description}</p>
                   </div>
-                </Reveal>
+                </RevealItem>
               );
             })}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
       {/* BELIEF BREAK */}
-      <section
-        id="crenca"
-        className="section relative overflow-hidden bg-[#0b1514] py-16 text-white sm:py-24 lg:py-32"
-      >
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-[140px]" />
-        </div>
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
-          <Reveal>
-            <p className="text-sm font-medium uppercase tracking-[0.25em] text-primary-light">
-              O que ninguém te contou
-            </p>
-            <p className="mt-6 text-lg text-white/70 sm:text-xl">
-              A maioria dos médicos acredita que burocracia é parte inevitável
-              da profissão. Que crescer na carreira significa abrir mão da vida
-              pessoal. Que decisões difíceis precisam ser tomadas sozinho.
-            </p>
-            <div className="mx-auto mt-10 h-px w-24 bg-primary-light/60" />
-            <h2 className="mt-10 font-display text-4xl font-semibold text-balance sm:text-5xl lg:text-6xl">
-              Mas isso não é verdade.
-            </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-base text-white/70 sm:text-lg">
-              A tecnologia agêntica já permite que você documente sem digitar,
-              analise exames com uma IA copiloto, e cresça sem se esgotar. Só
-              precisa das ferramentas certas ao seu lado.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <BeliefBreak />
 
-      {/* SOLUTION */}
-      <section id="solucao" className="section py-14 sm:py-20 lg:py-24">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <Reveal>
-            <div>
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-                Conheça a MedWiser
-              </p>
-              <h2 className="mt-4 font-display text-3xl font-semibold text-balance sm:text-4xl">
-                A IA médica que trabalha com você, não para você.
-              </h2>
-              <p className="mt-4 text-muted">
-                Um sistema pensado do zero para médicos brasileiros. A MedWiser
-                não espera comandos — ela age. Transcreve consultas, gera
-                documentos, analisa exames e te avisa sobre o que é importante.
-                Tudo enquanto você atende.
-              </p>
-
-              <div className="mt-8 space-y-4 text-sm">
-                <div className="flex items-start gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Mic className="h-4 w-4" />
-                  </span>
-                  <span className="pt-0.5">
-                    <strong className="text-foreground">Você fala.</strong>{" "}
-                    <span className="text-muted">
-                      A IA transcreve em tempo real e gera prontuários
-                      estruturados.
-                    </span>
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Brain className="h-4 w-4" />
-                  </span>
-                  <span className="pt-0.5">
-                    <strong className="text-foreground">Você atende.</strong>{" "}
-                    <span className="text-muted">
-                      A IA analisa exames e te alerta sobre achados críticos.
-                    </span>
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <MessageSquare className="h-4 w-4" />
-                  </span>
-                  <span className="pt-0.5">
-                    <strong className="text-foreground">Você decide.</strong>{" "}
-                    <span className="text-muted">
-                      E tem um copiloto de IA para validar condutas quando
-                      precisar.
-                    </span>
-                  </span>
-                </div>
-              </div>
-
-              <p className="mt-8 font-display text-lg font-semibold text-primary">
-                Agêntica. Clínica. Sua.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <div className="relative">
-              <div className="absolute right-8 top-6 h-24 w-24 rounded-full bg-primary/20 blur-[60px]" />
-              <div className="rounded-[24px] border border-border/60 bg-white p-6 shadow-card sm:p-8">
-                <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-muted">
-                  <span>MedWiser · Consulta em andamento</span>
-                  <span className="inline-flex items-center gap-2 text-primary">
-                    <span className="h-2 w-2 rounded-full bg-primary pulse-soft" />
-                    Gravando
-                  </span>
-                </div>
-                <div className="mt-6 grid gap-4">
-                  <div className="rounded-2xl border border-border/60 bg-surface p-4 float-slow">
-                    <p className="text-xs uppercase tracking-[0.2em] text-muted">
-                      IA trabalhando
-                    </p>
-                    <p className="mt-3 text-sm">
-                      <span className="sr-only">
-                        IA processando informações do paciente
-                      </span>
-                      <Typewriter
-                        phrases={transcriptionPhrases}
-                        className="inline-block font-medium text-foreground"
-                        cursorClassName="text-primary"
-                      />
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-border/60 bg-white p-4 shadow">
-                    <p className="text-xs uppercase tracking-[0.2em] text-muted">
-                      Documentos prontos
-                    </p>
-                    <p className="mt-3 text-sm text-muted">
-                      Anamnese · SOAP · Evolução clínica
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 float-delayed">
-                    <p className="text-xs uppercase tracking-[0.2em] text-primary">
-                      Alerta da IA
-                    </p>
-                    <p className="mt-3 text-sm text-foreground">
-                      Hemograma do paciente sugere possível anemia
-                      ferropriva. Considerar investigação.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      {/* SOLUTION — scroll-driven consultation story */}
+      <ConsultationStory />
 
       {/* FEATURES */}
       <section
@@ -573,10 +441,14 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <div className="mt-12 grid gap-6 sm:gap-8 lg:grid-cols-2">
-            {features.map((feature, index) => (
-              <Reveal key={feature.title} delay={index * 0.04}>
-                <div className="flex h-full flex-col rounded-[24px] border border-border/60 bg-white p-5 shadow-card sm:p-6">
+          <RevealGroup
+            className="mt-12 grid gap-6 sm:gap-8 lg:grid-cols-2"
+            stagger={0.07}
+            delay={0.1}
+          >
+            {features.map((feature) => (
+              <RevealItem key={feature.title} variant="fade-up">
+                <div className="hover-lift flex h-full flex-col rounded-card border border-border/60 bg-white p-5 shadow-card sm:p-6">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
@@ -616,14 +488,14 @@ export default function Home() {
                     />
                   </div>
                 </div>
-              </Reveal>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
 
           <div className="mt-12 flex justify-center">
             <LeadLink
               href={registerUrl}
-              className="tap-target inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition hover:bg-primary-dark"
+              className="tap-target inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97]"
             >
               Testar todas as funcionalidades grátis
               <ArrowRight className="h-4 w-4" />
@@ -637,13 +509,13 @@ export default function Home() {
         id="copiloto"
         className="section relative overflow-hidden py-14 sm:py-20 lg:py-24"
       >
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute left-1/4 top-0 h-[360px] w-[360px] rounded-full bg-primary/10 blur-[120px]" />
-          <div className="absolute bottom-0 right-1/4 h-[360px] w-[360px] rounded-full bg-primary/10 blur-[120px]" />
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute left-1/4 top-0 h-[360px] w-[360px] rounded-full bg-primary/10 blur-[120px] drift-slow" />
+          <div className="absolute bottom-0 right-1/4 h-[360px] w-[360px] rounded-full bg-primary/10 blur-[120px] drift-slow-reverse" />
         </div>
 
         <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1fr] lg:items-center">
-          <Reveal>
+          <Reveal variant="fade-left">
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
                 Para quem começa e para quem nunca quer parar
@@ -664,58 +536,64 @@ export default function Home() {
                 que você gostaria de ter do lado em cada consulta.
               </p>
 
-              <div className="mt-8 space-y-4">
-                <div className="flex items-start gap-4 rounded-2xl border border-border/60 bg-white p-5 shadow-card">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <BellRing className="h-5 w-5" />
+              <RevealGroup className="mt-8 space-y-4" stagger={0.06}>
+                <RevealItem>
+                  <div className="hover-lift flex items-start gap-4 rounded-2xl border border-border/60 bg-white p-5 shadow-card">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <BellRing className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-base font-semibold">
+                        Alertas em cada exame
+                      </h3>
+                      <p className="mt-1 text-sm text-muted">
+                        A IA faz uma segunda leitura de cada laudo que você
+                        sobe e sinaliza achados que podem exigir atenção. Não
+                        deixa nada escapar.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-display text-base font-semibold">
-                      Alertas em cada exame
-                    </h3>
-                    <p className="mt-1 text-sm text-muted">
-                      A IA faz uma segunda leitura de cada laudo que você sobe
-                      e sinaliza achados que podem exigir atenção. Não deixa
-                      nada escapar.
-                    </p>
+                </RevealItem>
+                <RevealItem>
+                  <div className="hover-lift flex items-start gap-4 rounded-2xl border border-border/60 bg-white p-5 shadow-card">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <MessageSquare className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-base font-semibold">
+                        Chat clínico contextual
+                      </h3>
+                      <p className="mt-1 text-sm text-muted">
+                        Uma IA que conhece o histórico completo do paciente e
+                        responde dúvidas sobre condutas, interações
+                        medicamentosas e referências — em segundos.
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start gap-4 rounded-2xl border border-border/60 bg-white p-5 shadow-card">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <MessageSquare className="h-5 w-5" />
+                </RevealItem>
+                <RevealItem>
+                  <div className="hover-lift flex items-start gap-4 rounded-2xl border border-border/60 bg-white p-5 shadow-card">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <Stethoscope className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-base font-semibold">
+                        Resumo automático do paciente
+                      </h3>
+                      <p className="mt-1 text-sm text-muted">
+                        Cada consulta atualiza automaticamente o resumo do
+                        paciente. Na próxima visita, você tem o contexto
+                        inteiro em 10 segundos de leitura.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-display text-base font-semibold">
-                      Chat clínico contextual
-                    </h3>
-                    <p className="mt-1 text-sm text-muted">
-                      Uma IA que conhece o histórico completo do paciente e
-                      responde dúvidas sobre condutas, interações
-                      medicamentosas e referências — em segundos.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 rounded-2xl border border-border/60 bg-white p-5 shadow-card">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Stethoscope className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-base font-semibold">
-                      Resumo automático do paciente
-                    </h3>
-                    <p className="mt-1 text-sm text-muted">
-                      Cada consulta atualiza automaticamente o resumo do
-                      paciente. Na próxima visita, você tem o contexto inteiro
-                      em 10 segundos de leitura.
-                    </p>
-                  </div>
-                </div>
-              </div>
+                </RevealItem>
+              </RevealGroup>
 
               <div className="mt-8">
                 <LeadLink
                   href={registerUrl}
-                  className="tap-target inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition hover:bg-primary-dark"
+                  className="tap-target inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97]"
                 >
                   Quero um copiloto clínico
                   <ArrowRight className="h-4 w-4" />
@@ -724,43 +602,8 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <div className="relative">
-              <div className="absolute -right-6 top-6 h-32 w-32 rounded-full bg-primary/20 blur-[80px]" />
-              <div className="relative rounded-[24px] border border-border/60 bg-white p-6 shadow-card sm:p-8">
-                <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-muted">
-                  <span>Chat clínico · Paciente J.M.S.</span>
-                  <span className="inline-flex items-center gap-2 text-primary">
-                    <Brain className="h-3.5 w-3.5" />
-                    IA
-                  </span>
-                </div>
-                <div className="mt-6 space-y-4">
-                  <div className="ml-auto max-w-[85%] rounded-2xl rounded-tr-md bg-primary/10 p-4 text-sm">
-                    Paciente hipertenso em uso de losartana 50mg, apresentou
-                    tosse seca persistente há 2 semanas. Posso trocar por
-                    qual?
-                  </div>
-                  <div className="mr-auto max-w-[92%] rounded-2xl rounded-tl-md border border-border/60 bg-surface p-4 text-sm">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-                      MedWiser IA
-                    </p>
-                    <p className="mt-2 text-foreground/90">
-                      A tosse seca com losartana é incomum (ela é BRA, não
-                      IECA). Vale investigar outras causas antes de trocar.
-                      Mas se for necessário substituir, as opções de mesma
-                      classe com boa tolerância seriam{" "}
-                      <strong>valsartana</strong> ou{" "}
-                      <strong>olmesartana</strong>.
-                    </p>
-                    <p className="mt-3 text-xs text-muted">
-                      Baseado no histórico: última consulta em 12/02 registrou
-                      PA 140/90 mmHg.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <Reveal variant="fade-right" delay={0.1}>
+            <CopilotChat />
           </Reveal>
         </div>
       </section>
@@ -788,14 +631,14 @@ export default function Home() {
                 </p>
                 <LeadLink
                   href={registerUrl}
-                  className="tap-target mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition hover:bg-primary-dark"
+                  className="tap-target mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97]"
                 >
                   Quero GANHAR tempo
                   <ArrowRight className="h-4 w-4" />
                 </LeadLink>
               </div>
 
-              <div className="grid gap-6 rounded-[24px] border border-border/60 bg-white p-5 shadow-card sm:p-6">
+              <div className="grid gap-6 rounded-card border border-border/60 bg-white p-5 shadow-card sm:p-6">
                 <div className="hidden gap-4 sm:grid sm:grid-cols-2 sm:gap-10">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-error">
                     Sem MedWiser
@@ -804,10 +647,11 @@ export default function Home() {
                     Com MedWiser
                   </p>
                 </div>
-                <div className="grid gap-4">
+                <RevealGroup className="grid gap-4" stagger={0.07}>
                   {comparisonRows.map((row) => (
-                    <div
+                    <RevealItem
                       key={row.id}
+                      variant="fade-up"
                       className="grid items-start gap-3 rounded-2xl border border-border/60 bg-surface/40 p-4 text-sm text-foreground/80 sm:grid-cols-2 sm:gap-10 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0"
                     >
                       <div className="space-y-1">
@@ -822,9 +666,9 @@ export default function Home() {
                         </p>
                         <div>✓ {row.after}</div>
                       </div>
-                    </div>
+                    </RevealItem>
                   ))}
-                </div>
+                </RevealGroup>
               </div>
             </div>
           </Reveal>
@@ -892,10 +736,10 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} variant="fade-up-scale">
             <div className="relative mx-auto w-[240px] sm:w-[300px] lg:w-[340px]">
-              <div className="absolute right-4 top-8 h-16 w-16 rounded-full bg-primary/20 blur-[50px]" />
-              <div className="rounded-[22px] border border-border/60 bg-white p-1.5 shadow-card">
+              <div className="absolute right-4 top-8 h-16 w-16 rounded-full bg-primary/20 blur-[50px] drift-slow" />
+              <div className="hover-lift rounded-[22px] border border-border/60 bg-white p-1.5 shadow-card float-slow">
                 <Image
                   src="/landing/mockups/mobile-app.svg"
                   alt="MedWiser no celular — apps iOS e Android"
@@ -932,32 +776,14 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <div className="mt-10 grid gap-4">
-            {faqs.map((faq, index) => (
-              <Reveal key={faq.question} delay={index * 0.02}>
-                <details
-                  className="group rounded-[24px] border border-border/60 bg-white p-5 shadow-card sm:p-6"
-                  open={index === 0}
-                >
-                  <summary className="tap-target flex cursor-pointer list-none items-center justify-between gap-4 py-2 text-sm font-semibold">
-                    <span>{faq.question}</span>
-                    <ChevronDown
-                      className="h-4 w-4 shrink-0 text-muted transition-transform duration-200 group-open:rotate-180"
-                      aria-hidden="true"
-                    />
-                  </summary>
-                  <p className="mt-3 text-sm text-muted">{faq.answer}</p>
-                </details>
-              </Reveal>
-            ))}
-          </div>
+          <Faq items={faqs} />
         </div>
       </section>
 
       {/* FOOTER */}
       <footer className="bg-[#0b1514] text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <div className="rounded-[24px] border border-primary/20 bg-gradient-to-br from-primary/15 to-transparent p-8 text-center sm:p-12">
+          <div className="rounded-card border border-primary/20 bg-gradient-to-br from-primary/15 to-transparent p-8 text-center sm:p-12">
             <h2 className="font-display text-3xl font-semibold text-balance sm:text-4xl">
               Pronto para recuperar seu tempo?
             </h2>
@@ -967,7 +793,7 @@ export default function Home() {
             </p>
             <LeadLink
               href={registerUrl}
-              className="tap-target mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition hover:bg-primary-dark"
+              className="tap-target mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97]"
             >
               Testar MedWiser grátis
               <ArrowRight className="h-4 w-4" />
@@ -1063,7 +889,7 @@ export default function Home() {
                 href="https://www.zennex.com.br"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="tap-target inline-flex items-center px-1 transition hover:text-white"
+                className="tap-target inline-flex items-center px-1 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
               >
                 Zennex
               </Link>
@@ -1072,7 +898,7 @@ export default function Home() {
               href="https://instagram.com/medwiser.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="tap-target inline-flex items-center px-1 transition hover:text-white"
+              className="tap-target inline-flex items-center px-1 transition-colors duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-white"
             >
               Instagram @medwiser.app
             </Link>

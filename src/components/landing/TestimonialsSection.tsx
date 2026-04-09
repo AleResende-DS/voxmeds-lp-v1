@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Reveal } from "./Reveal";
+import { RevealGroup, RevealItem, Reveal } from "./Reveal";
 
 type Testimonial = {
   id: string;
@@ -62,8 +62,8 @@ export function TestimonialsSection() {
       id="depoimentos"
       className="section relative overflow-hidden py-14 sm:py-20 lg:py-24"
     >
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute left-1/3 top-0 h-[360px] w-[360px] rounded-full bg-primary/5 blur-[120px]" />
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-1/3 top-0 h-[360px] w-[360px] rounded-full bg-primary/5 blur-[120px] drift-slow" />
       </div>
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -82,11 +82,15 @@ export function TestimonialsSection() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Reveal key={testimonial.id} delay={index * 0.05}>
+        <RevealGroup
+          className="mt-12 grid gap-6 sm:grid-cols-2 lg:gap-8"
+          stagger={0.08}
+          delay={0.1}
+        >
+          {testimonials.map((testimonial) => (
+            <RevealItem key={testimonial.id}>
               <article
-                className={`flex h-full flex-col rounded-[24px] border bg-white p-6 shadow-card sm:p-8 ${
+                className={`hover-lift flex h-full flex-col rounded-card border bg-white p-6 shadow-card sm:p-8 ${
                   testimonial.highlight
                     ? "border-primary/40 ring-1 ring-primary/15"
                     : "border-border/60"
@@ -121,9 +125,9 @@ export function TestimonialsSection() {
                   </div>
                 </div>
               </article>
-            </Reveal>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

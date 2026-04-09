@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Check,
   TrendingDown,
@@ -11,6 +12,8 @@ import {
   Shield,
 } from "lucide-react";
 import { trackLeadEvent } from "@/lib/tracking";
+
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
 const registerUrl = "https://portal.medwiser.app/register";
 
@@ -81,7 +84,7 @@ export function PricingSection() {
             <button
               type="button"
               onClick={() => handleToggle("monthly")}
-              className={`tap-target rounded-full px-5 text-sm font-medium transition ${
+              className={`tap-target press rounded-full px-5 text-sm font-medium transition-[background-color,color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
                 billingCycle === "monthly"
                   ? "bg-foreground text-white shadow-md"
                   : "text-muted hover:text-foreground"
@@ -92,7 +95,7 @@ export function PricingSection() {
             <button
               type="button"
               onClick={() => handleToggle("yearly")}
-              className={`tap-target inline-flex items-center gap-2 rounded-full px-5 text-sm font-medium transition ${
+              className={`tap-target press inline-flex items-center gap-2 rounded-full px-5 text-sm font-medium transition-[background-color,color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
                 billingCycle === "yearly"
                   ? "bg-foreground text-white shadow-md"
                   : "text-muted hover:text-foreground"
@@ -137,25 +140,50 @@ export function PricingSection() {
                 Depois
               </div>
               <div className="mt-2 flex items-baseline justify-center gap-2">
-                <span className="font-display text-4xl font-bold text-foreground sm:text-5xl">
-                  R$ {price}
-                </span>
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.span
+                    key={price}
+                    className="font-display text-4xl font-bold text-foreground sm:text-5xl"
+                    initial={{ opacity: 0, filter: "blur(3px)", y: 4 }}
+                    animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                    exit={{ opacity: 0, filter: "blur(3px)", y: -4 }}
+                    transition={{ duration: 0.22, ease: EASE_OUT }}
+                  >
+                    R$ {price}
+                  </motion.span>
+                </AnimatePresence>
                 <span className="text-sm text-muted">/mês</span>
               </div>
-              {billingCycle === "yearly" ? (
-                <p className="mt-2 text-xs text-muted">
-                  R$ {yearlyTotal.toLocaleString("pt-BR")} cobrados uma vez por ano
-                </p>
-              ) : (
-                <p className="mt-2 text-xs text-muted">Cobrado mensalmente</p>
-              )}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.p
+                  key={billingCycle}
+                  className="mt-2 text-xs text-muted"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.18, ease: EASE_OUT }}
+                >
+                  {billingCycle === "yearly"
+                    ? `R$ ${yearlyTotal.toLocaleString("pt-BR")} cobrados uma vez por ano`
+                    : "Cobrado mensalmente"}
+                </motion.p>
+              </AnimatePresence>
 
-              {billingCycle === "yearly" && (
-                <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 text-xs font-semibold text-success">
-                  <TrendingDown className="h-3 w-3" />
-                  Economize R$ {yearlySavings} por ano
-                </div>
-              )}
+              <AnimatePresence initial={false}>
+                {billingCycle === "yearly" && (
+                  <motion.div
+                    key="yearly-savings"
+                    className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 text-xs font-semibold text-success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.22, ease: EASE_OUT }}
+                  >
+                    <TrendingDown className="h-3 w-3" />
+                    Economize R$ {yearlySavings} por ano
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <ul className="mt-6 space-y-3 text-sm">
@@ -184,7 +212,7 @@ export function PricingSection() {
             <Link
               href={registerUrl}
               onClick={trackLeadEvent}
-              className="tap-target mt-8 inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(15,118,110,0.5)] transition-all duration-300 hover:bg-primary-dark hover:shadow-[0_12px_32px_-8px_rgba(15,118,110,0.6)] motion-safe:hover:scale-[1.02]"
+              className="tap-target mt-8 inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(15,118,110,0.5)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark hover:shadow-[0_12px_32px_-8px_rgba(15,118,110,0.6)] active:scale-[0.97] motion-safe:hover:scale-[1.02]"
             >
               Começar agora grátis
             </Link>

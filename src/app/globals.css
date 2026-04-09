@@ -18,6 +18,18 @@
   --shadow-soft: 0 30px 80px -60px rgba(15, 23, 42, 0.45);
   --shadow-card: 0 24px 60px -42px rgba(15, 23, 42, 0.35);
   --shadow-lg: 0 40px 100px -48px rgba(15, 23, 42, 0.5);
+
+  /* Motion — custom easing curves (stronger than built-in CSS easings) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Motion — durations */
+  --duration-instant: 100ms;
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-hero: 500ms;
 }
 
 @theme inline {
@@ -101,12 +113,45 @@ h4 {
   }
 
   .hover-lift {
-    transition: transform 300ms ease, box-shadow 300ms ease;
+    transition:
+      transform 200ms var(--ease-out),
+      box-shadow 200ms var(--ease-out);
   }
 
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+  @media (hover: hover) and (pointer: fine) {
+    .hover-lift:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+
+  /* Tactile feedback — every pressable surface uses this */
+  .press {
+    transition: transform 160ms var(--ease-out);
+  }
+
+  .press:active {
+    transform: scale(0.97);
+  }
+
+  /* Subtle pulse for ambient indicators (replaces animate-ping) */
+  .pulse-ring {
+    animation: pulse-ring 2.4s var(--ease-out) infinite;
+  }
+
+  /* Badge shimmer — ~8s loop */
+  .shimmer {
+    background-image: linear-gradient(
+      110deg,
+      transparent 35%,
+      rgba(255, 255, 255, 0.35) 45%,
+      rgba(255, 255, 255, 0.55) 50%,
+      rgba(255, 255, 255, 0.35) 55%,
+      transparent 65%
+    );
+    background-size: 250% 100%;
+    background-position: -150% 0;
+    animation: shimmer 8s var(--ease-in-out) infinite;
   }
 
   .float-slow {
@@ -115,6 +160,16 @@ h4 {
 
   .float-delayed {
     animation: float 8s ease-in-out infinite 1.6s;
+  }
+
+  .drift-slow {
+    animation: drift-slow 22s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .drift-slow-reverse {
+    animation: drift-slow-reverse 26s ease-in-out infinite;
+    will-change: transform;
   }
 
   .pulse-soft {
@@ -159,6 +214,48 @@ h4 {
   }
 }
 
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  80%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -150% 0;
+  }
+  55%,
+  100% {
+    background-position: 250% 0;
+  }
+}
+
+@keyframes drift-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(24px, -16px, 0);
+  }
+}
+
+@keyframes drift-slow-reverse {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-20px, 18px, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -170,7 +267,15 @@ h4 {
 
   .float-slow,
   .float-delayed,
-  .pulse-soft {
+  .pulse-soft,
+  .pulse-ring,
+  .shimmer,
+  .drift-slow,
+  .drift-slow-reverse {
     animation: none;
+  }
+
+  .press:active {
+    transform: none;
   }
 }
