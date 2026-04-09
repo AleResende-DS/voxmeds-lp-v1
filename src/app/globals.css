@@ -3,10 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #111111;
-  --primary: #0d9488;
+  /* Primary escurecido de #0d9488 para #0f766e (teal-700) para passar no WCAG AA */
+  --primary: #0f766e;
   --primary-light: #14b8a6;
-  --primary-dark: #0f766e;
-  --muted: #6b7280;
+  --primary-dark: #0b5952;
+  /* Muted escurecido de #6b7280 (gray-500) para #4b5563 (gray-600) — contraste ~7:1 */
+  --muted: #4b5563;
   --border: #eaeaec;
   --surface: #f7f9f8;
   --surface-strong: #eef5f3;
@@ -64,13 +66,8 @@ h4 {
   }
 
   .section {
-    scroll-margin-top: 88px;
-  }
-
-  @media (min-width: 768px) {
-    .section {
-      scroll-margin-top: 96px;
-    }
+    /* Header real é 64px — 12px de folga visual = 76px */
+    scroll-margin-top: 76px;
   }
 
   .tap-target {

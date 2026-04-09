@@ -23,7 +23,9 @@ export function Typewriter({
   startDelay = 300,
 }: TypewriterProps) {
   const reduceMotion = useReducedMotion();
-  const [text, setText] = useState("");
+  // Start with the first phrase so the server-rendered HTML contains the full
+  // H1 text (critical for SEO) and there's no empty state flash on first paint.
+  const [text, setText] = useState(phrases[0] ?? "");
   const [index, setIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [started, setStarted] = useState(false);

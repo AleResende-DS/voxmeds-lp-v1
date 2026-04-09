@@ -8,6 +8,7 @@ import { trackLeadEvent } from "@/lib/tracking";
 
 const navLinks = [
   { label: "Funcionalidades", href: "#funcionalidades" },
+  { label: "Como ajuda", href: "#copiloto" },
   { label: "Planos", href: "#planos" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -97,7 +98,7 @@ export function Header() {
               onClick={trackLeadEvent}
               className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-1.5 text-[13px] font-medium text-white shadow-[0_10px_30px_-20px_rgba(13,148,136,0.8)] transition hover:bg-primary-dark"
             >
-              Começar grátis
+              Testar grátis
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

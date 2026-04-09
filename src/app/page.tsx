@@ -3,23 +3,29 @@ import Link from "next/link";
 import {
   ArrowDown,
   ArrowRight,
-  BarChart3,
-  Calendar,
-  Check,
+  BellRing,
+  Brain,
   ChevronDown,
   Clock,
-  Hourglass,
   FileText,
+  FileUp,
+  HelpCircle,
   Home as HomeIcon,
+  Lightbulb,
+  MessageSquare,
+  Mic,
   MonitorSmartphone,
-  Repeat,
-  ShieldCheck,
   Sparkles,
+  Stethoscope,
+  Wand2,
 } from "lucide-react";
+import { FloatingWhatsApp } from "@/components/landing/FloatingWhatsApp";
 import { Header } from "@/components/landing/Header";
 import { LeadLink } from "@/components/landing/LeadLink";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { Reveal } from "@/components/landing/Reveal";
+import { SocialProofBar } from "@/components/landing/SocialProofBar";
+import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { Typewriter } from "@/components/landing/Typewriter";
 
 const registerUrl = "https://portal.medwiser.app/register";
@@ -27,22 +33,20 @@ const registerUrl = "https://portal.medwiser.app/register";
 const painPoints = [
   {
     title: "Horas digitando",
-    description: "Documentar consome mais tempo do que atender.",
+    description:
+      "Você termina a consulta e ainda passa mais 10 minutos documentando tudo.",
     icon: Clock,
   },
   {
-    title: "Sistemas fragmentados",
-    description: "Agenda em um lugar, prontuário em outro.",
-    icon: Repeat,
-  },
-  {
     title: "Trabalho em casa",
-    description: "A burocracia te acompanha para fora do consultório.",
+    description:
+      "A burocracia te acompanha para fora do consultório — e rouba seu tempo com a família.",
     icon: HomeIcon,
   },
   {
     title: "Retrabalho constante",
-    description: "Copiar, colar e reformatar o mesmo conteúdo.",
+    description:
+      "Copiar, colar e reformatar o mesmo conteúdo em cada sistema, todo dia.",
     icon: FileText,
   },
   {
@@ -52,62 +56,80 @@ const painPoints = [
     icon: MonitorSmartphone,
   },
   {
-    title: "Insegurança jurídica",
+    title: "Medo de deixar passar algo",
     description:
-      "Registros incompletos aumentam riscos e geram medo de processos.",
-    icon: ShieldCheck,
+      "Exame chega, você bate o olho correndo — e a insegurança de esquecer um achado importante vem junto.",
+    icon: HelpCircle,
+  },
+  {
+    title: "A insegurança do início da carreira",
+    description:
+      "Recém-formado? A responsabilidade pesa. Validar cada conduta sozinho, sem um colega por perto, é exaustivo.",
+    icon: Lightbulb,
   },
 ];
 
-const features = [
+type Feature = {
+  title: string;
+  description: string;
+  image: string;
+  tag: string;
+  badge?: string;
+  imageClass?: string;
+  imageWrapperClass?: string;
+};
+
+const features: Feature[] = [
   {
     title: "IA que documenta por você",
     description:
-      "Transcrição automática que gera prontuários, anamnese e documentos em segundos.",
+      "Grave a consulta. A IA transcreve, gera anamnese, SOAP e documentos em segundos. Você só revisa.",
     image: "/landing/screenshots/consulta-vox.webp",
     tag: "Transcrição com IA",
     imageWrapperClass: "aspect-[2037/1397]",
   },
   {
-    title: "Histórico completo e organizado",
+    title: "A IA não deixa nada passar",
     description:
-      "Prontuário eletrônico com evolução clínica, exames e documentos em um só lugar.",
+      "Alertas automáticos em exames e documentos. A MedWiser analisa cada arquivo e sinaliza achados que podem ser clinicamente relevantes — antes que algo escape.",
+    image: "/landing/screenshots/analytics-vox.webp",
+    tag: "Alertas inteligentes",
+    badge: "Exclusivo",
+    imageWrapperClass: "aspect-[2037/1397]",
+  },
+  {
+    title: "Seu copiloto em cada consulta",
+    description:
+      "Converse com uma IA que conhece o histórico completo do paciente. Tire dúvidas, valide condutas e consulte referências em segundos.",
     image: "/landing/screenshots/historico-vox.webp",
+    tag: "Chat clínico",
+    badge: "Exclusivo",
+    imageWrapperClass: "aspect-[2037/1397]",
+  },
+  {
+    title: "Prontuário completo e organizado",
+    description:
+      "Histórico de consultas, documentos, exames e evolução do paciente em um só lugar — tudo mantido atualizado automaticamente pela IA.",
+    image: "/landing/screenshots/agenda-vox.webp",
     tag: "Prontuário",
     imageWrapperClass: "aspect-[2037/1397]",
   },
   {
-    title: "Agenda inteligente",
+    title: "Upload inteligente de exames",
     description:
-      "Acesso de secretário, agendamento automático pelo Agente de WhatsApp e 100% customizável.",
-    image: "/landing/screenshots/agenda-vox.webp",
-    tag: "Agenda",
-    imageWrapperClass: "aspect-[2037/1397]",
-  },
-  {
-    title: "Relatórios automáticos",
-    description:
-      "Visão financeira e clínica sem planilhas ou retrabalho.",
-    image: "/landing/screenshots/analytics-vox.webp",
-    tag: "Analytics",
-    imageWrapperClass: "aspect-[2037/1397]",
-  },
-  {
-    title: "Agente de IA",
-    description:
-      "Assistente virtual que agenda consultas, confirma horários e responde dúvidas 24h por dia.",
+      "Envie PDF, foto ou laudo de até 50MB. A IA lê, interpreta e integra automaticamente ao prontuário do paciente.",
     image: "/landing/screenshots/whatsapp-agent-iphone.webp",
-    tag: "WhatsApp IA",
+    tag: "Análise por IA",
     imageClass: "object-contain",
     imageWrapperClass: "h-[280px] sm:h-[320px] lg:h-[340px]",
   },
   {
-    title: "Seu consultório no bolso",
+    title: "MedWiser no seu bolso",
     description:
-      "Já pensou uma consulta sem mouse e teclado? Aguarde...",
+      "Apps nativos para iOS e Android já disponíveis. Grave e atenda do celular — tudo sincronizado entre dispositivos.",
     image: "/landing/mockups/mobile-app.svg",
-    tag: "App mobile",
-    badge: "Em breve",
+    tag: "Apps mobile",
+    badge: "Disponível",
     imageClass: "object-contain",
     imageWrapperClass: "h-[280px] sm:h-[320px] lg:h-[340px]",
   },
@@ -116,146 +138,123 @@ const features = [
 const comparisonRows = [
   {
     id: "digitacao",
-    before: "Digitação",
+    before: "Horas digitando anamneses, SOAP e documentos",
     after: (
       <>
-        <span className="font-semibold text-primary">IA</span> faz{" "}
-        <span className="font-semibold text-primary">quase tudo</span> por você
+        <span className="font-semibold text-primary">A IA escreve</span> enquanto
+        você conversa com o paciente
       </>
     ),
   },
   {
-    id: "juridica",
-    before: "Insegurança jurídica",
+    id: "alertas",
+    before: "Medo de deixar passar um achado importante no exame",
     after: (
-      <span className="font-semibold text-primary">
-        Segurança total dos documentos
-      </span>
+      <>
+        Alertas automáticos em cada documento —{" "}
+        <span className="font-semibold text-primary">uma segunda leitura</span>{" "}
+        sempre ativa
+      </>
     ),
   },
   {
-    id: "agendamento",
-    before: "Agendamento 100% manual",
+    id: "seguranca",
+    before: "Decisões clínicas difíceis sem um colega por perto",
     after: (
       <>
-        <span className="font-semibold text-primary">Agendamento automático</span>{" "}
-        pelo Agente de IA
+        Um{" "}
+        <span className="font-semibold text-primary">copiloto de IA</span> que
+        conhece o histórico do paciente e responde em segundos
       </>
     ),
   },
   {
     id: "relacao",
-    before: "Péssima relação médico x paciente",
+    before: "Atendimento com o olho grudado na tela",
     after: (
       <span className="font-semibold text-primary">
-        100% presente onde importa, na consulta.
+        100% presente onde importa: na consulta
       </span>
     ),
   },
   {
     id: "vida",
-    before: "Leva trabalho para casa.",
+    before: "Leva trabalho para casa. Todo santo dia.",
     after: (
       <>
         <span className="font-semibold text-primary">
           Finaliza o dia no último paciente.
         </span>
         <span className="mt-2 block text-muted">
-          Mais descanso, mais lazer, mais família com a MedWiser.
+          Mais descanso, mais lazer, mais família.
         </span>
       </>
     ),
   },
 ];
 
-const securityItems = [
-  {
-    title: "Anonimização dos dados",
-    description: "Conforme descrito pela LGPD.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Uso simplificado",
-    description: "Nosso modelo não requer autorização do paciente.",
-    icon: Check,
-  },
-  {
-    title: "Áudios descartados",
-    description: "Nenhum registro de voz fica armazenado.",
-    icon: Sparkles,
-  },
-  {
-    title: "Compartilhamento auditado",
-    description:
-      "Compartilhamento auditado pelo médico responsável.",
-    icon: ShieldCheck,
-  },
-];
-
 const heroPhrases = [
-  "Em uma única plataforma",
-  "Mais inteligente",
-  "Mais organizado",
-  "Automatizado por IA",
-  "Na palma da sua mão",
+  "Não digitação.",
+  "Não burocracia.",
+  "Não trabalho em casa.",
 ];
 
 const transcriptionPhrases = [
-  "Ditado clínico em segundos",
-  "Anamnese pronta automaticamente",
-  "Evolução sem digitação",
+  "Gerando anamnese do paciente...",
+  "Analisando exames enviados...",
+  "Verificando interações medicamentosas...",
 ];
 
 const faqs = [
   {
-    question: "O que preciso para usar o MedWiser?",
+    question: "Como funciona o teste grátis?",
     answer:
-      "Basta um computador ou celular com internet e microfone. Você pode usar pelo navegador ou pelo app iOS/Android.",
+      "Você começa sem cartão de crédito e ganha 5 consultas grátis para testar tudo. Se quiser experimentar com acesso completo por mais tempo, basta cadastrar um cartão e ganhar 7 dias adicionais de acesso total. Sem pegadinha, sem compromisso.",
   },
   {
-    question: "O MedWiser substitui meu prontuário atual?",
+    question: "O que preciso para usar a MedWiser?",
     answer:
-      "Sim. O MedWiser é um prontuário completo, com histórico, documentos e evolução clínica em um só lugar.",
+      "Apenas um computador, tablet ou celular com internet e microfone. A MedWiser roda no navegador e também tem apps nativos para iOS e Android, tudo sincronizado.",
+  },
+  {
+    question: "A MedWiser substitui meu prontuário atual?",
+    answer:
+      "Sim. A MedWiser é um prontuário eletrônico completo — você tem histórico do paciente, evolução, documentos, exames e anotações em um só lugar. Não precisa de mais nenhum sistema.",
+  },
+  {
+    question: "O que são os alertas automáticos da IA?",
+    answer:
+      "Sempre que você faz upload de um exame ou gera um documento, a IA analisa o conteúdo e sinaliza achados que podem ser clinicamente relevantes. Funciona como uma segunda leitura — especialmente valiosa para médicos recém-formados ou em casos complexos. Você continua sendo quem decide.",
+  },
+  {
+    question: "Posso conversar com a IA durante a consulta?",
+    answer:
+      "Sim. Cada consulta tem um chat com uma IA que conhece o histórico completo daquele paciente. Você pode tirar dúvidas sobre interações medicamentosas, validar condutas ou consultar referências — antes, durante ou depois do atendimento.",
+  },
+  {
+    question: "A IA vai prescrever ou diagnosticar por mim?",
+    answer:
+      "Não. A IA documenta, organiza e analisa — mas toda decisão clínica, prescrição e diagnóstico continuam sendo 100% do médico. Você tem controle total sobre tudo que é salvo no prontuário.",
   },
   {
     question: "Posso personalizar os documentos gerados?",
     answer:
-      "Sim, todos os documentos são editáveis, a IA é apenas um suporte para você. Além disso, você pode criar templates personalizados dos documentos.",
+      "Sim. Todos os documentos são editáveis e você pode criar templates ilimitados de anamnese, SOAP, laudos e qualquer outro tipo de documento que use na sua rotina.",
   },
   {
-    question: "Como funciona o agente no WhatsApp?",
+    question: "A transcrição funciona com qualquer sotaque?",
     answer:
-      "Você conecta o WhatsApp da clínica e um assistente de IA responde mensagens, tira dúvidas, realiza agendamentos e confirma horários. Tudo com as informações diretamente do app.",
+      "Sim. Nossa IA foi treinada para entender a fala de médicos brasileiros de todas as regiões — sotaques regionais, terminologia técnica e variações de velocidade de fala.",
   },
   {
-    question: "Posso testar antes de assinar?",
+    question: "Como funciona a cobrança anual?",
     answer:
-      "Sim, oferecemos 20 consultas gratuitas sem cartão de crédito. Além de 30 dias com acesso grátis completo.",
-  },
-  {
-    question: "A IA vai prescrever por mim?",
-    answer:
-      "Não, a IA atua apenas como apoio e cria no máximo sugestões e alertas, mas você, médico, é quem decide tudo.",
-  },
-  {
-    question: "Gera prescrição digital válida?",
-    answer:
-      "Ainda não, estamos trabalhando para entregar um documento válido. Em breve você poderá gerar prescrições digitais válidas.",
-  },
-  {
-    question: "Posso começar com o plano individual e aumentar para Equipe?",
-    answer:
-      "Sim, você pode aumentar ou diminuir o seu plano a qualquer momento.",
-  },
-  {
-    question: "A cobrança é por médico?",
-    answer:
-      "Sim, o valor é por médico, mas é gerada uma única fatura com o valor total.",
+      "No plano anual, o valor total de R$ 2.388 é cobrado uma única vez no início, equivalendo a R$ 199 por mês (economia de 13% em relação ao mensal). No plano mensal, a cobrança é recorrente de R$ 229 por mês.",
   },
   {
     question: "Posso cancelar a qualquer momento?",
     answer:
-      "Sim. Sem fidelidade. Você pode cancelar quando quiser diretamente pelo app.",
+      "Sim. Sem fidelidade, sem burocracia e sem precisar falar com ninguém. Você cancela em 1 clique pelo próprio painel da MedWiser.",
   },
 ];
 
@@ -264,80 +263,82 @@ export default function Home() {
     <div className="bg-background text-foreground">
       <Header />
 
+      {/* HERO */}
       <section className="relative overflow-hidden bg-surface pt-14 sm:pt-20">
         <div className="absolute inset-0 -z-10">
-          <div className="absolute -left-40 top-[-120px] h-[420px] w-[420px] rounded-full bg-primary/20 blur-[120px]" />
+          <div className="absolute -left-40 top-[-120px] h-[420px] w-[420px] rounded-full bg-primary/15 blur-[120px]" />
           <div className="absolute right-[-120px] top-[60px] h-[380px] w-[380px] rounded-full bg-primary/10 blur-[120px]" />
-          <div className="absolute inset-0 bg-grid opacity-60" />
+          <div className="absolute inset-0 bg-grid opacity-50" />
           <div className="absolute inset-0 bg-noise" />
         </div>
 
-        <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 pb-16 pt-8 sm:gap-10 sm:px-6 sm:pb-24 sm:pt-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-8 sm:px-6 sm:pb-24 sm:pt-12 lg:grid-cols-[0.95fr_1.05fr]">
           <Reveal>
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-primary">
-                A transcrição com IA mais precisa em contexto médico.
+              <span
+                className="group inline-flex items-center gap-2 rounded-full border border-primary/30 bg-white/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-widest text-primary backdrop-blur-sm"
+                title="Plataforma agêntica significa que a IA não só responde perguntas — ela executa tarefas de verdade por você: documenta consultas, analisa exames e te avisa sobre achados críticos."
+              >
+                <Sparkles className="h-3.5 w-3.5" />
+                <span>Primeira plataforma médica Agêntica do Brasil</span>
+                <HelpCircle className="h-3.5 w-3.5 opacity-70" />
               </span>
-              <h1 className="mt-6 text-[2rem] font-semibold leading-tight text-balance sm:text-5xl">
-                Seu consultório inteiro.
+              <h1 className="mt-6 font-display text-[2.25rem] font-semibold leading-[1.05] text-balance sm:text-[3.25rem] lg:text-[3.75rem]">
+                Você estudou medicina.
                 <br />
                 <span className="text-primary">
-                  <span className="sm:hidden">Na palma da sua mão</span>
                   <Typewriter
                     phrases={heroPhrases}
-                    className="hidden min-w-[22ch] font-semibold sm:inline-block"
+                    className="inline-block font-semibold"
                     cursorClassName="text-primary"
-                    typeSpeed={64}
-                    deleteSpeed={34}
-                    pause={1500}
+                    typeSpeed={60}
+                    deleteSpeed={32}
+                    pause={1600}
                   />
                 </span>
               </h1>
-              <p className="mt-5 text-lg text-muted">
-                Prontuário, agenda, transcrição, relatórios, atendimento no
-                WhatsApp — tudo integrado e{" "}
-                <span className="font-semibold text-primary">INTELIGENTE</span>,
-                para você focar no que importa: seu paciente.
+              <p className="mt-5 max-w-xl text-lg text-muted">
+                A MedWiser transcreve suas consultas, gera prontuários
+                completos, analisa exames e te alerta sobre achados críticos.
+                Você cuida do paciente. A IA cuida do resto.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                 <LeadLink
                   href={registerUrl}
-                  className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-[0_16px_40px_-24px_rgba(13,148,136,0.9)] transition hover:bg-primary-dark sm:w-auto"
+                  className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition hover:bg-primary-dark sm:w-auto"
                 >
-                  Começar teste grátis
+                  Quero meu tempo de volta
                   <ArrowRight className="h-4 w-4" />
                 </LeadLink>
                 <Link
-                  href="#solucao"
-                  className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/60 bg-white px-6 py-3 text-sm font-medium text-foreground transition hover:border-primary/50 sm:w-auto"
+                  href="#copiloto"
+                  className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/60 bg-white px-6 py-3.5 text-sm font-medium text-foreground transition hover:border-primary/50 sm:w-auto"
                 >
                   Ver como funciona
                   <ArrowDown className="h-4 w-4" />
                 </Link>
               </div>
 
-              <div className="mt-6 flex flex-wrap gap-4 text-sm text-muted">
-                <span>✓ 30 dias grátis</span>
-                <span>✓ Sem cartão</span>
-                <span>✓ Cancele quando quiser</span>
-              </div>
-
-              <div className="mt-6 flex items-center gap-2 text-sm text-muted">
-                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <MonitorSmartphone className="h-4 w-4" />
+              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+                <span className="inline-flex items-center gap-1.5">
+                  <Sparkles className="h-4 w-4 text-primary" />
+                  5 consultas grátis sem cartão
                 </span>
-                Disponível para Web. iOS e Android em breve.
+                <span className="inline-flex items-center gap-1.5">
+                  <Wand2 className="h-4 w-4 text-primary" />
+                  Cancele em 1 clique
+                </span>
               </div>
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="relative lg:origin-center lg:scale-110">
-              <div className="absolute -right-8 top-8 h-24 w-24 rounded-full bg-primary/20 blur-[65px] sm:-right-10 sm:top-10 sm:h-32 sm:w-32 sm:blur-[80px]" />
-              <div className="relative aspect-[2036/1394] overflow-hidden rounded-2xl border border-white/70 bg-white/45 p-1 shadow-[0_22px_54px_-30px_rgba(15,23,42,0.45)] backdrop-blur-[2px] sm:rounded-[28px] sm:p-1.5">
+            <div className="relative">
+              <div className="absolute -right-10 top-10 h-32 w-32 rounded-full bg-primary/20 blur-[80px]" />
+              <div className="relative aspect-[2036/1394] overflow-hidden rounded-[24px] border border-white/70 bg-white/45 p-1.5 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.55)] backdrop-blur-[2px]">
                 <video
-                  className="h-full w-full rounded-xl object-contain pointer-events-none sm:rounded-[22px]"
+                  className="pointer-events-none h-full w-full rounded-[20px] object-contain"
                   autoPlay
                   loop
                   muted
@@ -345,9 +346,12 @@ export default function Home() {
                   preload="metadata"
                   disablePictureInPicture
                   poster="/landing/mockups/hero-screenshot.png"
-                  aria-label="Demonstração do app MedWiser"
+                  aria-label="Demonstração da plataforma MedWiser"
                 >
-                  <source src="/landing/mockups/hero-loop-v2.mp4" type="video/mp4" />
+                  <source
+                    src="/landing/mockups/hero-loop-v2.mp4"
+                    type="video/mp4"
+                  />
                   Seu navegador não suporta vídeo HTML5.
                 </video>
               </div>
@@ -356,70 +360,45 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SOCIAL PROOF BAR */}
+      <SocialProofBar />
+
+      {/* PROBLEM */}
       <section className="section py-14 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-              <div className="max-w-2xl">
-                <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-                  O problema
-                </p>
-                <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
-                  Expediente longo ou é a burocracia que está roubando o seu
-                  tempo?
-                </h2>
-                <p className="mt-4 text-muted">
-                  Você estudou para{" "}
-                  <span className="font-semibold text-foreground">
-                    cuidar de pessoas
-                  </span>
-                  , não para preencher formulários. Você sabe que se não fosse a{" "}
-                  <span className="font-semibold text-primary">“papelada”</span>{" "}
-                  poderia atender mais, ou ter{" "}
-                  <span className="font-semibold text-foreground">
-                    mais tempo livre
-                  </span>
-                  . Mas ainda assim, você é obrigado a{" "}
-                  <span className="font-semibold text-foreground">
-                    levar serviço pra casa
-                  </span>{" "}
-                  e trocar{" "}
-                  <span className="font-semibold text-foreground">
-                    tempo com a família
-                  </span>
-                  ,{" "}
-                  <span className="font-semibold text-foreground">
-                    descanso
-                  </span>{" "}
-                  e{" "}
-                  <span className="font-semibold text-foreground">lazer</span>{" "}
-                  pela{" "}
-                  <span className="font-semibold text-foreground">
-                    documentação clínica
-                  </span>
-                  .
-                </p>
-              </div>
-
-              <div className="flex items-center justify-start lg:justify-center">
-                <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-primary/20 bg-white/70 shadow-card">
-                  <div className="absolute inset-0 rounded-full border border-primary/20 animate-ping" />
-                  <Hourglass className="relative h-9 w-9 text-primary animate-[spin_10s_linear_infinite]" />
-                </div>
-              </div>
+            <div className="max-w-2xl">
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
+                O problema
+              </p>
+              <h2 className="mt-4 font-display text-3xl font-semibold text-balance sm:text-4xl">
+                Você estudou anos para salvar vidas —
+                <br />
+                <span className="text-primary">
+                  e está gastando seu dia digitando.
+                </span>
+              </h2>
+              <p className="mt-4 text-muted">
+                Seja você um especialista com décadas de consultório ou um
+                recém-formado enfrentando a primeira plantão, o peso da
+                burocracia é o mesmo. A MedWiser existe para tirar isso dos
+                seus ombros.
+              </p>
             </div>
           </Reveal>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {painPoints.map((item) => {
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {painPoints.map((item, index) => {
               const Icon = item.icon;
               return (
-                <Reveal key={item.title} className="h-full">
+                <Reveal key={item.title} className="h-full" delay={index * 0.03}>
                   <div className="flex h-full flex-col rounded-[24px] border border-border/60 bg-white p-6 shadow-card">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <h3 className="mt-5 text-xl font-semibold">{item.title}</h3>
+                    <h3 className="mt-5 font-display text-xl font-semibold">
+                      {item.title}
+                    </h3>
                     <p className="mt-2 text-sm text-muted">{item.description}</p>
                   </div>
                 </Reveal>
@@ -429,29 +408,38 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section bg-surface py-14 sm:py-20 lg:py-24" id="crenca">
-        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
+      {/* BELIEF BREAK */}
+      <section
+        id="crenca"
+        className="section relative overflow-hidden bg-[#0b1514] py-16 text-white sm:py-24 lg:py-32"
+      >
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-[140px]" />
+        </div>
+        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
           <Reveal>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-              Quebra de crença
+            <p className="text-sm font-medium uppercase tracking-[0.25em] text-primary-light">
+              O que ninguém te contou
             </p>
-            <p className="mt-4 text-lg text-muted">
-              A maioria dos médicos acha que burocracia faz parte do trabalho. Que
-              crescer na carreira significa abrir mão da vida pessoal.
+            <p className="mt-6 text-lg text-white/70 sm:text-xl">
+              A maioria dos médicos acredita que burocracia é parte inevitável
+              da profissão. Que crescer na carreira significa abrir mão da vida
+              pessoal. Que decisões difíceis precisam ser tomadas sozinho.
             </p>
-            <div className="mx-auto mt-8 h-px w-24 bg-primary/40" />
-            <h2 className="mt-8 text-3xl font-semibold text-primary sm:text-4xl">
+            <div className="mx-auto mt-10 h-px w-24 bg-primary-light/60" />
+            <h2 className="mt-10 font-display text-4xl font-semibold text-balance sm:text-5xl lg:text-6xl">
               Mas isso não é verdade.
             </h2>
-            <p className="mt-4 text-muted">
-              A tecnologia já permite que você documente sem digitar, organize sem
-              planilhas e cresça sem se esgotar. Você só precisa das ferramentas
-              certas.
+            <p className="mx-auto mt-6 max-w-2xl text-base text-white/70 sm:text-lg">
+              A tecnologia agêntica já permite que você documente sem digitar,
+              analise exames com uma IA copiloto, e cresça sem se esgotar. Só
+              precisa das ferramentas certas ao seu lado.
             </p>
           </Reveal>
         </div>
       </section>
 
+      {/* SOLUTION */}
       <section id="solucao" className="section py-14 sm:py-20 lg:py-24">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
@@ -459,41 +447,56 @@ export default function Home() {
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
                 Conheça a MedWiser
               </p>
-              <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
-                O sistema médico 100% com IA, que realmente entende sua rotina.
+              <h2 className="mt-4 font-display text-3xl font-semibold text-balance sm:text-4xl">
+                A IA médica que trabalha com você, não para você.
               </h2>
               <p className="mt-4 text-muted">
-                Um sistema pensado do zero para médicos brasileiros: você fala, a
-                IA documenta; você atende, tudo se organiza automaticamente; você
-                consulta, os dados viram insights.
+                Um sistema pensado do zero para médicos brasileiros. A MedWiser
+                não espera comandos — ela age. Transcreve consultas, gera
+                documentos, analisa exames e te avisa sobre o que é importante.
+                Tudo enquanto você atende.
               </p>
 
-              <div className="mt-6 space-y-4 text-sm">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Sparkles className="h-4 w-4" />
+              <div className="mt-8 space-y-4 text-sm">
+                <div className="flex items-start gap-3">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Mic className="h-4 w-4" />
                   </span>
-                  <span>Você fala, a IA documenta em tempo real.</span>
+                  <span className="pt-0.5">
+                    <strong className="text-foreground">Você fala.</strong>{" "}
+                    <span className="text-muted">
+                      A IA transcreve em tempo real e gera prontuários
+                      estruturados.
+                    </span>
+                  </span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Calendar className="h-4 w-4" />
+                <div className="flex items-start gap-3">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Brain className="h-4 w-4" />
                   </span>
-                  <span>Você atende, o sistema organiza agenda e pacientes.</span>
+                  <span className="pt-0.5">
+                    <strong className="text-foreground">Você atende.</strong>{" "}
+                    <span className="text-muted">
+                      A IA analisa exames e te alerta sobre achados críticos.
+                    </span>
+                  </span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <BarChart3 className="h-4 w-4" />
+                <div className="flex items-start gap-3">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <MessageSquare className="h-4 w-4" />
                   </span>
-                  <span>
-                    Presença total na consulta, você exerce a medicina, a IA cuida
-                    da burocracia.
+                  <span className="pt-0.5">
+                    <strong className="text-foreground">Você decide.</strong>{" "}
+                    <span className="text-muted">
+                      E tem um copiloto de IA para validar condutas quando
+                      precisar.
+                    </span>
                   </span>
                 </div>
               </div>
 
-              <p className="mt-8 text-lg font-semibold text-primary">
-                Simples. Seguro. Integrado.
+              <p className="mt-8 font-display text-lg font-semibold text-primary">
+                Agêntica. Clínica. Sua.
               </p>
             </div>
           </Reveal>
@@ -501,47 +504,45 @@ export default function Home() {
           <Reveal delay={0.1}>
             <div className="relative">
               <div className="absolute right-8 top-6 h-24 w-24 rounded-full bg-primary/20 blur-[60px]" />
-              <div className="rounded-[32px] border border-border/60 bg-white p-6 shadow-card sm:p-8">
+              <div className="rounded-[24px] border border-border/60 bg-white p-6 shadow-card sm:p-8">
                 <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-muted">
-                  <span>Demo MedWiser</span>
+                  <span>MedWiser · Consulta em andamento</span>
                   <span className="inline-flex items-center gap-2 text-primary">
                     <span className="h-2 w-2 rounded-full bg-primary pulse-soft" />
-                    Ao vivo
+                    Gravando
                   </span>
                 </div>
                 <div className="mt-6 grid gap-4">
                   <div className="rounded-2xl border border-border/60 bg-surface p-4 float-slow">
                     <p className="text-xs uppercase tracking-[0.2em] text-muted">
-                      Transcrição
+                      IA trabalhando
                     </p>
                     <p className="mt-3 text-sm">
                       <span className="sr-only">
-                        Transcrição automática em segundos.
+                        IA processando informações do paciente
                       </span>
-                      <span className="text-muted">&ldquo;</span>
                       <Typewriter
                         phrases={transcriptionPhrases}
                         className="inline-block font-medium text-foreground"
                         cursorClassName="text-primary"
                       />
-                      <span className="text-muted">&rdquo;</span>
                     </p>
                   </div>
                   <div className="rounded-2xl border border-border/60 bg-white p-4 shadow">
                     <p className="text-xs uppercase tracking-[0.2em] text-muted">
-                      Prontuário
+                      Documentos prontos
                     </p>
-                    <p className="mt-3 text-sm">
-                      Documentos estruturados e gerados automaticamente.
+                    <p className="mt-3 text-sm text-muted">
+                      Anamnese · SOAP · Evolução clínica
                     </p>
                   </div>
-                  <div className="rounded-2xl border border-border/60 bg-surface p-4 float-delayed">
-                    <p className="text-xs uppercase tracking-[0.2em] text-muted">
-                      Alertas Auxiliares
+                  <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 float-delayed">
+                    <p className="text-xs uppercase tracking-[0.2em] text-primary">
+                      Alerta da IA
                     </p>
-                    <p className="mt-3 text-sm">
-                      Leitura dos documentos gerados e sugestões inteligentes de
-                      exames, consultas ou erros críticos.
+                    <p className="mt-3 text-sm text-foreground">
+                      Hemograma do paciente sugere possível anemia
+                      ferropriva. Considerar investigação.
                     </p>
                   </div>
                 </div>
@@ -551,34 +552,38 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="funcionalidades" className="section bg-surface py-14 sm:py-20 lg:py-24">
+      {/* FEATURES */}
+      <section
+        id="funcionalidades"
+        className="section bg-surface py-14 sm:py-20 lg:py-24"
+      >
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="max-w-2xl">
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
                 Funcionalidades
               </p>
-              <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
-                Tudo que você precisa em um só lugar
+              <h2 className="mt-4 font-display text-3xl font-semibold text-balance sm:text-4xl">
+                Tudo que você precisa. Nada que você não precisa.
               </h2>
               <p className="mt-4 text-muted">
-                Cada módulo foi criado para aliviar sua carga administrativa sem
-                atrapalhar o fluxo da consulta.
+                Cada funcionalidade foi construída com um único objetivo:
+                devolver seu tempo e dar mais segurança nas suas decisões.
               </p>
             </div>
           </Reveal>
 
           <div className="mt-12 grid gap-6 sm:gap-8 lg:grid-cols-2">
-            {features.map((feature) => (
-              <Reveal key={feature.title}>
-                <div className="flex h-full flex-col rounded-[32px] border border-border/60 bg-white p-5 shadow-card sm:p-6 md:min-h-[560px]">
+            {features.map((feature, index) => (
+              <Reveal key={feature.title} delay={index * 0.04}>
+                <div className="flex h-full flex-col rounded-[24px] border border-border/60 bg-white p-5 shadow-card sm:p-6">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                         {feature.tag}
                       </span>
                       {feature.badge && (
-                        <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-primary">
+                        <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.25em] text-primary">
                           {feature.badge}
                         </span>
                       )}
@@ -586,18 +591,22 @@ export default function Home() {
                     <span className="text-xs text-muted">MedWiser</span>
                   </div>
                   <div className="mt-4">
-                    <h3 className="text-2xl font-semibold">{feature.title}</h3>
-                    {feature.badge && (
-                      <span className="sr-only">{feature.badge}</span>
-                    )}
+                    <h3 className="font-display text-2xl font-semibold">
+                      {feature.title}
+                    </h3>
                   </div>
-                  <p className="mt-2 text-sm text-muted">{feature.description}</p>
-                  <div className={`mt-auto overflow-hidden rounded-2xl border border-border/60 bg-surface ${
-                    feature.imageWrapperClass ?? "h-[280px] sm:h-[320px] lg:h-[340px]"
-                  }`}>
+                  <p className="mt-2 text-sm text-muted">
+                    {feature.description}
+                  </p>
+                  <div
+                    className={`mt-6 overflow-hidden rounded-2xl border border-border/60 bg-surface ${
+                      feature.imageWrapperClass ??
+                      "h-[280px] sm:h-[320px] lg:h-[340px]"
+                    }`}
+                  >
                     <Image
                       src={feature.image}
-                      alt={feature.title}
+                      alt={`${feature.title} — MedWiser`}
                       width={2037}
                       height={1397}
                       sizes="(max-width: 1024px) 100vw, 50vw"
@@ -610,33 +619,183 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+
+          <div className="mt-12 flex justify-center">
+            <LeadLink
+              href={registerUrl}
+              className="tap-target inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition hover:bg-primary-dark"
+            >
+              Testar todas as funcionalidades grátis
+              <ArrowRight className="h-4 w-4" />
+            </LeadLink>
+          </div>
         </div>
       </section>
 
-      <section id="comparativo" className="section py-14 sm:py-20 lg:py-24">
+      {/* COPILOT — recém-formado angle */}
+      <section
+        id="copiloto"
+        className="section relative overflow-hidden py-14 sm:py-20 lg:py-24"
+      >
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute left-1/4 top-0 h-[360px] w-[360px] rounded-full bg-primary/10 blur-[120px]" />
+          <div className="absolute bottom-0 right-1/4 h-[360px] w-[360px] rounded-full bg-primary/10 blur-[120px]" />
+        </div>
+
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <Reveal>
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
+                Para quem começa e para quem nunca quer parar
+              </p>
+              <h2 className="mt-4 font-display text-3xl font-semibold text-balance sm:text-4xl">
+                Você nunca mais
+                <br />
+                <span className="text-primary">decide sozinho.</span>
+              </h2>
+              <p className="mt-6 text-muted">
+                O início da carreira médica é solitário. A responsabilidade de
+                cada decisão pesa. E mesmo para quem já tem décadas de
+                experiência, uma segunda leitura sempre vale ouro.
+              </p>
+              <p className="mt-4 text-muted">
+                A MedWiser é o copiloto que não dorme, não esquece e sempre
+                conhece o paciente — funcionando como aquele colega experiente
+                que você gostaria de ter do lado em cada consulta.
+              </p>
+
+              <div className="mt-8 space-y-4">
+                <div className="flex items-start gap-4 rounded-2xl border border-border/60 bg-white p-5 shadow-card">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <BellRing className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-base font-semibold">
+                      Alertas em cada exame
+                    </h3>
+                    <p className="mt-1 text-sm text-muted">
+                      A IA faz uma segunda leitura de cada laudo que você sobe
+                      e sinaliza achados que podem exigir atenção. Não deixa
+                      nada escapar.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 rounded-2xl border border-border/60 bg-white p-5 shadow-card">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <MessageSquare className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-base font-semibold">
+                      Chat clínico contextual
+                    </h3>
+                    <p className="mt-1 text-sm text-muted">
+                      Uma IA que conhece o histórico completo do paciente e
+                      responde dúvidas sobre condutas, interações
+                      medicamentosas e referências — em segundos.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 rounded-2xl border border-border/60 bg-white p-5 shadow-card">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Stethoscope className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-base font-semibold">
+                      Resumo automático do paciente
+                    </h3>
+                    <p className="mt-1 text-sm text-muted">
+                      Cada consulta atualiza automaticamente o resumo do
+                      paciente. Na próxima visita, você tem o contexto inteiro
+                      em 10 segundos de leitura.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <LeadLink
+                  href={registerUrl}
+                  className="tap-target inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition hover:bg-primary-dark"
+                >
+                  Quero um copiloto clínico
+                  <ArrowRight className="h-4 w-4" />
+                </LeadLink>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="relative">
+              <div className="absolute -right-6 top-6 h-32 w-32 rounded-full bg-primary/20 blur-[80px]" />
+              <div className="relative rounded-[24px] border border-border/60 bg-white p-6 shadow-card sm:p-8">
+                <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-muted">
+                  <span>Chat clínico · Paciente J.M.S.</span>
+                  <span className="inline-flex items-center gap-2 text-primary">
+                    <Brain className="h-3.5 w-3.5" />
+                    IA
+                  </span>
+                </div>
+                <div className="mt-6 space-y-4">
+                  <div className="ml-auto max-w-[85%] rounded-2xl rounded-tr-md bg-primary/10 p-4 text-sm">
+                    Paciente hipertenso em uso de losartana 50mg, apresentou
+                    tosse seca persistente há 2 semanas. Posso trocar por
+                    qual?
+                  </div>
+                  <div className="mr-auto max-w-[92%] rounded-2xl rounded-tl-md border border-border/60 bg-surface p-4 text-sm">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+                      MedWiser IA
+                    </p>
+                    <p className="mt-2 text-foreground/90">
+                      A tosse seca com losartana é incomum (ela é BRA, não
+                      IECA). Vale investigar outras causas antes de trocar.
+                      Mas se for necessário substituir, as opções de mesma
+                      classe com boa tolerância seriam{" "}
+                      <strong>valsartana</strong> ou{" "}
+                      <strong>olmesartana</strong>.
+                    </p>
+                    <p className="mt-3 text-xs text-muted">
+                      Baseado no histórico: última consulta em 12/02 registrou
+                      PA 140/90 mmHg.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* COMPARISON */}
+      <section
+        id="comparativo"
+        className="section bg-surface py-14 sm:py-20 lg:py-24"
+      >
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
             <div className="grid gap-8 sm:gap-10 lg:grid-cols-[0.45fr_0.55fr]">
               <div>
                 <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-                  Comparativo
+                  Antes e depois
                 </p>
-                <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
-                  A diferença de usar tecnologia de verdade
+                <h2 className="mt-4 font-display text-3xl font-semibold text-balance sm:text-4xl">
+                  A diferença de
+                  <br />
+                  ter uma IA do seu lado.
                 </h2>
                 <p className="mt-4 text-muted">
-                  Veja a diferença real de usar a melhor plataforma médica com IA.
+                  Veja a transformação real no dia a dia de médicos que
+                  começaram a usar a MedWiser.
                 </p>
                 <LeadLink
                   href={registerUrl}
-                  className="tap-target mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white"
+                  className="tap-target mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition hover:bg-primary-dark"
                 >
                   Quero GANHAR tempo
                   <ArrowRight className="h-4 w-4" />
                 </LeadLink>
               </div>
 
-              <div className="grid gap-6 rounded-[32px] border border-border/60 bg-white p-5 shadow-card sm:p-6">
+              <div className="grid gap-6 rounded-[24px] border border-border/60 bg-white p-5 shadow-card sm:p-6">
                 <div className="hidden gap-4 sm:grid sm:grid-cols-2 sm:gap-10">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-error">
                     Sem MedWiser
@@ -649,13 +808,13 @@ export default function Home() {
                   {comparisonRows.map((row) => (
                     <div
                       key={row.id}
-                      className="grid items-start gap-3 rounded-2xl border border-border/60 bg-surface/40 p-4 text-sm text-muted sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0 sm:grid-cols-2 sm:gap-10"
+                      className="grid items-start gap-3 rounded-2xl border border-border/60 bg-surface/40 p-4 text-sm text-foreground/80 sm:grid-cols-2 sm:gap-10 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-0"
                     >
                       <div className="space-y-1">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-error sm:hidden">
                           Sem MedWiser
                         </p>
-                        <div>✕ {row.before}</div>
+                        <div className="text-muted">✕ {row.before}</div>
                       </div>
                       <div className="space-y-1">
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary sm:hidden">
@@ -672,31 +831,61 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="app" className="section bg-surface py-14 sm:py-20 lg:py-24">
+      {/* APP MOBILE */}
+      <section id="app" className="section py-14 sm:py-20 lg:py-24">
         <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
             <div>
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-                App mobile
+                Apps nativos
               </p>
-              <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
-                Seu consultório no bolso
+              <h2 className="mt-4 font-display text-3xl font-semibold text-balance sm:text-4xl">
+                Seu consultório
+                <br />
+                <span className="text-primary">no seu bolso.</span>
               </h2>
               <p className="mt-4 text-muted">
-                Acesse prontuários, agenda e notificações em qualquer lugar. E o
-                principal: faça consultas apenas utilizando o celular. Você
-                consulta, a IA faz o resto.
+                Apps nativos para iOS e Android — disponíveis agora. Grave
+                consultas, consulte prontuários e acesse tudo do seu celular,
+                com tudo sincronizado entre dispositivos.
               </p>
-              <ul className="mt-6 space-y-3 text-sm text-muted">
-                <li>✓ Agenda e prontuários sempre sincronizados</li>
-                <li>✓ Sincronização entre os dispositivos</li>
-                <li>✓ Liberdade real: da agenda à prescrição, tudo pelo celular.</li>
-                <li>✓ Segurança Biométrica</li>
-                <li>✓ Transcrição usando o microfone do celular.</li>
+              <ul className="mt-6 space-y-3 text-sm">
+                <li className="flex items-start gap-3">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Mic className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="text-foreground/80">
+                    Grave consultas direto do celular ou tablet
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <FileUp className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="text-foreground/80">
+                    Upload de exames pela câmera do celular
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <MonitorSmartphone className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="text-foreground/80">
+                    Sincronização em tempo real entre web, iOS e Android
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Sparkles className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="text-foreground/80">
+                    Live Activity no iPhone durante gravações
+                  </span>
+                </li>
               </ul>
-              <div className="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-primary">
-                <span className="rounded-full border border-primary/30 px-4 py-2">
-                  Em breve
+              <div className="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em]">
+                <span className="rounded-full border border-primary/40 bg-primary/10 px-4 py-2 font-semibold text-primary">
+                  Disponível agora
                 </span>
                 <span className="text-muted">App Store · Google Play</span>
               </div>
@@ -704,12 +893,12 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="relative mx-auto w-[220px] sm:w-[280px] lg:w-[320px]">
-              <div className="absolute right-4 top-8 h-14 w-14 rounded-full bg-primary/20 blur-[45px]" />
+            <div className="relative mx-auto w-[240px] sm:w-[300px] lg:w-[340px]">
+              <div className="absolute right-4 top-8 h-16 w-16 rounded-full bg-primary/20 blur-[50px]" />
               <div className="rounded-[22px] border border-border/60 bg-white p-1.5 shadow-card">
                 <Image
                   src="/landing/mockups/mobile-app.svg"
-                  alt="Mockup app MedWiser"
+                  alt="MedWiser no celular — apps iOS e Android"
                   width={460}
                   height={720}
                   className="h-auto w-full object-contain"
@@ -720,141 +909,32 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="whatsapp" className="section py-14 sm:py-20 lg:py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[0.93fr_1fr]">
-          <Reveal>
-            <div>
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-                WhatsApp IA
-              </p>
-              <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
-                Atendimento 24h - Sem CLT
-              </h2>
-              <p className="mt-4 text-muted">
-                Seu paciente envia mensagem no WhatsApp da clínica e recebe
-                resposta automática: pode agendar consultas, confirmar horários,
-                reagendar e tirar dúvidas comuns. Tudo integrado com sua agenda.
-              </p>
-              <ul className="mt-6 space-y-3 text-sm text-muted">
-                <li>✓ Agenda consultas automaticamente</li>
-                <li>✓ Confirma e lembra pacientes</li>
-                <li>✓ Responde dúvidas frequentes</li>
-                <li>✓ Funciona 24 horas por dia</li>
-                <li>
-                  ✓ Lembrete para pacientes com receitas controladas, lembrando-o
-                  de agendar uma consulta ANTES do término do medicamento.
-                </li>
-              </ul>
-            </div>
-          </Reveal>
+      {/* TESTIMONIALS */}
+      <TestimonialsSection />
 
-          <Reveal delay={0.1}>
-            <div className="relative overflow-hidden rounded-2xl border border-white/70 bg-white/45 p-1 shadow-[0_22px_54px_-30px_rgba(15,23,42,0.45)] backdrop-blur-[2px] sm:rounded-[28px] sm:p-1.5">
-              <div className="overflow-hidden rounded-xl bg-white sm:rounded-[22px]">
-                <Image
-                  src="/landing/screenshots/whatsapp-agent-pc-v3.webp"
-                  alt="Conversa no WhatsApp com agente IA da MedWiser"
-                  width={2055}
-                  height={1408}
-                  className="h-auto w-full object-contain"
-                />
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section id="seguranca" className="section bg-surface py-14 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <Reveal>
-            <div className="max-w-2xl">
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-                Segurança
-              </p>
-              <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
-                Todos os dados protegidos
-              </h2>
-              <p className="mt-4 text-muted">
-                Conformidade, criptografia e infraestrutura de nível clínico.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {securityItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Reveal key={item.title} className="h-full">
-                  <div className="flex h-full flex-col rounded-[24px] border border-border/60 bg-white p-6 shadow-card">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="mt-5 text-lg font-semibold">{item.title}</h3>
-                    <p className="mt-2 text-sm text-muted">{item.description}</p>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section id="depoimentos" className="section hidden py-14 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <Reveal>
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-                  Depoimentos
-                </p>
-                <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
-                  O que médicos estão dizendo
-                </h2>
-              </div>
-              <span className="text-sm text-muted">
-                Espaço reservado para depoimentos reais.
-              </span>
-            </div>
-          </Reveal>
-
-          <div className="mt-10 flex gap-6 overflow-x-auto pb-4">
-            {[1, 2, 3].map((item) => (
-              <div
-                key={item}
-                className="min-w-[280px] flex-1 rounded-[28px] border border-border/60 bg-white p-6 shadow-card"
-              >
-                <p className="text-sm text-muted">
-                  &ldquo;Economizo pelo menos 2 horas por dia. Antes ficava até
-                  tarde digitando, agora saio no horário e com tudo
-                  documentado.&rdquo;
-                </p>
-                <div className="mt-5 text-sm font-semibold">Dr(a). [Nome]</div>
-                <div className="text-xs text-muted">Especialidade · Cidade</div>
-                <div className="mt-4 text-xs text-primary">★★★★★</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* PRICING */}
       <PricingSection />
 
+      {/* FAQ */}
       <section id="faq" className="section bg-surface py-14 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <Reveal>
-            <div className="max-w-2xl">
+            <div className="text-center">
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
                 FAQ
               </p>
-              <h2 className="mt-4 text-3xl font-semibold text-balance sm:text-4xl">
+              <h2 className="mt-4 font-display text-3xl font-semibold text-balance sm:text-4xl">
                 Perguntas frequentes
               </h2>
+              <p className="mt-4 text-muted">
+                Ainda ficou com dúvida? Fale com a gente no WhatsApp.
+              </p>
             </div>
           </Reveal>
 
           <div className="mt-10 grid gap-4">
             {faqs.map((faq, index) => (
-              <Reveal key={faq.question}>
+              <Reveal key={faq.question} delay={index * 0.02}>
                 <details
                   className="group rounded-[24px] border border-border/60 bg-white p-5 shadow-card sm:p-6"
                   open={index === 0}
@@ -874,25 +954,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FOOTER */}
       <footer className="bg-[#0b1514] text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-          <div className="rounded-[32px] bg-primary/10 p-8 text-center sm:p-10">
-            <h2 className="text-3xl font-semibold text-balance">
-              Pronto para transformar sua rotina?
+          <div className="rounded-[24px] border border-primary/20 bg-gradient-to-br from-primary/15 to-transparent p-8 text-center sm:p-12">
+            <h2 className="font-display text-3xl font-semibold text-balance sm:text-4xl">
+              Pronto para recuperar seu tempo?
             </h2>
-            <p className="mt-3 text-sm text-white/70">
-              Experimente o consultório mais leve da sua vida.
+            <p className="mx-auto mt-4 max-w-xl text-sm text-white/70 sm:text-base">
+              5 consultas grátis sem cartão. Sem pegadinha, sem compromisso.
+              Seu consultório mais leve começa agora.
             </p>
             <LeadLink
               href={registerUrl}
-              className="tap-target mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white"
+              className="tap-target mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition hover:bg-primary-dark"
             >
-              Começar teste grátis de 30 dias
+              Testar MedWiser grátis
               <ArrowRight className="h-4 w-4" />
             </LeadLink>
           </div>
 
-          <div className="mt-12 grid gap-8 text-sm sm:grid-cols-2 md:mt-14 md:grid-cols-[1.2fr_1fr_1fr] md:gap-10">
+          <div className="mt-14 grid gap-8 text-sm sm:grid-cols-2 md:grid-cols-[1.2fr_1fr_1fr] md:gap-10">
             <div className="flex flex-col items-center text-center sm:col-span-2 md:col-span-1 md:items-start md:text-left">
               <Image
                 src="/logo-footer.svg"
@@ -903,7 +985,7 @@ export default function Home() {
                 className="h-auto w-24 sm:w-28"
               />
               <p className="mt-4 text-white/60">
-                Inteligência clínica em cada palavra.
+                Primeira plataforma médica Agêntica do Brasil.
               </p>
             </div>
             <div className="flex flex-col items-center text-center md:items-start md:text-left">
@@ -912,30 +994,37 @@ export default function Home() {
               </p>
               <ul className="mt-4 flex flex-col items-center gap-1 text-white/70 md:items-start">
                 <li>
-                  <Link href="#funcionalidades" className="tap-target inline-flex items-center">
+                  <Link
+                    href="#funcionalidades"
+                    className="tap-target inline-flex items-center"
+                  >
                     Funcionalidades
                   </Link>
                 </li>
                 <li>
-                  <Link href="#planos" className="tap-target inline-flex items-center">
+                  <Link
+                    href="#copiloto"
+                    className="tap-target inline-flex items-center"
+                  >
+                    Copiloto clínico
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#planos"
+                    className="tap-target inline-flex items-center"
+                  >
                     Planos
                   </Link>
                 </li>
                 <li>
-                  <Link href="#faq" className="tap-target inline-flex items-center">
+                  <Link
+                    href="#faq"
+                    className="tap-target inline-flex items-center"
+                  >
                     FAQ
                   </Link>
                 </li>
-              </ul>
-            </div>
-            <div className="hidden">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-                Empresa
-              </p>
-              <ul className="mt-4 space-y-2 text-white/70">
-                <li>Sobre</li>
-                <li>Contato</li>
-                <li>Blog</li>
               </ul>
             </div>
             <div className="flex flex-col items-center text-center md:items-start md:text-left">
@@ -967,7 +1056,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-center text-xs text-white/50 md:mt-12 md:flex-row md:items-start md:text-left">
+          <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-center text-xs text-white/50 md:flex-row md:items-start md:text-left">
             <span className="flex flex-wrap items-center justify-center gap-1 md:justify-start">
               © 2026 MedWiser — Desenvolvido por{" "}
               <Link
@@ -980,20 +1069,18 @@ export default function Home() {
               </Link>
             </span>
             <Link
-              href="https://medwiser.app"
+              href="https://instagram.com/medwiser.app"
               target="_blank"
               rel="noopener noreferrer"
               className="tap-target inline-flex items-center px-1 transition hover:text-white"
             >
-              Instagram /medwiser.app
+              Instagram @medwiser.app
             </Link>
           </div>
         </div>
       </footer>
+
+      <FloatingWhatsApp />
     </div>
   );
 }
-
-
-
-
