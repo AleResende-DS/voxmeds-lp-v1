@@ -74,73 +74,61 @@ const painPoints = [
 type Feature = {
   title: string;
   description: string;
-  image: string;
+  image?: string;
   tag: string;
   badge?: string;
   alt?: string;
   imageClass?: string;
   imageWrapperClass?: string;
+  featured?: boolean;
 };
 
 const features: Feature[] = [
   {
-    title: "IA que documenta por você",
-    description:
-      "Grave a consulta. A IA transcreve, gera anamnese, SOAP e documentos em segundos. Você só revisa.",
-    image: "/landing/screenshots/consulta-vox.webp",
-    tag: "Transcrição com IA",
-    alt: "Tela de consulta mostrando transcrição de áudio e geração automática de documentos clínicos",
-    imageWrapperClass: "aspect-[2037/1397]",
-  },
-  {
     title: "A IA não deixa nada passar",
     description:
-      "Alertas automáticos em exames e documentos. A MedWiser analisa cada arquivo e sinaliza achados que podem ser clinicamente relevantes — antes que algo escape.",
-    image: "/landing/screenshots/analytics-vox.webp",
+      "Alertas automáticos em exames e documentos. Dosagem perigosa, interação medicamentosa, sugestão de exames complementares — a IA sinaliza antes que algo escape.",
+    image: "/landing/screenshots/alertas-clinicos.webp",
     tag: "Alertas inteligentes",
     badge: "Exclusivo",
-    alt: "Painel de alertas da IA sinalizando achados clínicos relevantes em exames do paciente",
-    imageWrapperClass: "aspect-[2037/1397]",
+    alt: "Painel de alertas clínicos da IA sinalizando achados críticos, interações e dosagens perigosas",
+    featured: true,
+  },
+  {
+    title: "MedWiser no seu bolso",
+    description:
+      "Apps nativos para iOS e Android. Grave e atenda do celular — tudo sincronizado entre dispositivos. Ideal para quem não trabalha com notebook ou atende na rede pública.",
+    image: "/landing/screenshots/mobile-app-recording.webp",
+    tag: "Apps mobile",
+    badge: "Disponível",
+    alt: "Aplicativo MedWiser no celular mostrando gravação de consulta na interface mobile",
+    imageClass: "object-contain",
+    featured: true,
   },
   {
     title: "Seu copiloto em cada consulta",
     description:
       "Converse com uma IA que conhece o histórico completo do paciente. Tire dúvidas, valide condutas e consulte referências em segundos.",
-    image: "/landing/screenshots/historico-vox.webp",
     tag: "Chat clínico",
     badge: "Exclusivo",
-    alt: "Chat com IA durante consulta mostrando resposta contextualizada sobre histórico do paciente",
-    imageWrapperClass: "aspect-[2037/1397]",
+  },
+  {
+    title: "Upload inteligente de exames",
+    description:
+      "Envie PDF ou utilize o app para enviar fotos dos exames e documentos que o paciente levou impresso para a consulta. A IA lê, interpreta e integra ao prontuário. Você só revisa, dá a palavra final e assina.",
+    tag: "Análise por IA",
   },
   {
     title: "Prontuário completo e organizado",
     description:
       "Histórico de consultas, documentos, exames e evolução do paciente em um só lugar — tudo mantido atualizado automaticamente pela IA.",
-    image: "/landing/screenshots/agenda-vox.webp",
     tag: "Prontuário",
-    alt: "Prontuário eletrônico com histórico de consultas, documentos e evolução clínica do paciente",
-    imageWrapperClass: "aspect-[2037/1397]",
   },
   {
-    title: "Upload inteligente de exames",
+    title: "IA que documenta por você",
     description:
-      "Envie PDF, foto ou laudo de até 50MB. A IA lê, interpreta e integra automaticamente ao prontuário do paciente.",
-    image: "/landing/screenshots/whatsapp-agent-iphone.webp",
-    tag: "Análise por IA",
-    alt: "Upload de exame via celular com a IA interpretando e integrando resultados ao prontuário",
-    imageClass: "object-contain",
-    imageWrapperClass: "h-[280px] sm:h-[320px] lg:h-[340px]",
-  },
-  {
-    title: "MedWiser no seu bolso",
-    description:
-      "Apps nativos para iOS e Android já disponíveis. Grave e atenda do celular — tudo sincronizado entre dispositivos.",
-    image: "/landing/mockups/mobile-app.svg",
-    tag: "Apps mobile",
-    badge: "Disponível",
-    alt: "Aplicativo MedWiser no celular mostrando interface de consulta mobile para iOS e Android",
-    imageClass: "object-contain",
-    imageWrapperClass: "h-[280px] sm:h-[320px] lg:h-[340px]",
+      "Grave a consulta. A IA transcreve, gera anamnese, SOAP e documentos em segundos. Você só revisa.",
+    tag: "Transcrição com IA",
   },
 ];
 
@@ -368,15 +356,65 @@ export default function Home() {
             </div>
           </Reveal>
 
+          {/* Featured cards — full width */}
           <RevealGroup
-            className="mt-12 grid gap-6 sm:gap-8 lg:grid-cols-2"
+            className="mt-12 flex flex-col gap-6 sm:gap-8"
             stagger={0.07}
             delay={0.1}
           >
-            {features.map((feature) => (
-              <RevealItem key={feature.title} variant="fade-up">
-                <div className="hover-lift flex h-full flex-col rounded-card border border-border/60 bg-card p-5 shadow-card sm:p-6">
-                  <div className="flex items-center justify-between">
+            {features
+              .filter((f) => f.featured)
+              .map((feature) => (
+                <RevealItem key={feature.title} variant="fade-up">
+                  <div className="hover-lift flex flex-col overflow-hidden rounded-card border border-border/60 bg-card shadow-card lg:flex-row">
+                    <div className="flex flex-col justify-center p-6 sm:p-8 lg:w-1/2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                          {feature.tag}
+                        </span>
+                        {feature.badge && (
+                          <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.25em] text-primary">
+                            {feature.badge}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="mt-4 font-display text-2xl font-semibold sm:text-3xl">
+                        {feature.title}
+                      </h3>
+                      <p className="mt-3 text-sm text-muted-foreground sm:text-base">
+                        {feature.description}
+                      </p>
+                    </div>
+                    {feature.image && (
+                      <div className="border-t border-border/60 bg-surface p-4 lg:w-1/2 lg:border-l lg:border-t-0">
+                        <div className="overflow-hidden rounded-xl">
+                          <Image
+                            src={feature.image}
+                            alt={feature.alt ?? `${feature.title} — MedWiser`}
+                            width={1200}
+                            height={800}
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            className={`h-auto w-full ${feature.imageClass ?? "object-cover"}`}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </RevealItem>
+              ))}
+          </RevealGroup>
+
+          {/* Standard cards — 2-column grid, no images */}
+          <RevealGroup
+            className="mt-6 grid gap-6 sm:gap-8 lg:grid-cols-2"
+            stagger={0.07}
+            delay={0.1}
+          >
+            {features
+              .filter((f) => !f.featured)
+              .map((feature) => (
+                <RevealItem key={feature.title} variant="fade-up">
+                  <div className="hover-lift flex h-full flex-col rounded-card border border-border/60 bg-card p-5 shadow-card sm:p-6">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                         {feature.tag}
@@ -387,36 +425,15 @@ export default function Home() {
                         </span>
                       )}
                     </div>
-                    <span className="text-xs text-muted-foreground">MedWiser</span>
-                  </div>
-                  <div className="mt-4">
-                    <h3 className="font-display text-2xl font-semibold">
+                    <h3 className="mt-4 font-display text-2xl font-semibold">
                       {feature.title}
                     </h3>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {feature.description}
+                    </p>
                   </div>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    {feature.description}
-                  </p>
-                  <div
-                    className={`mt-6 overflow-hidden rounded-2xl border border-border/60 bg-surface ${
-                      feature.imageWrapperClass ??
-                      "h-[280px] sm:h-[320px] lg:h-[340px]"
-                    }`}
-                  >
-                    <Image
-                      src={feature.image}
-                      alt={feature.alt ?? `${feature.title} — MedWiser`}
-                      width={2037}
-                      height={1397}
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className={`h-full w-full ${
-                        feature.imageClass ?? "object-cover"
-                      }`}
-                    />
-                  </div>
-                </div>
-              </RevealItem>
-            ))}
+                </RevealItem>
+              ))}
           </RevealGroup>
 
           <div className="mt-12 flex justify-center">
