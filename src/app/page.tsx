@@ -30,6 +30,7 @@ import { SocialProofBar } from "@/components/landing/SocialProofBar";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { Typewriter } from "@/components/landing/Typewriter";
 import { HeroLoopV2 } from "@/components/landing/HeroLoopV2";
+import { LeadCapturePopup } from "@/components/landing/LeadCapturePopup";
 
 const registerUrl = "https://portal.medwiser.app/register";
 
@@ -729,6 +730,7 @@ export default function Home() {
         </div>
       </footer>
 
+      <LeadCapturePopup />
     </div>
   );
 }
