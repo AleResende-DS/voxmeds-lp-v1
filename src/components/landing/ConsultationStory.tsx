@@ -14,6 +14,7 @@ import {
   CheckCircle2,
   FileText,
   Mic,
+  RefreshCw,
   Sparkles,
   Waves,
 } from "lucide-react";
@@ -67,9 +68,19 @@ const HEADLINES = [
     body: "Alertas inteligentes em tempo real para achados críticos.",
   },
   {
-    eyebrow: "07 · Você cuida do paciente",
-    title: "A consulta termina. Tudo documentado.",
-    body: "Você jantar em casa hoje. Sua família agradece.",
+    eyebrow: "07 · A IA atualiza",
+    title: "O prontuário se atualiza sozinho.",
+    body: "Nova alergia? Medicação trocada? A IA revisa a consulta e mantém o perfil do paciente sempre atual.",
+  },
+  {
+    eyebrow: "08 · Consulta documentada",
+    title: "A consulta termina. Tudo pronto.",
+    body: "Prontuário, alertas e perfil — tudo atualizado sem você digitar uma linha.",
+  },
+  {
+    eyebrow: "09 · Você cuida de você",
+    title: "Seu dia termina no último paciente.",
+    body: "Você vai jantar em casa hoje. Sua família agradece.",
   },
 ] as const;
 
@@ -82,27 +93,33 @@ export function ConsultationStory() {
     offset: ["start start", "end end"],
   });
 
-  // 7 beats mapped to scroll ranges.
-  // Each beat has a crossfade overlap with the next (~4%) which we mask with opacity.
-  const beat1 = useLayerOpacity(scrollYProgress, [0.0, 0.04, 0.13, 0.17]);
-  const beat2 = useLayerOpacity(scrollYProgress, [0.14, 0.18, 0.27, 0.31]);
-  const beat3 = useLayerOpacity(scrollYProgress, [0.28, 0.32, 0.41, 0.45]);
-  const beat4 = useLayerOpacity(scrollYProgress, [0.42, 0.46, 0.55, 0.59]);
-  const beat5 = useLayerOpacity(scrollYProgress, [0.56, 0.6, 0.69, 0.73]);
-  const beat6 = useLayerOpacity(scrollYProgress, [0.7, 0.74, 0.83, 0.87]);
-  const beat7 = useTransform(scrollYProgress, [0.84, 0.9, 1.0], [0, 1, 1]);
+  // 9 beats mapped to scroll ranges (~0.11 each).
+  // Each beat has a crossfade overlap with the next (~3%) which we mask with opacity.
+  const beat1 = useLayerOpacity(scrollYProgress, [0.00, 0.03, 0.09, 0.12]);
+  const beat2 = useLayerOpacity(scrollYProgress, [0.10, 0.13, 0.20, 0.23]);
+  const beat3 = useLayerOpacity(scrollYProgress, [0.21, 0.24, 0.31, 0.34]);
+  const beat4 = useLayerOpacity(scrollYProgress, [0.32, 0.35, 0.42, 0.45]);
+  const beat5 = useLayerOpacity(scrollYProgress, [0.43, 0.46, 0.53, 0.56]);
+  const beat6 = useLayerOpacity(scrollYProgress, [0.54, 0.57, 0.64, 0.67]);
+  const beat7 = useLayerOpacity(scrollYProgress, [0.65, 0.68, 0.75, 0.78]); // auto-fill
+  const beat8 = useLayerOpacity(scrollYProgress, [0.76, 0.80, 0.87, 0.90]);
+  const beat9 = useTransform(scrollYProgress, [0.88, 0.92, 1.0], [0, 1, 1]);
 
-  // Headline index, derived from scroll position (7 steps).
-  // Explicit `number` return type so TypeScript doesn't narrow to a literal union.
+  // Headline index, derived from scroll position (9 steps).
   const headlineIndex = useTransform(scrollYProgress, (v): number => {
-    if (v < 0.14) return 0;
-    if (v < 0.28) return 1;
-    if (v < 0.42) return 2;
-    if (v < 0.56) return 3;
-    if (v < 0.7) return 4;
-    if (v < 0.84) return 5;
-    return 6;
+    if (v < 0.10) return 0;
+    if (v < 0.21) return 1;
+    if (v < 0.32) return 2;
+    if (v < 0.43) return 3;
+    if (v < 0.54) return 4;
+    if (v < 0.65) return 5;
+    if (v < 0.76) return 6;
+    if (v < 0.88) return 7;
+    return 8;
   });
+
+  // "AO VIVO" indicator opacity — only visible during recording beats (1-3)
+  const liveOpacity = useTransform(scrollYProgress, [0, 0.03, 0.32, 0.35], [0.4, 1, 1, 0]);
 
   // Subtle scale pulse for the full mockup, driven by scroll (tech feel)
   const mockupScale = useTransform(
@@ -112,22 +129,34 @@ export function ConsultationStory() {
   );
 
   // Waveform path length — drives an SVG stroke reveal
-  const waveProgress = useTransform(scrollYProgress, [0.14, 0.27], [0, 1]);
+  const waveProgress = useTransform(scrollYProgress, [0.10, 0.20], [0, 1]);
 
   // Transcription text reveal — driven by scroll, word by word
   const transcriptionReveal = useTransform(
     scrollYProgress,
-    [0.28, 0.42],
+    [0.21, 0.32],
     [0, 1],
   );
 
+  // SOAP card stagger — each card fades in sequentially within beat4's range
+  const soapS = useTransform(scrollYProgress, [0.32, 0.36], [0, 1]);
+  const soapO = useTransform(scrollYProgress, [0.34, 0.38], [0, 1]);
+  const soapA = useTransform(scrollYProgress, [0.36, 0.40], [0, 1]);
+  const soapP = useTransform(scrollYProgress, [0.38, 0.42], [0, 1]);
+
   // Alert card slide — from the right
-  const alertX = useTransform(scrollYProgress, [0.7, 0.82], [60, 0]);
+  const alertX = useTransform(scrollYProgress, [0.54, 0.64], [60, 0]);
   const alertOpacity = useTransform(
     scrollYProgress,
-    [0.7, 0.78, 0.9, 1],
-    [0, 1, 1, 1],
+    [0.54, 0.60, 0.67, 0.67],
+    [0, 1, 1, 0],
   );
+
+  // Auto-fill stagger — patient profile fields animate in sequence
+  const fillField1 = useTransform(scrollYProgress, [0.65, 0.69], [0, 1]);
+  const fillField2 = useTransform(scrollYProgress, [0.67, 0.71], [0, 1]);
+  const fillField3 = useTransform(scrollYProgress, [0.69, 0.73], [0, 1]);
+  const fillField4 = useTransform(scrollYProgress, [0.71, 0.75], [0, 1]);
 
   if (reduceMotion) {
     return <StaticConsultationStory />;
@@ -138,14 +167,13 @@ export function ConsultationStory() {
       ref={ref}
       id="solucao"
       aria-label="Como a MedWiser transforma uma consulta"
-      className="dark section relative bg-background text-foreground"
-      style={{ height: "420vh" }}
+      className="dark section relative bg-background text-foreground h-[340vh] lg:h-[420vh]"
     >
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
         {/* Background: grid + orbs + noise */}
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute left-1/4 top-0 h-[400px] w-[400px] rounded-full bg-primary/20 blur-[160px] drift-slow" />
-          <div className="absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-primary/10 blur-[140px] drift-slow-reverse" />
+          <div className="absolute left-1/4 top-0 h-[480px] w-[480px] rounded-full bg-primary/20 blur-[100px] drift-slow" />
+          <div className="absolute bottom-0 right-1/4 h-[480px] w-[480px] rounded-full bg-primary/10 blur-[100px] drift-slow-reverse" />
           <div
             className="absolute inset-0 opacity-40"
             style={{
@@ -159,6 +187,9 @@ export function ConsultationStory() {
           <div className="absolute inset-0 bg-noise opacity-30" />
         </div>
 
+        {/* Progress dots — vertical step indicator */}
+        <ProgressDots index={headlineIndex} total={HEADLINES.length} sectionRef={ref} />
+
         <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr]">
           {/* LEFT — Headlines */}
           <div className="order-2 lg:order-1">
@@ -170,6 +201,20 @@ export function ConsultationStory() {
             <p className="mt-8 hidden text-xs uppercase tracking-[0.2em] text-foreground/40 sm:block">
               Role a página para ver →
             </p>
+            <button
+              type="button"
+              onClick={() => {
+                const section = ref.current;
+                if (!section) return;
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.scrollHeight;
+                const targetScroll = sectionTop + (7 / HEADLINES.length) * sectionHeight;
+                window.scrollTo({ top: targetScroll, behavior: "smooth" });
+              }}
+              className="mt-3 hidden text-xs text-primary underline-offset-4 hover:underline sm:block"
+            >
+              Pular para o resultado
+            </button>
           </div>
 
           {/* RIGHT — Mockup */}
@@ -184,14 +229,17 @@ export function ConsultationStory() {
                   <div className="h-2 w-2 rounded-full bg-red-400/80" />
                   <div className="h-2 w-2 rounded-full bg-yellow-400/80" />
                   <div className="h-2 w-2 rounded-full bg-green-400/80" />
-                  <span className="ml-3 text-[10px] font-mono text-foreground/40">
-                    MedWiser · Consulta em andamento
+                  <span className="ml-3 text-[10px] text-foreground/40">
+                    MedWiser · Consulta
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[10px] text-primary-light">
+                <motion.div
+                  className="flex items-center gap-1.5 text-[10px] text-primary-light"
+                  style={{ opacity: liveOpacity }}
+                >
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary-light" />
                   AO VIVO
-                </div>
+                </motion.div>
               </div>
 
               {/* Stage — absolute layers, each driven by a scroll range */}
@@ -207,8 +255,8 @@ export function ConsultationStory() {
                       <Mic className="h-10 w-10 text-primary-light" />
                     </div>
                   </div>
-                  <p className="text-sm font-mono text-foreground/50">
-                    aguardando áudio...
+                  <p className="text-sm text-foreground/50">
+                    Aguardando áudio...
                   </p>
                 </motion.div>
 
@@ -217,7 +265,7 @@ export function ConsultationStory() {
                   className="absolute inset-0 flex flex-col items-center justify-center gap-6"
                   style={{ opacity: beat2 }}
                 >
-                  <div className="flex items-center gap-2 text-xs font-mono text-primary-light">
+                  <div className="flex items-center gap-2 text-xs text-primary-light">
                     <Waves className="h-4 w-4" />
                     Capturando áudio
                   </div>
@@ -243,8 +291,8 @@ export function ConsultationStory() {
                       style={{ pathLength: waveProgress, opacity: 0.6 }}
                     />
                   </svg>
-                  <p className="text-[11px] font-mono text-foreground/40">
-                    00:00:42 · 16kHz · canal único
+                  <p className="text-[11px] text-foreground/40">
+                    00:00:42 · gravando
                   </p>
                 </motion.div>
 
@@ -259,7 +307,7 @@ export function ConsultationStory() {
                   <TranscriptionStream progress={transcriptionReveal} />
                 </motion.div>
 
-                {/* BEAT 4 — Structured SOAP */}
+                {/* BEAT 4 — Structured SOAP (staggered entry) */}
                 <motion.div
                   className="absolute inset-0 flex flex-col gap-2 p-2"
                   style={{ opacity: beat4 }}
@@ -268,38 +316,38 @@ export function ConsultationStory() {
                     Prontuário estruturado
                   </p>
                   <div className="grid gap-2 text-[11px]">
-                    <div className="rounded-lg border border-border/60 bg-muted/40 p-3">
+                    <motion.div className="rounded-lg border border-border/60 bg-muted/40 p-3" style={{ opacity: soapS }}>
                       <p className="text-[9px] font-bold uppercase tracking-widest text-primary-light">
                         S · Subjetivo
                       </p>
                       <p className="mt-1 text-foreground/75">
                         Paciente refere tosse seca há 2 semanas, sem febre.
                       </p>
-                    </div>
-                    <div className="rounded-lg border border-border/60 bg-muted/40 p-3">
+                    </motion.div>
+                    <motion.div className="rounded-lg border border-border/60 bg-muted/40 p-3" style={{ opacity: soapO }}>
                       <p className="text-[9px] font-bold uppercase tracking-widest text-primary-light">
                         O · Objetivo
                       </p>
                       <p className="mt-1 text-foreground/75">
                         PA 140/90, FC 78, ausculta pulmonar sem alterações.
                       </p>
-                    </div>
-                    <div className="rounded-lg border border-border/60 bg-muted/40 p-3">
+                    </motion.div>
+                    <motion.div className="rounded-lg border border-border/60 bg-muted/40 p-3" style={{ opacity: soapA }}>
                       <p className="text-[9px] font-bold uppercase tracking-widest text-primary-light">
                         A · Avaliação
                       </p>
                       <p className="mt-1 text-foreground/75">
                         Suspeita de tosse medicamentosa por IECA. HAS descompensada.
                       </p>
-                    </div>
-                    <div className="rounded-lg border border-border/60 bg-muted/40 p-3">
+                    </motion.div>
+                    <motion.div className="rounded-lg border border-border/60 bg-muted/40 p-3" style={{ opacity: soapP }}>
                       <p className="text-[9px] font-bold uppercase tracking-widest text-primary-light">
                         P · Plano
                       </p>
                       <p className="mt-1 text-foreground/75">
                         Trocar losartana por valsartana. Retorno em 15 dias.
                       </p>
-                    </div>
+                    </motion.div>
                   </div>
                 </motion.div>
 
@@ -314,7 +362,7 @@ export function ConsultationStory() {
                   <div className="flex gap-3">
                     <div className="flex h-28 w-20 shrink-0 flex-col gap-1 rounded-lg border border-border/60 bg-muted/40 p-2">
                       <FileText className="h-4 w-4 text-primary-light" />
-                      <p className="text-[8px] font-mono text-foreground/60">
+                      <p className="text-[8px] text-foreground/60">
                         hemograma.pdf
                       </p>
                       <div className="mt-1 flex flex-col gap-0.5">
@@ -326,7 +374,7 @@ export function ConsultationStory() {
                       </div>
                     </div>
                     <div className="flex-1 rounded-lg border border-border/60 bg-muted/40 p-3">
-                      <p className="text-[10px] font-mono text-foreground/60">
+                      <p className="text-[10px] text-foreground/60">
                         Achados processados
                       </p>
                       <div className="mt-2 space-y-1 text-[11px]">
@@ -383,10 +431,68 @@ export function ConsultationStory() {
                   </motion.div>
                 </motion.div>
 
-                {/* BEAT 7 — Final consolidated view */}
+                {/* BEAT 7 — Auto-fill patient profile */}
+                <motion.div
+                  className="absolute inset-0 flex flex-col gap-2.5 p-2"
+                  style={{ opacity: beat7 }}
+                >
+                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-primary-light">
+                    <RefreshCw className="h-3.5 w-3.5" />
+                    Perfil atualizado automaticamente
+                  </div>
+                  <div className="rounded-lg border border-border/60 bg-muted/40 p-3">
+                    <p className="text-[9px] font-bold uppercase tracking-widest text-foreground/50">
+                      Paciente · João M. Santos
+                    </p>
+                    <div className="mt-2.5 space-y-2 text-[11px]">
+                      <motion.div className="flex items-center gap-2" style={{ opacity: fillField1 }}>
+                        <span className="inline-flex items-center gap-1 rounded-full bg-green-500/15 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-green-400">
+                          + novo
+                        </span>
+                        <span className="text-foreground/60">Alergia:</span>
+                        <span className="font-medium text-foreground/90">Dipirona</span>
+                      </motion.div>
+                      <motion.div className="flex items-center gap-2" style={{ opacity: fillField2 }}>
+                        <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/15 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-blue-400">
+                          atualizado
+                        </span>
+                        <span className="text-foreground/60">Medicação:</span>
+                        <span className="font-medium text-foreground/90">
+                          <span className="text-foreground/40 line-through">Losartana 50mg</span>
+                          {" → "}Valsartana 80mg
+                        </span>
+                      </motion.div>
+                      <motion.div className="flex items-center gap-2" style={{ opacity: fillField3 }}>
+                        <span className="inline-flex items-center gap-1 rounded-full bg-green-500/15 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-green-400">
+                          + novo
+                        </span>
+                        <span className="text-foreground/60">Condição:</span>
+                        <span className="font-medium text-foreground/90">Anemia ferropriva (suspeita)</span>
+                      </motion.div>
+                      <motion.div className="flex items-center gap-2" style={{ opacity: fillField4 }}>
+                        <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/15 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-blue-400">
+                          atualizado
+                        </span>
+                        <span className="text-foreground/60">PA ref.:</span>
+                        <span className="font-medium text-foreground/90">
+                          <span className="text-foreground/40 line-through">130/85</span>
+                          {" → "}140/90 mmHg
+                        </span>
+                      </motion.div>
+                    </div>
+                    <motion.p
+                      className="mt-3 text-[10px] text-primary-light/70"
+                      style={{ opacity: fillField4 }}
+                    >
+                      ✓ 4 campos atualizados automaticamente
+                    </motion.p>
+                  </div>
+                </motion.div>
+
+                {/* BEAT 8 — Documented summary */}
                 <motion.div
                   className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-4"
-                  style={{ opacity: beat7 }}
+                  style={{ opacity: beat8 }}
                 >
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/20 text-primary-light">
                     <CheckCircle2 className="h-8 w-8" />
@@ -394,15 +500,28 @@ export function ConsultationStory() {
                   <p className="text-lg font-semibold text-foreground">
                     Consulta documentada
                   </p>
-                  <div className="flex items-center gap-4 font-mono text-[11px] text-foreground/50">
+                  <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-foreground/50">
                     <span>03m 47s</span>
                     <span className="h-3 w-px bg-foreground/20" />
                     <span>SOAP + alerta</span>
                     <span className="h-3 w-px bg-foreground/20" />
+                    <span>4 campos atualizados</span>
+                    <span className="h-3 w-px bg-foreground/20" />
                     <span>0 digitação</span>
                   </div>
-                  <p className="mt-4 max-w-xs text-center text-xs text-foreground/60">
-                    Você jantar em casa hoje. Sua família agradece.
+                </motion.div>
+
+                {/* BEAT 9 — Final: go home */}
+                <motion.div
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-4"
+                  style={{ opacity: beat9 }}
+                >
+                  <p className="text-2xl">🏠</p>
+                  <p className="text-lg font-semibold text-foreground">
+                    Seu dia termina no último paciente.
+                  </p>
+                  <p className="max-w-xs text-center text-sm text-foreground/60">
+                    Você vai jantar em casa hoje. Sua família agradece.
                   </p>
                 </motion.div>
               </div>
@@ -445,7 +564,7 @@ function HeadlineSwitcher({ index }: { index: MotionValue<number> }) {
           key={current}
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -14 }}
+          exit={{ opacity: 0, y: -14, transition: { duration: 0.18, ease: EASE_OUT } }}
           transition={{ duration: 0.32, ease: EASE_OUT }}
         >
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary-light">
@@ -488,7 +607,7 @@ function TranscriptionLine({
   const x = useTransform(progress, [start, end], [-6, 0]);
 
   return (
-    <motion.p style={{ opacity, x }} className="font-mono">
+    <motion.p style={{ opacity, x }}>
       <span className="mr-2 text-primary-light/60">▸</span>
       {text}
     </motion.p>
@@ -509,6 +628,68 @@ function TranscriptionStream({ progress }: { progress: MotionValue<number> }) {
           start={i / total}
           end={(i + 1) / total}
           text={line}
+        />
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Vertical progress dots — shows which beat is active in the scroll story.
+ * Dots are clickable and scroll to the corresponding beat.
+ */
+function ProgressDots({
+  index,
+  total,
+  sectionRef,
+}: {
+  index: MotionValue<number>;
+  total: number;
+  sectionRef: React.RefObject<HTMLElement | null>;
+}) {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const unsubscribe = index.on("change", (v) => {
+      setCurrent(Math.max(0, Math.min(total - 1, Math.round(v))));
+    });
+    return unsubscribe;
+  }, [index, total]);
+
+  const scrollToBeat = (beatIndex: number) => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.scrollHeight;
+    const targetScroll = sectionTop + (beatIndex / total) * sectionHeight;
+    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+  };
+
+  const BEAT_LABELS = [
+    "Você fala",
+    "A IA escuta",
+    "A IA transcreve",
+    "A IA estrutura",
+    "A IA analisa",
+    "A IA alerta",
+    "A IA atualiza",
+    "Consulta documentada",
+    "Você cuida de você",
+  ];
+
+  return (
+    <div className="absolute left-4 top-1/2 z-20 hidden -translate-y-1/2 flex-col gap-2.5 lg:flex">
+      {Array.from({ length: total }, (_, i) => (
+        <button
+          key={i}
+          type="button"
+          aria-label={`Ir para etapa ${i + 1} — ${BEAT_LABELS[i]}`}
+          onClick={() => scrollToBeat(i)}
+          className={`cursor-pointer rounded-full transition-[width,background-color,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:opacity-100 ${
+            i === current
+              ? "h-1.5 w-6 bg-primary opacity-100"
+              : "h-1.5 w-1.5 bg-foreground/25 opacity-60 hover:bg-foreground/50"
+          }`}
         />
       ))}
     </div>
@@ -538,9 +719,9 @@ function StaticConsultationStory() {
         </h2>
         <p className="mt-5 max-w-2xl text-base text-foreground/65 mx-auto">
           Áudio vira transcrição, transcrição vira prontuário, prontuário vira
-          alerta. Tudo em segundos. Você só cuida do paciente.
+          alerta — e o perfil do paciente se atualiza sozinho. Tudo em segundos.
         </p>
-        <div className="mt-10 flex items-center justify-center gap-4 font-mono text-xs text-foreground/50">
+        <div className="mt-10 flex items-center justify-center gap-4 text-xs text-foreground/50">
           <span>03m 47s por consulta</span>
           <span className="h-3 w-px bg-foreground/20" />
           <span>SOAP + alerta</span>
