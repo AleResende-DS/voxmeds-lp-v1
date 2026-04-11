@@ -25,6 +25,7 @@ import { LeadLink } from "@/components/landing/LeadLink";
 import { PricingSection } from "@/components/landing/PricingSection";
 import { Reveal, RevealGroup, RevealItem } from "@/components/landing/Reveal";
 import { ScrollProgress } from "@/components/landing/ScrollProgress";
+import { SecuritySection } from "@/components/landing/SecuritySection";
 import { SocialProofBar } from "@/components/landing/SocialProofBar";
 import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { Typewriter } from "@/components/landing/Typewriter";
@@ -571,6 +572,9 @@ export default function Home() {
 
       {/* TESTIMONIALS */}
       <TestimonialsSection />
+
+      {/* SECURITY */}
+      <SecuritySection />
 
       {/* PRICING */}
       <PricingSection />
