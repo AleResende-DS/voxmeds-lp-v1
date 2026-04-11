@@ -153,12 +153,17 @@
 
 ---
 
-## 9. Remove FAQ Subtitle
+## 9. Update FAQ Subtitle
 
-In the FAQ section of `src/app/page.tsx`, remove the `<p>` tag:
+In the FAQ section of `src/app/page.tsx`, change the subtitle from:
 ```
 "Ainda ficou com dúvida? Fale com a gente no WhatsApp."
 ```
+To:
+```
+"Ainda ficou com dúvida? Teste por 7 dias sem compromisso."
+```
+With "Teste por 7 dias sem compromisso" in bold (`<strong>` or `font-semibold`).
 
 ---
 
