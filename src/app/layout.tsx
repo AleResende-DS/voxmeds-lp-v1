@@ -37,9 +37,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://medwiser.app"),
-  title: "Prontuário Eletrônico com IA para Médicos | MedWiser",
+  title: "Prontuário com Transcrição por IA | MedWiser — Plataforma Agêntica para Médicos",
   description:
-    "A primeira plataforma médica Agêntica do Brasil. Transcrição clínica, prontuário automático e copiloto de IA em cada consulta. Comece grátis, sem cartão.",
+    "A primeira plataforma médica Agêntica do Brasil. Transcrição clínica, prontuário automático e copiloto de IA em cada consulta. Teste grátis por 7 dias.",
   keywords: [
     "MedWiser",
     "prontuário eletrônico com IA",
@@ -52,6 +52,10 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "https://medwiser.app",
+    languages: {
+      "pt-BR": "https://medwiser.app",
+      "x-default": "https://medwiser.app",
+    },
   },
   icons: {
     icon: [
@@ -68,7 +72,7 @@ export const metadata: Metadata = {
     "facebook-domain-verification": "mavip3dguzlkh70zkucq8bv2motyz9",
   },
   openGraph: {
-    title: "MedWiser — Primeira plataforma médica Agêntica do Brasil",
+    title: "Prontuário com Transcrição por IA | MedWiser — Plataforma Agêntica para Médicos",
     description:
       "Você estudou medicina, não digitação. A MedWiser transcreve, documenta e analisa enquanto você atende seu paciente.",
     url: "https://medwiser.app",
@@ -86,7 +90,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MedWiser — Primeira plataforma médica Agêntica do Brasil",
+    title: "Prontuário com Transcrição por IA | MedWiser — Plataforma Agêntica para Médicos",
     description:
       "Transcrição clínica, prontuário automático e copiloto de IA em cada consulta.",
     images: ["/landing/mockups/hero-screenshot.png"],
@@ -120,7 +124,7 @@ const softwareLd = JSON.stringify({
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "4.9",
-    reviewCount: "127",
+    reviewCount: "20",
     bestRating: "5",
     worstRating: "1",
   },
@@ -143,7 +147,7 @@ const faqLd = JSON.stringify({
       name: "Como funciona o teste grátis?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Você pode começar sem cartão de crédito e testar com 5 consultas grátis. Se quiser experimentar com acesso completo por mais tempo, basta cadastrar um cartão e ganhar 7 dias de acesso total.",
+        text: "Você ganha 7 dias grátis para testar tudo, sem compromisso. Depois, escolha entre o plano mensal ou anual.",
       },
     },
     {
@@ -207,21 +211,13 @@ export default function RootLayout({
       <body
         className={`${display.variable} ${body.variable} ${geist.variable} ${geistMono.variable} antialiased`}
       >
-        <Script
-          id="ld-organization"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
+        <Script id="ld-organization" type="application/ld+json" strategy="beforeInteractive">
           {organizationLd}
         </Script>
-        <Script
-          id="ld-software"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
+        <Script id="ld-software" type="application/ld+json" strategy="beforeInteractive">
           {softwareLd}
         </Script>
-        <Script id="ld-faq" type="application/ld+json" strategy="afterInteractive">
+        <Script id="ld-faq" type="application/ld+json" strategy="beforeInteractive">
           {faqLd}
         </Script>
         <Script id="gtm-base" strategy="afterInteractive">

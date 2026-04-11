@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   animate,
   motion,
@@ -9,13 +9,13 @@ import {
   useReducedMotion,
   useTransform,
 } from "framer-motion";
-import { Stethoscope, FileText, Clock, Star } from "lucide-react";
+import { FileText, Clock, Star } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
 type Stat = {
-  icon: typeof Stethoscope;
+  icon: typeof FileText;
   value: number;
   prefix?: string;
   suffix?: string;
@@ -25,13 +25,6 @@ type Stat = {
 
 const stats: Stat[] = [
   {
-    icon: Stethoscope,
-    value: 200,
-    prefix: "+",
-    format: "integer",
-    label: "médicos testando a MedWiser",
-  },
-  {
     icon: FileText,
     value: 1500,
     prefix: "+",
@@ -40,10 +33,11 @@ const stats: Stat[] = [
   },
   {
     icon: Clock,
-    value: 2,
+    value: 400,
+    prefix: "+",
     suffix: "h",
     format: "integer",
-    label: "economizadas em média por dia",
+    label: "economizadas por ano",
   },
   {
     icon: Star,
@@ -69,13 +63,18 @@ function formatValue(
 
 function AnimatedStatValue({ stat }: { stat: Stat }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-20%" });
+  const inView = useInView(ref, { once: true, amount: 0.3 });
   const reduceMotion = useReducedMotion();
+  const [hydrated, setHydrated] = useState(false);
 
-  const motionValue = useMotionValue(reduceMotion ? stat.value : 0);
+  const motionValue = useMotionValue(0);
   const display = useTransform(motionValue, (v) =>
     formatValue(v, stat.format),
   );
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
     if (!inView || reduceMotion) return;
@@ -86,10 +85,13 @@ function AnimatedStatValue({ stat }: { stat: Stat }) {
     return () => controls.stop();
   }, [inView, motionValue, stat.value, reduceMotion]);
 
+  // SSR / pre-hydration: show the final value so crawlers and first paint see real numbers
+  const staticValue = formatValue(stat.value, stat.format);
+
   return (
     <span ref={ref} className="tabular-nums">
       {stat.prefix}
-      <motion.span>{display}</motion.span>
+      {hydrated ? <motion.span>{display}</motion.span> : <span>{staticValue}</span>}
       {stat.suffix}
     </span>
   );
@@ -103,7 +105,7 @@ export function SocialProofBar() {
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {stats.map((stat) => {
               const Icon = stat.icon;
               return (
