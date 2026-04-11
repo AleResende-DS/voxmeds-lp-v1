@@ -8,7 +8,6 @@ import {
   TrendingDown,
   ChevronDown,
   Sparkles,
-  CreditCard,
   Shield,
 } from "lucide-react";
 import { trackLeadEvent } from "@/lib/tracking";
@@ -76,42 +75,47 @@ export function PricingSection() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
-            Comece grátis em segundos — sem cartão de crédito. Cadastre um
-            cartão depois e ganhe 7 dias de acesso completo.
+            Teste tudo por 7 dias, grátis. Sem compromisso, cancele quando
+            quiser.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={() => handleToggle("monthly")}
-              className={`tap-target press rounded-full px-5 text-sm font-medium transition-[background-color,color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-                billingCycle === "monthly"
-                  ? "bg-foreground text-white shadow-md"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Mensal
-            </button>
-            <button
-              type="button"
-              onClick={() => handleToggle("yearly")}
-              className={`tap-target press inline-flex items-center gap-2 rounded-full px-5 text-sm font-medium transition-[background-color,color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-                billingCycle === "yearly"
-                  ? "bg-foreground text-white shadow-md"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Anual
-              <span
-                className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
-                  billingCycle === "yearly"
-                    ? "bg-primary text-white"
-                    : "bg-success/15 text-success"
-                }`}
-              >
-                -{savingsPercent}%
-              </span>
-            </button>
+          <div className="mt-8 flex justify-center">
+            <div className="relative inline-flex rounded-full bg-muted p-1">
+              {(["monthly", "yearly"] as const).map((cycle) => (
+                <button
+                  key={cycle}
+                  type="button"
+                  onClick={() => handleToggle(cycle)}
+                  className={`press relative z-10 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                    billingCycle === cycle
+                      ? "text-background"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {billingCycle === cycle && (
+                    <motion.span
+                      layoutId="billing-pill"
+                      className="absolute inset-0 rounded-full bg-foreground shadow-sm"
+                      transition={{ type: "spring", duration: 0.35, bounce: 0.15 }}
+                    />
+                  )}
+                  <span className="relative">
+                    {cycle === "monthly" ? "Mensal" : "Anual"}
+                  </span>
+                  {cycle === "yearly" && (
+                    <span
+                      className={`relative rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                        billingCycle === "yearly"
+                          ? "bg-primary text-white"
+                          : "bg-success/15 text-success"
+                      }`}
+                    >
+                      -{savingsPercent}%
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -131,7 +135,7 @@ export function PricingSection() {
                 R$ 0,00
               </div>
               <div className="mt-1 text-xs text-muted-foreground">
-                5 consultas grátis sem cartão
+                7 dias grátis para testar tudo
               </div>
             </div>
 
@@ -218,7 +222,7 @@ export function PricingSection() {
             </Link>
 
             <p className="mt-3 text-center text-xs text-muted-foreground">
-              Cadastro em menos de 30 segundos. Sem cartão.
+              Cadastro em menos de 30 segundos.
             </p>
           </div>
         </div>
@@ -226,11 +230,7 @@ export function PricingSection() {
         <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-muted-foreground sm:text-sm">
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-primary" />
-            <span>5 consultas grátis sem cartão</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <CreditCard className="h-4 w-4 text-primary" />
-            <span>+7 dias grátis com cartão</span>
+            <span>7 dias grátis</span>
           </div>
           <div className="flex items-center gap-2">
             <Shield className="h-4 w-4 text-primary" />

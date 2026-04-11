@@ -40,7 +40,7 @@ export function BeliefBreak() {
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <motion.div
-          className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[140px]"
+          className="absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[80px]"
           style={
             reduceMotion
               ? undefined

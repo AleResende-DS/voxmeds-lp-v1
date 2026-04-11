@@ -77,7 +77,14 @@ export function Header() {
                 fill
                 sizes="(max-width: 640px) 56px, 60px"
                 priority
-                className="object-contain scale-[1.25]"
+                className="object-contain scale-[1.25] dark:hidden"
+              />
+              <Image
+                src="/logo-footer.svg"
+                alt="MedWiser"
+                fill
+                sizes="(max-width: 640px) 56px, 60px"
+                className="hidden object-contain scale-[1.25] dark:block"
               />
             </span>
           </Link>
@@ -191,7 +198,7 @@ export function Header() {
                       trackLeadEvent();
                       closeMenu();
                     }}
-                    className="tap-target press inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-medium text-white transition-[background-color,transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97]"
+                    className="tap-target press inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-medium text-white shadow-[0_10px_30px_-20px_rgba(13,148,136,0.8)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97]"
                   >
                     Começar grátis
                     <ArrowRight className="h-4 w-4" />

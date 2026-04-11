@@ -78,16 +78,32 @@ export function Typewriter({
   if (phrases.length === 0) return null;
   const displayedText = reduceMotion ? (phrases[0] ?? "") : text;
 
+  // Find the longest phrase to reserve its height and prevent layout jumps
+  const longestPhrase = phrases.reduce((a, b) =>
+    a.length >= b.length ? a : b,
+    "",
+  );
+
   return (
-    <span className={className} aria-hidden={reduceMotion ? undefined : true}>
-      {displayedText}
-      {!reduceMotion && (
-        <span
-          className={`type-cursor${cursorClassName ? ` ${cursorClassName}` : ""}`}
-        >
-          |
-        </span>
-      )}
+    <span
+      className={`${className ?? ""} relative inline-grid`}
+      aria-hidden={reduceMotion ? undefined : true}
+    >
+      {/* Invisible spacer — reserves height of the longest phrase */}
+      <span className="invisible col-start-1 row-start-1" aria-hidden="true">
+        {longestPhrase}|
+      </span>
+      {/* Visible typed text */}
+      <span className="col-start-1 row-start-1">
+        {displayedText}
+        {!reduceMotion && (
+          <span
+            className={`type-cursor${cursorClassName ? ` ${cursorClassName}` : ""}`}
+          >
+            |
+          </span>
+        )}
+      </span>
     </span>
   );
 }
