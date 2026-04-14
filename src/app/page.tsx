@@ -103,7 +103,7 @@ const features: Feature[] = [
     image: "/landing/screenshots/mobile-app-recording.webp",
     tag: "Apps mobile",
     badge: "Disponível",
-    alt: "Aplicativo MedWiser no celular mostrando gravação de consulta na interface mobile",
+    alt: "Aplicativo MedWiser no celular — telas de login, lista de consultas, gravação e sincronização",
     imageClass: "object-contain",
     featured: true,
   },
@@ -360,7 +360,7 @@ export default function Home() {
 
           {/* Featured cards — full width */}
           <RevealGroup
-            className="mt-12 flex flex-col gap-6 sm:gap-8"
+            className="mt-8 flex flex-col gap-4 sm:gap-6"
             stagger={0.07}
             delay={0.1}
           >
@@ -369,7 +369,7 @@ export default function Home() {
               .map((feature) => (
                 <RevealItem key={feature.title} variant="fade-up">
                   <div className="hover-lift flex flex-col overflow-hidden rounded-card border border-border/60 bg-card shadow-card lg:flex-row">
-                    <div className="flex flex-col justify-center p-6 sm:p-8 lg:w-1/2">
+                    <div className="flex flex-col justify-center p-5 sm:p-6 lg:w-3/5">
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                           {feature.tag}
@@ -380,23 +380,23 @@ export default function Home() {
                           </span>
                         )}
                       </div>
-                      <h3 className="mt-4 font-display text-2xl font-semibold sm:text-3xl">
+                      <h3 className="mt-3 font-display text-xl font-semibold sm:text-2xl">
                         {feature.title}
                       </h3>
-                      <p className="mt-3 text-sm text-muted-foreground sm:text-base">
+                      <p className="mt-2 text-sm text-muted-foreground">
                         {feature.description}
                       </p>
                     </div>
                     {feature.image && (
-                      <div className="border-t border-border/60 bg-surface p-4 lg:w-1/2 lg:border-l lg:border-t-0">
-                        <div className="overflow-hidden rounded-xl">
+                      <div className="flex items-center justify-center border-t border-border/60 bg-surface p-3 lg:w-2/5 lg:border-l lg:border-t-0">
+                        <div className="flex items-center justify-center overflow-hidden rounded-xl">
                           <Image
                             src={feature.image}
                             alt={feature.alt ?? `${feature.title} — MedWiser`}
-                            width={1200}
-                            height={800}
-                            sizes="(max-width: 1024px) 100vw, 50vw"
-                            className={`h-auto w-full ${feature.imageClass ?? "object-cover"}`}
+                            width={800}
+                            height={533}
+                            sizes="(max-width: 1024px) 100vw, 40vw"
+                            className={`mx-auto max-h-[200px] w-auto ${feature.imageClass ?? "object-contain"}`}
                           />
                         </div>
                       </div>

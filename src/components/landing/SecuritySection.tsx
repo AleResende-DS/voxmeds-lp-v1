@@ -9,22 +9,22 @@ const items = [
       "Seus dados e os dos seus pacientes protegidos de acordo com a Lei Geral de Proteção de Dados.",
   },
   {
-    icon: Lock,
-    title: "Criptografia ponta a ponta",
-    description:
-      "Toda comunicação entre você e a MedWiser é criptografada de ponta a ponta.",
-  },
-  {
     icon: MicOff,
     title: "Áudio nunca é salvo",
     description:
       "O áudio da consulta é processado em tempo real e descartado imediatamente. Nenhuma gravação é armazenada.",
   },
+  {
+    icon: Lock,
+    title: "Criptografia ponta a ponta",
+    description:
+      "Toda comunicação entre você e a MedWiser é criptografada de ponta a ponta.",
+  },
 ];
 
 export function SecuritySection() {
   return (
-    <section className="dark section relative overflow-hidden bg-background py-14 text-foreground sm:py-20 lg:py-24">
+    <section className="section relative overflow-hidden bg-surface py-14 sm:py-20 lg:py-24">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[120px]" />
         <div className="absolute inset-0 bg-noise opacity-30" />
@@ -58,7 +58,7 @@ export function SecuritySection() {
                   <h3 className="mt-4 font-display text-lg font-semibold">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-sm text-foreground/60">
+                  <p className="mt-2 text-sm text-muted-foreground">
                     {item.description}
                   </p>
                 </div>

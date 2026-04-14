@@ -35,7 +35,6 @@ const features = [
 
 const monthlyPrice = 229;
 const yearlyPrice = 199;
-const yearlyTotal = yearlyPrice * 12;
 const savingsPercent = Math.round(
   ((monthlyPrice - yearlyPrice) / monthlyPrice) * 100,
 );
@@ -139,15 +138,15 @@ export function PricingSection() {
               </div>
             </div>
 
-            <div className="mt-6 text-center">
-              <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                Depois
+            <div className="mt-4 text-center">
+              <div className="text-[11px] font-medium text-muted-foreground/70">
+                Após o teste gratuito
               </div>
-              <div className="mt-2 flex items-baseline justify-center gap-2">
+              <div className="mt-1 flex items-baseline justify-center gap-1.5">
                 <AnimatePresence mode="popLayout" initial={false}>
                   <motion.span
                     key={price}
-                    className="font-display text-4xl font-bold text-foreground sm:text-5xl"
+                    className="text-lg font-semibold text-muted-foreground"
                     initial={{ opacity: 0, filter: "blur(3px)", y: 4 }}
                     animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                     exit={{ opacity: 0, filter: "blur(3px)", y: -4 }}
@@ -156,28 +155,14 @@ export function PricingSection() {
                     R$ {price}
                   </motion.span>
                 </AnimatePresence>
-                <span className="text-sm text-muted-foreground">/mês</span>
+                <span className="text-xs text-muted-foreground/60">/mês</span>
               </div>
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.p
-                  key={billingCycle}
-                  className="mt-2 text-xs text-muted-foreground"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.18, ease: EASE_OUT }}
-                >
-                  {billingCycle === "yearly"
-                    ? `R$ ${yearlyTotal.toLocaleString("pt-BR")} cobrados uma vez por ano`
-                    : "Cobrado mensalmente"}
-                </motion.p>
-              </AnimatePresence>
 
               <AnimatePresence initial={false}>
                 {billingCycle === "yearly" && (
                   <motion.div
                     key="yearly-savings"
-                    className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 text-xs font-semibold text-success"
+                    className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 text-xs font-semibold text-success"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}

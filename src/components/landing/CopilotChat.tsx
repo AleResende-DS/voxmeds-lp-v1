@@ -132,12 +132,6 @@ export function CopilotChat() {
     }
   }, [phase, visibleWords, inView, reduceMotion, totalWords]);
 
-  useEffect(() => {
-    if (phase === "idle") {
-      setVisibleWords(0);
-    }
-  }, [convIndex, phase]);
-
   const allWords = conversation.aiResponse.join(" ").split(" ");
   const shownText = allWords.slice(0, visibleWords).join(" ");
 

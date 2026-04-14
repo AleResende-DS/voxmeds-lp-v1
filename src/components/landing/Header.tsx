@@ -23,6 +23,7 @@ const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [forceDark, setForceDark] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -30,6 +31,23 @@ export function Header() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Force dark mode on header while it overlaps a [data-dark-header] section
+  useEffect(() => {
+    const targets = document.querySelectorAll("[data-dark-header]");
+    if (!targets.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const any = entries.some((e) => e.isIntersecting);
+        setForceDark(any);
+      },
+      { rootMargin: "0px 0px -95% 0px", threshold: 0 },
+    );
+
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -57,7 +75,7 @@ export function Header() {
   const closeMenu = () => setOpen(false);
 
   return (
-    <header className="sticky top-0 z-50">
+    <header className={`sticky top-0 z-50${forceDark ? " dark" : ""}`}>
       <div
         className={`backdrop-blur-sm transition-colors duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
           scrolled

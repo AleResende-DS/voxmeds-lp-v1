@@ -100,19 +100,21 @@ export function HeroLoopV2() {
         : "Prescrição"
       : TAB_PER_BEAT[currentBeat];
 
-  // Reset docs sub-beat when entering docs beat
+  // Switch from atestado to prescricao while docs beat is active.
   useEffect(() => {
-    if (currentBeat === "docs") {
-      setDocsSubBeat("atestado");
-      const id = setTimeout(() => setDocsSubBeat("prescricao"), 3000);
-      return () => clearTimeout(id);
-    }
+    if (currentBeat !== "docs") return;
+    const id = setTimeout(() => setDocsSubBeat("prescricao"), 3000);
+    return () => clearTimeout(id);
   }, [currentBeat]);
 
   // Cycle beats with per-beat durations
   useEffect(() => {
     if (reduceMotion) return;
     const id = setTimeout(() => {
+      const nextBeat = BEAT_SEQUENCE[(beatIndex + 1) % BEAT_SEQUENCE.length];
+      if (nextBeat === "docs") {
+        setDocsSubBeat("atestado");
+      }
       setBeatIndex((i) => (i + 1) % BEAT_SEQUENCE.length);
     }, BEAT_DURATIONS[currentBeat]);
     return () => clearTimeout(id);
@@ -139,7 +141,7 @@ export function HeroLoopV2() {
         style={{ aspectRatio: "2036/1420" }}
       >
         <Header dateTime={dateTime} />
-        <Tabs activeTab={activeTab} beat={currentBeat} />
+        <Tabs activeTab={activeTab} />
 
         {/* Main content area */}
         <div className="relative min-h-0 flex-1 overflow-hidden">
@@ -221,7 +223,7 @@ function Header({ dateTime }: { dateTime: string }) {
 
 /* ───────────────────────── Tabs ───────────────────────── */
 
-function Tabs({ activeTab, beat }: { activeTab: string; beat: Beat }) {
+function Tabs({ activeTab }: { activeTab: string }) {
   return (
     <div className="flex items-center gap-0.5 border-b border-border bg-card px-3 sm:px-4">
       {TAB_LABELS.map((label) => {
@@ -381,7 +383,7 @@ function BeatInfo() {
         className="flex flex-wrap gap-1"
       >
         {["Atestado", "Prescrição/Receita", "Pedido de exames", "Anamnese Geral"].map(
-          (doc, i) => (
+          (doc) => (
             <span
               key={doc}
               className="inline-flex items-center gap-1 rounded-full border border-border bg-card px-2 py-0.5 text-[8px] font-medium text-muted-foreground"

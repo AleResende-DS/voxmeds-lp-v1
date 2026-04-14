@@ -167,7 +167,8 @@ export function ConsultationStory() {
       ref={ref}
       id="solucao"
       aria-label="Como a MedWiser transforma uma consulta"
-      className="dark section relative bg-background text-foreground h-[340vh] lg:h-[420vh]"
+      data-dark-header
+      className="dark section relative bg-background text-foreground h-[300vh] lg:h-[360vh]"
     >
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
         {/* Background: grid + orbs + noise */}

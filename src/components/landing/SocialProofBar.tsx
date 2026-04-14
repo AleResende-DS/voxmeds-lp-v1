@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import {
   animate,
   motion,
@@ -65,16 +65,16 @@ function AnimatedStatValue({ stat }: { stat: Stat }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.3 });
   const reduceMotion = useReducedMotion();
-  const [hydrated, setHydrated] = useState(false);
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   const motionValue = useMotionValue(0);
   const display = useTransform(motionValue, (v) =>
     formatValue(v, stat.format),
   );
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
 
   useEffect(() => {
     if (!inView || reduceMotion) return;
@@ -105,12 +105,15 @@ export function SocialProofBar() {
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {stats.map((stat) => {
               const Icon = stat.icon;
               return (
-                <div key={stat.label} className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <div
+                  key={stat.label}
+                  className="flex flex-col items-center gap-3 text-center"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                     <Icon className="h-5 w-5" />
                   </div>
                   <div>
