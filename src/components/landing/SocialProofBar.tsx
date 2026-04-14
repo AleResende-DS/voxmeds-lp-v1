@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   animate,
   motion,
@@ -65,16 +65,16 @@ function AnimatedStatValue({ stat }: { stat: Stat }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.3 });
   const reduceMotion = useReducedMotion();
-  const hydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
+  const [hydrated, setHydrated] = useState(false);
 
   const motionValue = useMotionValue(0);
   const display = useTransform(motionValue, (v) =>
     formatValue(v, stat.format),
   );
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
     if (!inView || reduceMotion) return;

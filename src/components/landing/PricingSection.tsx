@@ -35,6 +35,7 @@ const features = [
 
 const monthlyPrice = 229;
 const yearlyPrice = 199;
+const yearlyTotal = yearlyPrice * 12;
 const savingsPercent = Math.round(
   ((monthlyPrice - yearlyPrice) / monthlyPrice) * 100,
 );
