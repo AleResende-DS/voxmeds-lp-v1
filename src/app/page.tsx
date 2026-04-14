@@ -32,7 +32,7 @@ import { Typewriter } from "@/components/landing/Typewriter";
 import { HeroLoopV2 } from "@/components/landing/HeroLoopV2";
 import { LeadCapturePopup } from "@/components/landing/LeadCapturePopup";
 
-const registerUrl = "https://portal.medwiser.app/register";
+const registerUrl = "https://app.medwiser.app/register";
 
 const painPoints = [
   {
@@ -684,7 +684,7 @@ export default function Home() {
               <ul className="mt-4 flex flex-col items-center gap-1 text-foreground/70 md:items-start">
                 <li>
                   <Link
-                    href="https://portal.medwiser.app/terms"
+                    href="https://app.medwiser.app/terms"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="tap-target inline-flex items-center"
@@ -694,7 +694,7 @@ export default function Home() {
                 </li>
                 <li>
                   <Link
-                    href="https://portal.medwiser.app/privacy"
+                    href="https://app.medwiser.app/privacy"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="tap-target inline-flex items-center"

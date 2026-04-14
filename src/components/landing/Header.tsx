@@ -15,8 +15,8 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
-const loginUrl = "https://portal.medwiser.app/login";
-const registerUrl = "https://portal.medwiser.app/register";
+const loginUrl = "https://app.medwiser.app/login";
+const registerUrl = "https://app.medwiser.app/register";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 

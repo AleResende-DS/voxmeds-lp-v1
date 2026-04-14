@@ -119,7 +119,7 @@ const softwareLd = JSON.stringify({
     "@type": "Offer",
     price: "199",
     priceCurrency: "BRL",
-    url: "https://portal.medwiser.app/register",
+    url: "https://app.medwiser.app/register",
   },
   aggregateRating: {
     "@type": "AggregateRating",

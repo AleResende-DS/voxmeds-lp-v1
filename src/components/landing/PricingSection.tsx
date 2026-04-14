@@ -14,7 +14,7 @@ import { trackLeadEvent } from "@/lib/tracking";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
-const registerUrl = "https://portal.medwiser.app/register";
+const registerUrl = "https://app.medwiser.app/register";
 
 type BillingCycle = "monthly" | "yearly";
 
