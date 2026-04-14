@@ -10,7 +10,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
   { label: "Funcionalidades", href: "#funcionalidades" },
-  { label: "Como ajuda", href: "#copiloto" },
+  { label: "Copiloto", href: "#copiloto" },
   { label: "Planos", href: "#planos" },
   { label: "FAQ", href: "#faq" },
 ];

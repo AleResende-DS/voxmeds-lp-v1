@@ -4,7 +4,6 @@ import { Reveal } from "./Reveal";
 type Testimonial = {
   id: string;
   quote: string;
-  shortQuote: string;
   name: string;
   role: string;
   crm: string;
@@ -15,58 +14,32 @@ type Testimonial = {
 
 const testimonials: Testimonial[] = [
   {
-    id: "rafael",
+    id: "matheus",
     quote:
-      "Terminei a residência ano passado e tinha um medo enorme de deixar algo importante passar em um laudo. Os alertas automáticos me dão uma segurança que eu não tinha. É quase como ter um R3 olhando meus exames junto comigo.",
-    shortQuote:
-      "Os alertas automáticos me dão uma segurança que eu não tinha.",
-    name: "Dr. Rafael Nogueira",
-    role: "Clínico Geral",
-    crm: "CRM-PE 24587",
-    city: "Recife · PE",
-    image: "/landing/testimonials/dr-rafael.svg",
+      "Como médico, sempre busquei soluções que reduzissem a burocracia da nossa rotina, sem abrir mão de qualidade e confiabilidade. A MedWiser nasceu justamente dessa lacuna: a falta de ferramentas realmente eficazes para apoiar o dia a dia clínico. Tenho orgulho de fazer parte de um projeto que contribui diretamente para melhorar a qualidade de vida de nós, médicos, e elevar o padrão do cuidado oferecido aos pacientes.",
+    name: "Dr. Matheus Guelssi",
+    role: "Ultrassonografista, cofundador e sócio",
+    crm: "CRM 47.009 PR",
+    city: "Campo Mourão - PR",
+    image: "/landing/testimonials/perfil-matheus.webp",
     highlight: true,
   },
   {
-    id: "camila",
+    id: "gabriella",
     quote:
-      "Eu atendo 18 pacientes por dia e terminava o expediente digitando até às 23h. Hoje saio do consultório às 19h com tudo documentado.",
-    shortQuote:
-      "Hoje saio do consultório às 19h com tudo documentado.",
-    name: "Dra. Camila Ferreira",
-    role: "Pediatra",
-    crm: "CRM-SP 178432",
-    city: "São Paulo · SP",
-    image: "/landing/testimonials/dra-camila.svg",
-  },
-  {
-    id: "mariana",
-    quote:
-      "Já testei quase todos os sistemas do mercado. A MedWiser é a primeira que realmente entende como eu escrevo.",
-    shortQuote:
-      "A MedWiser é a primeira que realmente entende como eu escrevo.",
-    name: "Dra. Mariana Costa",
+      "Já testei outras ferramentas, mas nenhuma chega perto da MedWiser em qualidade. E o melhor: meus pacientes perceberam um atendimento mais humano e próximo. Hoje uso em 100% das consultas e recomendo muito!",
+    name: "Dra. Gabriella Cappelletti",
     role: "Dermatologista",
-    crm: "CRM-RS 38291",
-    city: "Porto Alegre · RS",
-    image: "/landing/testimonials/dra-mariana.svg",
-  },
-  {
-    id: "eduardo",
-    quote:
-      "O chat com a IA durante a consulta mudou como eu trabalho. Quando bate uma dúvida, a resposta vem em segundos já levando em conta o histórico do paciente.",
-    shortQuote:
-      "A resposta vem em segundos já levando em conta o histórico do paciente.",
-    name: "Dr. Eduardo Lima",
-    role: "Cardiologista",
-    crm: "CRM-MG 67104",
-    city: "Belo Horizonte · MG",
-    image: "/landing/testimonials/dr-eduardo.svg",
+    crm: "CRM 47.008 PR",
+    city: "Campo Mourão - PR",
+    image: "/landing/testimonials/perfil-gabriella.webp",
   },
 ];
 
 const featured = testimonials.find((t) => t.highlight)!;
 const secondary = testimonials.filter((t) => !t.highlight);
+const secondaryGridClass =
+  secondary.length === 1 ? "max-w-2xl" : "max-w-3xl sm:grid-cols-3";
 
 export function TestimonialsSection() {
   return (
@@ -128,36 +101,39 @@ export function TestimonialsSection() {
           </article>
         </Reveal>
 
-        {/* Secondary testimonials — compact */}
+        {/* Secondary testimonials */}
         <Reveal delay={0.2}>
-          <div className="mx-auto mt-8 grid max-w-3xl gap-4 sm:grid-cols-3">
+          <div className={`mx-auto mt-8 grid gap-4 ${secondaryGridClass}`}>
             {secondary.map((t) => (
               <div
                 key={t.id}
-                className="hover-lift rounded-card border border-border/60 bg-card p-5 shadow-card"
+                className="hover-lift rounded-card border border-border/60 bg-card p-6 shadow-card"
               >
                 <div className="text-xs text-primary" aria-hidden="true">
                   {"★".repeat(5)}
                 </div>
-                <p className="mt-2 text-sm text-foreground/80">
-                  &ldquo;{t.shortQuote}&rdquo;
-                </p>
-                <div className="mt-4 flex items-center gap-3">
-                  <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full border border-border/60 bg-surface">
+                <blockquote className="mt-3 text-sm leading-relaxed text-foreground/80">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <div className="mt-5 flex items-center gap-3 border-t border-border/60 pt-5">
+                  <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-border/60 bg-surface">
                     <Image
                       src={t.image}
                       alt={`Foto de ${t.name}`}
                       fill
-                      sizes="36px"
+                      sizes="44px"
                       className="object-cover"
                     />
                   </div>
                   <div className="min-w-0">
-                    <div className="truncate text-xs font-semibold text-foreground">
+                    <div className="text-sm font-semibold text-foreground">
                       {t.name}
                     </div>
-                    <div className="truncate text-[11px] text-muted-foreground">
+                    <div className="text-xs text-muted-foreground">
                       {t.role} · {t.city}
+                    </div>
+                    <div className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground/80">
+                      {t.crm}
                     </div>
                   </div>
                 </div>
