@@ -86,15 +86,18 @@ export function Typewriter({
 
   return (
     <span
-      className={`${className ?? ""} relative inline-grid`}
+      className={`${className ?? ""} relative inline-grid max-w-full items-start justify-items-start align-top`}
       aria-hidden={reduceMotion ? undefined : true}
     >
       {/* Invisible spacer — reserves height of the longest phrase */}
-      <span className="invisible col-start-1 row-start-1" aria-hidden="true">
+      <span
+        className="invisible col-start-1 row-start-1 min-w-0 whitespace-normal break-words"
+        aria-hidden="true"
+      >
         {longestPhrase}|
       </span>
       {/* Visible typed text */}
-      <span className="col-start-1 row-start-1">
+      <span className="col-start-1 row-start-1 min-w-0 whitespace-normal break-words">
         {displayedText}
         {!reduceMotion && (
           <span

@@ -209,28 +209,31 @@ export default function Home() {
           <div className="absolute inset-0 bg-noise" />
         </div>
 
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-8 sm:px-6 sm:pb-24 sm:pt-12 lg:grid-cols-[0.95fr_1.05fr]">
-          <Reveal>
-            <div>
+        <div className="mx-auto grid min-w-0 max-w-7xl items-center gap-10 px-4 pb-16 pt-8 sm:px-6 sm:pb-24 sm:pt-12 lg:grid-cols-[0.95fr_1.05fr]">
+          <Reveal className="min-w-0">
+            <div className="min-w-0">
               <span
-                className="relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-background/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-widest text-primary backdrop-blur-sm"
+                className="relative inline-flex max-w-full items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-background/80 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-primary backdrop-blur-sm sm:px-4 sm:text-[11px] sm:tracking-widest"
                 title="Plataforma agêntica significa que a IA não só responde perguntas — ela executa tarefas de verdade por você: documenta consultas, analisa exames e te avisa sobre achados críticos."
               >
-                <Sparkles className="h-3.5 w-3.5" />
-                <span>Primeira plataforma médica Agêntica do Brasil</span>
-                <HelpCircle className="h-3.5 w-3.5 opacity-70" />
+                <Sparkles className="h-3.5 w-3.5 shrink-0" />
+                <span className="min-w-0 leading-relaxed">
+                  Primeira plataforma médica Agêntica do Brasil
+                </span>
+                <HelpCircle className="hidden h-3.5 w-3.5 shrink-0 opacity-70 sm:block" />
                 <span
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 shimmer"
                 />
               </span>
-              <h1 className="mt-6 font-display text-[2.25rem] font-semibold leading-[1.05] text-balance sm:text-[3.25rem] lg:text-[3.75rem]">
-                Você estudou medicina.
+              <h1 className="mt-6 font-display text-[2.25rem] font-semibold leading-[1.05] sm:text-[3.25rem] lg:text-[3.75rem]">
+                Você estudou{" "}
+                <span className="max-[420px]:block">medicina.</span>
                 <br />
                 <span className="text-primary">
                   <Typewriter
                     phrases={heroPhrases}
-                    className="inline-block font-semibold"
+                    className="font-semibold"
                     cursorClassName="text-primary"
                     typeSpeed={38}
                     deleteSpeed={22}
@@ -276,7 +279,7 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.1} variant="fade-up-scale">
+          <Reveal className="min-w-0" delay={0.1} variant="fade-up-scale">
             <HeroLoopV2 />
           </Reveal>
         </div>
