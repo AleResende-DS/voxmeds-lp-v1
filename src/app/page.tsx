@@ -31,6 +31,7 @@ import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { Typewriter } from "@/components/landing/Typewriter";
 import { HeroLoopV2 } from "@/components/landing/HeroLoopV2";
 import { LeadCapturePopup } from "@/components/landing/LeadCapturePopup";
+import { ConsentSummary } from "@/components/consent/ConsentSummary";
 
 const registerUrl = "https://app.medwiser.app/register";
 
@@ -709,6 +710,9 @@ export default function Home() {
                   >
                     Privacidade
                   </Link>
+                </li>
+                <li>
+                  <ConsentSummary />
                 </li>
               </ul>
             </div>

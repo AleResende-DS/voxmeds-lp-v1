@@ -9,6 +9,7 @@ import Script from "next/script";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AnalyticsBootstrap } from "@/components/analytics/AnalyticsBootstrap";
 import { ScrollDepthTracker } from "@/components/analytics/ScrollDepthTracker";
+import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
@@ -280,6 +281,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         >
           <AnalyticsBootstrap />
           <ScrollDepthTracker />
+          <ConsentBanner />
           {children}
         </ThemeProvider>
       </body>
