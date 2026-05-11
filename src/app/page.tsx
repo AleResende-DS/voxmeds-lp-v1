@@ -246,6 +246,8 @@ export default function Home() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                 <LeadLink
                   href={registerUrl}
+                  ctaName="hero_primary"
+                  position="hero"
                   className="tap-target inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97] sm:w-auto"
                 >
                   Quero meu tempo de volta
@@ -441,6 +443,8 @@ export default function Home() {
           <div className="mt-12 flex justify-center">
             <LeadLink
               href={registerUrl}
+              ctaName="features_cta"
+              position="features"
               className="tap-target inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97]"
             >
               Testar todas as funcionalidades grátis
@@ -556,6 +560,8 @@ export default function Home() {
               <div className="mt-8">
                 <LeadLink
                   href={registerUrl}
+                  ctaName="copilot_cta"
+                  position="copilot"
                   className="tap-target inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97]"
                 >
                   Quero um copiloto clínico
@@ -617,6 +623,8 @@ export default function Home() {
             </p>
             <LeadLink
               href={registerUrl}
+              ctaName="footer_cta"
+              position="footer"
               className="tap-target mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_-20px_rgba(15,118,110,0.9)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97]"
             >
               Testar MedWiser grátis

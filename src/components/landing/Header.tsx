@@ -6,6 +6,7 @@ import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { trackLeadEvent } from "@/lib/tracking";
+import { analytics } from "@/lib/analytics";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
@@ -129,7 +130,14 @@ export function Header() {
             <ThemeToggle />
             <Link
               href={registerUrl}
-              onClick={trackLeadEvent}
+              onClick={() => {
+                trackLeadEvent();
+                analytics.track('cta_clicked', {
+                  cta_name: 'header_cta',
+                  cta_position: 'header',
+                  cta_destination: registerUrl,
+                });
+              }}
               className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-1.5 text-[13px] font-medium text-white shadow-[0_10px_30px_-20px_rgba(13,148,136,0.8)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97]"
             >
               Testar grátis
@@ -214,6 +222,11 @@ export function Header() {
                     href={registerUrl}
                     onClick={() => {
                       trackLeadEvent();
+                      analytics.track('cta_clicked', {
+                        cta_name: 'header_mobile_cta',
+                        cta_position: 'header_mobile',
+                        cta_destination: registerUrl,
+                      });
                       closeMenu();
                     }}
                     className="tap-target press inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-medium text-white shadow-[0_10px_30px_-20px_rgba(13,148,136,0.8)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark active:scale-[0.97]"

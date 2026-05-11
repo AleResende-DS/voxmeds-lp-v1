@@ -11,6 +11,7 @@ import {
   Shield,
 } from "lucide-react";
 import { trackLeadEvent } from "@/lib/tracking";
+import { analytics } from "@/lib/analytics";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
@@ -201,7 +202,14 @@ export function PricingSection() {
 
             <Link
               href={registerUrl}
-              onClick={trackLeadEvent}
+              onClick={() => {
+                trackLeadEvent();
+                analytics.track('cta_clicked', {
+                  cta_name: billingCycle === 'monthly' ? 'pricing_monthly' : 'pricing_yearly',
+                  cta_position: 'pricing',
+                  cta_destination: registerUrl,
+                });
+              }}
               className="tap-target mt-8 inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_rgba(15,118,110,0.5)] transition-[background-color,transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-primary-dark hover:shadow-[0_12px_32px_-8px_rgba(15,118,110,0.6)] active:scale-[0.97] motion-safe:hover:scale-[1.02]"
             >
               Começar agora grátis
