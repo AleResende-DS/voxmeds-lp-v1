@@ -37,7 +37,13 @@ export function applyConsent(choice: ConsentChoice, source: 'banner' | 'dialog' 
 
   if (typeof window !== 'undefined') {
     const anonymousId = getOrCreateAnonymousId();
-    void fetch('/api/consent/log', {
+    // Use absolute API URL — the LP runs on medwiser.app while the API
+    // lives on api.medwiser.app. A relative '/api/consent/log' would
+    // resolve to the LP origin and 404. Mirrors the fix applied to
+    // apps/web (commit cad6b5f in the medwiser monorepo).
+    const apiBase =
+      process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') ?? 'https://api.medwiser.app';
+    void fetch(`${apiBase}/api/consent/log`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ state, source, anonymousId }),
