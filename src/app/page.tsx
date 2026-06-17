@@ -27,7 +27,6 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/landing/Reveal";
 import { ScrollProgress } from "@/components/landing/ScrollProgress";
 import { SecuritySection } from "@/components/landing/SecuritySection";
 import { SocialProofBar } from "@/components/landing/SocialProofBar";
-import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { Typewriter } from "@/components/landing/Typewriter";
 import { HeroLoopV2 } from "@/components/landing/HeroLoopV2";
 import { LeadCapturePopup } from "@/components/landing/LeadCapturePopup";
@@ -580,9 +579,6 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
-
-      {/* TESTIMONIALS */}
-      <TestimonialsSection />
 
       {/* SECURITY */}
       <SecuritySection />
