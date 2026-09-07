@@ -37,7 +37,8 @@ export function track<E extends EventName>(
   const eventId = options?.eventId ?? crypto.randomUUID();
   const fullProps = { ...base, ...(props as Record<string, unknown>), event_id: eventId };
 
-  pushDataLayer(event, fullProps);
+  // The published GTM page-view trigger uses the same name as the web app.
+  pushDataLayer(event === 'page_view' ? 'PageView' : event, fullProps);
 
   if (!options?.skipPosthog) {
     captureEvent(event, fullProps);

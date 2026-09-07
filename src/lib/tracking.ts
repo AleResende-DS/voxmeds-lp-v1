@@ -1,5 +1,3 @@
-const LEAD_EVENT_NAME = process.env.NEXT_PUBLIC_LEAD_EVENT_NAME ?? "lead";
-
 declare global {
   interface Window {
     dataLayer?: Array<Record<string, unknown>>;
@@ -14,5 +12,6 @@ export function trackLeadEvent(): void {
 
   window.__leadClicked = true;
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: LEAD_EVENT_NAME });
+  // A CTA click is not a completed account registration.
+  window.dataLayer.push({ event: 'cta_clicked', cta_name: 'start_registration' });
 }

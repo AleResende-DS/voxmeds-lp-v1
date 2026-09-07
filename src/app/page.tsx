@@ -29,7 +29,6 @@ import { SecuritySection } from "@/components/landing/SecuritySection";
 import { SocialProofBar } from "@/components/landing/SocialProofBar";
 import { Typewriter } from "@/components/landing/Typewriter";
 import { HeroLoopV2 } from "@/components/landing/HeroLoopV2";
-import { LeadCapturePopup } from "@/components/landing/LeadCapturePopup";
 import { ConsentSummary } from "@/components/consent/ConsentSummary";
 
 const registerUrl = "https://app.medwiser.app/register";
@@ -87,9 +86,9 @@ type Feature = {
 
 const features: Feature[] = [
   {
-    title: "A IA não deixa nada passar",
+    title: "Apoio à revisão clínica",
     description:
-      "Alertas automáticos em exames e documentos. Dosagem perigosa, interação medicamentosa, sugestão de exames complementares — a IA sinaliza antes que algo escape.",
+      "Alertas automáticos em exames e documentos. Dosagem perigosa, interação medicamentosa, sugestão de exames complementares — a IA pode sinalizar pontos para sua revisão.",
     image: "/landing/screenshots/alertas-clinicos.webp",
     tag: "Alertas inteligentes",
     badge: "Exclusivo",
@@ -144,7 +143,7 @@ const faqs = [
   {
     question: "Como funciona o teste grátis?",
     answer:
-      "Você ganha 7 dias grátis para testar tudo, sem compromisso. Depois, escolhe entre o plano mensal ou anual. Cancela em 1 clique pelo próprio painel.",
+      "Comece com 5 consultas gratuitas, sem cartão. Para continuar, escolha um plano e cadastre um cartão para iniciar 7 dias de teste. Ao final, a cobrança é automática se você não cancelar antes pelo painel.",
   },
   {
     question: "O que preciso para usar a MedWiser?",
@@ -268,7 +267,7 @@ export default function Home() {
               <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
                 <span className="inline-flex items-center gap-1.5">
                   <Sparkles className="h-4 w-4 text-primary" />
-                  7 dias grátis
+                  5 consultas grátis
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <Wand2 className="h-4 w-4 text-primary" />
@@ -501,8 +500,8 @@ export default function Home() {
                       </h3>
                       <p className="mt-1 text-sm text-muted-foreground">
                         A IA faz uma segunda leitura de cada laudo que você
-                        sobe e sinaliza achados que podem exigir atenção. Não
-                        deixa nada escapar.
+                        sobe e sinaliza achados que podem exigir atenção.
+                        Revise as sugestões antes de tomar decisões clínicas.
                       </p>
                     </div>
                   </div>
@@ -600,7 +599,7 @@ export default function Home() {
               <p className="mt-4 text-muted-foreground">
                 Ainda ficou com dúvida?{" "}
                 <strong className="font-semibold text-foreground">
-                  Teste por 7 dias sem compromisso.
+                  Experimente com 5 consultas gratuitas.
                 </strong>
               </p>
             </div>
@@ -618,7 +617,7 @@ export default function Home() {
               Pronto para recuperar seu tempo?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-sm text-foreground/70 sm:text-base">
-              7 dias grátis. Sem compromisso.
+              Comece com 5 consultas grátis, sem cartão.
               Seu consultório mais leve começa agora.
             </p>
             <LeadLink
@@ -741,7 +740,6 @@ export default function Home() {
         </div>
       </footer>
 
-      <LeadCapturePopup />
     </div>
   );
 }

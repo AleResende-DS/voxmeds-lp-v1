@@ -1,6 +1,7 @@
 import { ConsentState, CONSENT_VERSION, DEFAULT_DENIED_CONSENT } from './types';
 import { readConsent, writeConsent } from './consent-storage';
 import { getOrCreateAnonymousId } from './identity';
+import { pushGoogleConsentCommand } from './gtm';
 
 type ConsentChoice = Pick<ConsentState, 'analytics' | 'marketing'>;
 
@@ -28,9 +29,7 @@ export function applyConsent(choice: ConsentChoice, source: 'banner' | 'dialog' 
   };
 
   if (typeof window !== 'undefined') {
-    window.dataLayer = window.dataLayer || [];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window.dataLayer as any[]).push(['consent', 'update', toGoogleConsentSignals(state)]);
+    pushGoogleConsentCommand('consent', 'update', toGoogleConsentSignals(state));
   }
 
   writeConsent(state);
@@ -65,4 +64,3 @@ export function hasMarketingConsent(): boolean {
 export function hasAnalyticsConsent(): boolean {
   return getConsentOrDefault().analytics === 'granted';
 }
-

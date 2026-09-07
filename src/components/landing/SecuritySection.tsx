@@ -10,15 +10,15 @@ const items = [
   },
   {
     icon: MicOff,
-    title: "Áudio nunca é salvo",
+    title: "Controle da gravação",
     description:
-      "O áudio da consulta é processado em tempo real e descartado imediatamente. Nenhuma gravação é armazenada.",
+      "Inicie e encerre a gravação durante a consulta. Informe o paciente e siga as orientações da política de privacidade.",
   },
   {
     icon: Lock,
-    title: "Criptografia ponta a ponta",
+    title: "Conexão criptografada",
     description:
-      "Toda comunicação entre você e a MedWiser é criptografada de ponta a ponta.",
+      "O acesso à plataforma usa HTTPS para proteger a comunicação entre seu dispositivo e nossos servidores.",
   },
 ];
 
