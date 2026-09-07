@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://medwiser.app"),
   title: "Prontuário com Transcrição por IA | MedWiser — Plataforma Agêntica para Médicos",
   description:
-    "A primeira plataforma médica Agêntica do Brasil. Transcrição clínica, prontuário automático e copiloto de IA em cada consulta. Comece com 5 consultas grátis.",
+    "A primeira plataforma médica Agêntica do Brasil. Transcrição clínica, prontuário automático e copiloto de IA em cada consulta. Experimente por 7 Dias Grátis.",
   keywords: [
     "MedWiser",
     "prontuário eletrônico com IA",
@@ -151,7 +151,7 @@ const faqLd = JSON.stringify({
       name: "Como funciona o teste grátis?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Comece com 5 consultas gratuitas, sem cartão. Para continuar, escolha um plano e cadastre um cartão para iniciar 7 dias de teste. Ao final, a cobrança é automática se você não cancelar antes pelo painel.",
+        text: "Experimente o MedWiser por 7 Dias Grátis. Escolha um plano e cadastre um cartão para iniciar o teste. Ao final dos 7 dias, a cobrança é automática se você não cancelar antes pelo painel.",
       },
     },
     {

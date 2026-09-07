@@ -76,7 +76,7 @@ export function PricingSection() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
-            Comece com 5 consultas grátis, sem cartão. Cancele quando
+            Experimente por 7 Dias Grátis. Cancele quando
             quiser.
           </p>
 
@@ -136,7 +136,7 @@ export function PricingSection() {
                 R$ 0,00
               </div>
               <div className="mt-1 text-xs text-muted-foreground">
-                5 consultas grátis, sem cartão
+                7 Dias Grátis
               </div>
             </div>
 
@@ -181,8 +181,8 @@ export function PricingSection() {
               {billingCycle === "yearly"
                 ? "Plano anual: R$ 2.388 cobrados de uma vez por ano."
                 : "Plano mensal: R$ 229 cobrados por mês."}
-              {" "}Após as 5 consultas gratuitas, a ativação de um plano exige cartão
-              e inclui 7 dias de teste. A cobrança começa ao final desse período,
+              {" "}A ativação do teste de 7 dias exige a escolha de um plano
+              e o cadastro de um cartão. A cobrança começa ao final desse período,
               salvo cancelamento anterior pelo painel.
             </p>
 
@@ -233,7 +233,7 @@ export function PricingSection() {
         <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-muted-foreground sm:text-sm">
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-primary" />
-            <span>5 consultas grátis</span>
+            <span>7 Dias Grátis</span>
           </div>
           <div className="flex items-center gap-2">
             <Shield className="h-4 w-4 text-primary" />

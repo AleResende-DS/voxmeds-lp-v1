@@ -143,7 +143,7 @@ const faqs = [
   {
     question: "Como funciona o teste grátis?",
     answer:
-      "Comece com 5 consultas gratuitas, sem cartão. Para continuar, escolha um plano e cadastre um cartão para iniciar 7 dias de teste. Ao final, a cobrança é automática se você não cancelar antes pelo painel.",
+      "Experimente o MedWiser por 7 Dias Grátis. Escolha um plano e cadastre um cartão para iniciar o teste. Ao final dos 7 dias, a cobrança é automática se você não cancelar antes pelo painel.",
   },
   {
     question: "O que preciso para usar a MedWiser?",
@@ -267,7 +267,7 @@ export default function Home() {
               <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
                 <span className="inline-flex items-center gap-1.5">
                   <Sparkles className="h-4 w-4 text-primary" />
-                  5 consultas grátis
+                  7 Dias Grátis
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <Wand2 className="h-4 w-4 text-primary" />
@@ -599,7 +599,7 @@ export default function Home() {
               <p className="mt-4 text-muted-foreground">
                 Ainda ficou com dúvida?{" "}
                 <strong className="font-semibold text-foreground">
-                  Experimente com 5 consultas gratuitas.
+                  Experimente por 7 Dias Grátis.
                 </strong>
               </p>
             </div>
@@ -617,7 +617,7 @@ export default function Home() {
               Pronto para recuperar seu tempo?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-sm text-foreground/70 sm:text-base">
-              Comece com 5 consultas grátis, sem cartão.
+              Experimente por 7 Dias Grátis.
               Seu consultório mais leve começa agora.
             </p>
             <LeadLink
